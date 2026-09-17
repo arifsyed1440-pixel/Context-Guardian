@@ -51,14 +51,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         <div className="greeting-text-col">
           <div className="greeting-title-row">
             <span className="greeting-heading">Good evening, Alex</span>
-            <span className="sparkle-symbol">✦</span>
+            <span className="sparkle-symbol" aria-hidden="true">✦</span>
           </div>
           <div className="greeting-subtitle-row">
-            <span className="material-symbols-outlined text-tertiary">check_circle</span>
+            <span className="material-symbols-outlined text-tertiary text-[16px]">verified_user</span>
             <p className="greeting-subtext">
-              Reconstructed <span className="highlight-tertiary">{contexts.length} active context threads</span> ({completedActions}/{totalActions} deliverables resolved)
+              Reconstructed <span className="highlight-tertiary">{contexts.length} active threads</span> ({completedActions}/{totalActions} deliverables resolved)
             </p>
           </div>
+          <p className="greeting-tagline">
+            Recovers high-value personal context that ordinary reminders lose.
+          </p>
         </div>
 
         {/* Quick Neural Radar Status */}

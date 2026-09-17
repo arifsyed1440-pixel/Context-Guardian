@@ -33,6 +33,13 @@
   gap: 10px;
 }
 
+.screen-tag {
+  color: var(--secondary);
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 10.5px;
+}
+
 .prototype-pill {
   background: rgba(192, 193, 255, 0.12);
   color: var(--primary);
@@ -43,6 +50,12 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   border: 1px solid rgba(192, 193, 255, 0.25);
+}
+
+.preview-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .viewport-toggle-btn {
@@ -56,6 +69,8 @@
   border: var(--glass-border);
   font-size: 11px;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 .viewport-toggle-btn:hover {
   background: var(--surface-container-high);
@@ -87,7 +102,7 @@
 
 .full-viewport .mobile-chassis {
   width: 100%;
-  max-width: 768px;
+  max-width: 820px;
   min-height: 840px;
   background: var(--surface);
   border-radius: 24px;
@@ -97,12 +112,75 @@
   flex-direction: column;
 }
 
+/* Chassis Notch / Dynamic Island */
+.chassis-notch-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-top: 10px;
+  z-index: 60;
+}
+
+.has-device-frame .chassis-dynamic-island {
+  width: 96px;
+  height: 20px;
+  background: #000000;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.island-lens {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #111827;
+  border: 1px solid #1f2937;
+}
+
+.island-sensor {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #030712;
+}
+
+.full-viewport .chassis-notch-bar {
+  display: none;
+}
+
 .chassis-speaker {
-  width: 64px;
-  height: 4px;
-  background: var(--surface-variant);
-  border-radius: 9999px;
-  margin: 10px auto 2px;
+  display: none;
+}
+
+/* Realistic Mobile Status Bar */
+.mobile-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 22px 2px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--on-surface);
+  letter-spacing: -0.01em;
+  z-index: 55;
+  user-select: none;
+}
+
+.status-time {
+  font-family: var(--font-label);
+  font-size: 11.5px;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--on-surface);
 }
 
 .screen-viewport {
@@ -3329,6 +3407,196 @@
 }
 .privacy-card-text strong {
   color: var(--tertiary);
+}
+
+/* Greeting Tagline (Communicating Context Recovery Purpose) */
+.greeting-tagline {
+  font-size: 11.5px;
+  color: var(--secondary);
+  font-weight: 500;
+  margin-top: 2px;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+/* Workflow State Pill in CaptureScreen */
+.workflow-state-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+
+.workflow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.workflow-state-pill.idle {
+  background: rgba(144, 143, 160, 0.12);
+  color: var(--outline);
+  border: 1px solid rgba(144, 143, 160, 0.25);
+}
+
+.workflow-state-pill.processing {
+  background: rgba(76, 215, 246, 0.12);
+  color: var(--secondary);
+  border: 1px solid rgba(76, 215, 246, 0.35);
+  animation: pulse 1.5s infinite;
+}
+
+.workflow-state-pill.review {
+  background: rgba(78, 222, 163, 0.12);
+  color: var(--tertiary);
+  border: 1px solid rgba(78, 222, 163, 0.35);
+}
+
+.workflow-state-pill.error {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+/* Context Recovery Pillars (WHO, WHY, WHAT, WHEN) in Dossier */
+.context-pillars-card {
+  background: var(--surface-container);
+  border: var(--glass-border);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pillars-heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pillars-title-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pillars-title {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--on-surface);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pillars-badge {
+  font-size: 9.5px;
+  color: var(--tertiary);
+  background: rgba(78, 222, 163, 0.1);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(78, 222, 163, 0.25);
+  font-weight: 600;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.pillar-cell {
+  background: var(--surface-container-low);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s ease;
+}
+.pillar-cell:hover {
+  background: var(--surface-container-high);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.pillar-top {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pillar-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.pillar-val {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pillar-sub {
+  font-size: 10px;
+  color: var(--outline);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Dual Graph Action CTAs */
+.graph-bottom-cta-wrap.dual-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.graph-bottom-cta-wrap.dual-actions .stitch-btn {
+  flex: 1;
+}
+
+/* Dossier Actions Grid 3-button layout */
+.dossier-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.dossier-actions-grid .full-span {
+  grid-column: 1 / -1;
+}
+
+/* Responsive Polish across mobile widths (320px - 768px) */
+@media (max-width: 360px) {
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .greeting-heading {
+    font-size: 18px;
+  }
+  .spotlight-title {
+    font-size: 14px;
+  }
+  .thread-top-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
 }
 
 /* Common Animations */

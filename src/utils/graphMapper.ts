@@ -3,43 +3,43 @@ import type { ContextObject } from '../types/context';
 
 /**
  * Maps a single ContextObject into React Flow graph nodes and edges
- * utilizing the Obsidian Lumina visual design system.
+ * utilizing the Obsidian Lumina visual design system with clear hierarchy,
+ * non-overlapping coordinates, and high-readability typography.
  */
 export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edges: Edge[] } {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
-  const centerX = 200;
-
-  // 1. Center Master Node: Purpose (e.g. Project Review)
+  // 1. Center Master Node: Purpose / Goal
   const purposeId = 'node-purpose';
   nodes.push({
     id: purposeId,
     type: 'default',
-    position: { x: centerX - 80, y: 160 },
+    position: { x: 190, y: 150 },
     data: {
-      label: `🎯 ${context.purpose}\n(${context.temporal.eventTiming || 'Milestone'})`
+      label: `🎯 ${context.purpose}\n(Master Milestone)`
     },
     style: {
       background: 'linear-gradient(135deg, #262a33 0%, #1c2028 100%)',
       color: '#c0c1ff',
-      border: '1.5px solid #8083ff',
+      border: '2px solid #8083ff',
       borderRadius: '16px',
       padding: '12px 16px',
       fontWeight: 700,
-      fontSize: '12px',
-      boxShadow: '0 0 28px rgba(128, 131, 255, 0.45)',
-      width: 160,
+      fontSize: '12.5px',
+      lineHeight: '1.4',
+      boxShadow: '0 0 32px rgba(128, 131, 255, 0.45)',
+      width: 170,
       textAlign: 'center'
     }
   });
 
-  // 2. Originator / Actor Node (Level 0, Top-Left)
+  // 2. Originator / Actor Node (Top-Left)
   const actorId = 'node-actor';
   nodes.push({
     id: actorId,
     type: 'default',
-    position: { x: 30, y: 30 },
+    position: { x: 20, y: 40 },
     data: {
       label: `👤 ${context.actor}\n(Originator)`
     },
@@ -51,7 +51,8 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
       padding: '10px 14px',
       fontWeight: 600,
       fontSize: '11.5px',
-      boxShadow: '0 0 20px rgba(76, 215, 246, 0.3)',
+      lineHeight: '1.35',
+      boxShadow: '0 0 22px rgba(76, 215, 246, 0.35)',
       width: 140,
       textAlign: 'center'
     }
@@ -69,25 +70,26 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
     markerEnd: { type: MarkerType.ArrowClosed, color: '#4cd7f6' }
   });
 
-  // 3. Event Timing Node (Bottom-Left of Purpose)
+  // 3. Event Timing Node (Bottom-Left)
   if (context.temporal.eventTiming) {
     const eventId = 'node-event';
     nodes.push({
       id: eventId,
       type: 'default',
-      position: { x: 20, y: 290 },
+      position: { x: 20, y: 260 },
       data: {
         label: `📅 ${context.temporal.eventTiming}\n(Event Horizon)`
       },
       style: {
         background: '#0a0e16',
         color: '#4edea3',
-        border: '1px dashed #4edea3',
-        borderRadius: '12px',
-        padding: '8px 12px',
+        border: '1.5px dashed #4edea3',
+        borderRadius: '13px',
+        padding: '9px 12px',
         fontSize: '11px',
-        fontWeight: 500,
-        boxShadow: '0 0 16px rgba(78, 222, 163, 0.25)',
+        fontWeight: 600,
+        lineHeight: '1.35',
+        boxShadow: '0 0 20px rgba(78, 222, 163, 0.25)',
         width: 150,
         textAlign: 'center'
       }
@@ -99,42 +101,45 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
       target: eventId,
       label: 'scheduled at',
       type: 'smoothstep',
-      style: { stroke: '#4edea3', strokeWidth: 1.5, strokeDasharray: '3,3' },
-      labelStyle: { fill: '#4edea3', fontSize: 9 },
+      style: { stroke: '#4edea3', strokeWidth: 1.75, strokeDasharray: '4,4' },
+      labelStyle: { fill: '#4edea3', fontSize: 9.5, fontWeight: 500 },
       markerEnd: { type: MarkerType.ArrowClosed, color: '#4edea3' }
     });
   }
 
-  // 4. Action Nodes & Artifacts (Right Side)
-  const actionStartY = 40;
-  const actionGapY = 130;
-  const actionX = 260;
+  // 4. Action Nodes & Connected Artifacts (Right Side)
+  const actionX = 280;
+  const artifactX = 470;
+  const startY = 30;
+  const gapY = 125;
 
   context.actions.forEach((action, idx) => {
     const actionId = `node-action-${idx}`;
     const isDone = context.completedActions.includes(action);
+    const posY = startY + idx * gapY;
 
     nodes.push({
       id: actionId,
       type: 'default',
-      position: { x: actionX, y: actionStartY + idx * actionGapY },
+      position: { x: actionX, y: posY },
       data: {
         label: `${isDone ? '✅' : '⚡'} Action ${idx + 1}:\n${action}`
       },
       style: {
         background: isDone
-          ? 'linear-gradient(135deg, #00885d 0%, #0f131c 100%)'
+          ? 'linear-gradient(135deg, #005236 0%, #0a1813 100%)'
           : 'linear-gradient(135deg, #262a33 0%, #181c24 100%)',
-        color: isDone ? '#4edea3' : '#dfe2ee',
-        border: isDone ? '1px solid #4edea3' : '1px solid #908fa0',
+        color: isDone ? '#6ffbbe' : '#dfe2ee',
+        border: isDone ? '1.5px solid #4edea3' : '1px solid #908fa0',
         borderRadius: '14px',
         padding: '10px 14px',
         fontWeight: 600,
         fontSize: '11.5px',
+        lineHeight: '1.35',
         boxShadow: isDone
-          ? '0 0 20px rgba(78, 222, 163, 0.35)'
-          : '0 4px 16px rgba(0, 0, 0, 0.4)',
-        width: 170,
+          ? '0 0 24px rgba(78, 222, 163, 0.4)'
+          : '0 4px 18px rgba(0, 0, 0, 0.5)',
+        width: 165,
         textAlign: 'center'
       }
     });
@@ -146,7 +151,7 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
       label: 'requires action',
       type: 'smoothstep',
       style: { stroke: '#c0c1ff', strokeWidth: 1.75 },
-      labelStyle: { fill: '#c0c1ff', fontSize: 9.5 },
+      labelStyle: { fill: '#c0c1ff', fontSize: 9.5, fontWeight: 500 },
       markerEnd: { type: MarkerType.ArrowClosed, color: '#c0c1ff' }
     });
 
@@ -157,20 +162,21 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
       nodes.push({
         id: artifactId,
         type: 'default',
-        position: { x: actionX + 190, y: actionStartY + idx * actionGapY },
+        position: { x: artifactX, y: posY },
         data: {
           label: `📦 Artifact:\n${artifactConcept}`
         },
         style: {
           background: '#0a0e16',
           color: '#4cd7f6',
-          border: '1px solid #4cd7f6',
+          border: '1.5px solid #0ea5e9',
           borderRadius: '12px',
           padding: '8px 12px',
           fontWeight: 600,
           fontSize: '11px',
-          boxShadow: '0 0 16px rgba(76, 215, 246, 0.25)',
-          width: 130,
+          lineHeight: '1.3',
+          boxShadow: '0 0 18px rgba(76, 215, 246, 0.25)',
+          width: 140,
           textAlign: 'center'
         }
       });
@@ -179,35 +185,36 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
         id: `edge-${actionId}-${artifactId}`,
         source: actionId,
         target: artifactId,
-        label: 'specifies',
+        label: 'references',
         type: 'smoothstep',
         style: { stroke: '#4cd7f6', strokeWidth: 1.5, strokeDasharray: '3,3' },
-        labelStyle: { fill: '#4cd7f6', fontSize: 9 },
+        labelStyle: { fill: '#4cd7f6', fontSize: 9, fontWeight: 500 },
         markerEnd: { type: MarkerType.ArrowClosed, color: '#4cd7f6' }
       });
     }
   });
 
-  // 5. Task Deadline Node (Bottom Right)
+  // 5. Task Deadline Node (Bottom Center)
   if (context.temporal.taskDeadline) {
     const deadlineId = 'node-deadline';
     nodes.push({
       id: deadlineId,
       type: 'default',
-      position: { x: actionX + 40, y: actionStartY + context.actions.length * actionGapY + 10 },
+      position: { x: 190, y: 310 },
       data: {
-        label: `⏰ Deadline:\n${context.temporal.taskDeadline}`
+        label: `⏰ Cutoff Deadline:\n${context.temporal.taskDeadline}`
       },
       style: {
-        background: 'linear-gradient(135deg, #93000a 0%, #1c2028 100%)',
-        color: '#ffb4ab',
+        background: 'linear-gradient(135deg, #690005 0%, #181c24 100%)',
+        color: '#ffdad6',
         border: '1.5px solid #ffb4ab',
-        borderRadius: '12px',
-        padding: '8px 14px',
+        borderRadius: '13px',
+        padding: '9px 14px',
         fontWeight: 700,
-        fontSize: '11px',
-        boxShadow: '0 0 20px rgba(255, 180, 171, 0.35)',
-        width: 140,
+        fontSize: '11.5px',
+        lineHeight: '1.35',
+        boxShadow: '0 0 24px rgba(255, 180, 171, 0.4)',
+        width: 165,
         textAlign: 'center'
       }
     });
@@ -220,7 +227,7 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
       label: 'due by',
       type: 'smoothstep',
       style: { stroke: '#ffb4ab', strokeWidth: 1.75, strokeDasharray: '4,4' },
-      labelStyle: { fill: '#ffb4ab', fontSize: 9 },
+      labelStyle: { fill: '#ffb4ab', fontSize: 9.5, fontWeight: 600 },
       markerEnd: { type: MarkerType.ArrowClosed, color: '#ffb4ab' }
     });
   }

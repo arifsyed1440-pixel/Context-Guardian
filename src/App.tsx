@@ -7,6 +7,7 @@ import {
   setActiveContextId 
 } from './services/storageService';
 import { ContextObject, ScreenType } from './types/context';
+import { DeviceFrame } from './components/common/DeviceFrame';
 import { Header } from './components/Header';
 import { Navigation } from './components/Navigation';
 import { HomeScreen } from './components/screens/HomeScreen';
@@ -29,6 +30,7 @@ export const App: React.FC = () => {
   });
   const [currentScreen, setCurrentScreen] = useState<ScreenType>('home');
   const [isMobileWrapper, setIsMobileWrapper] = useState<boolean>(true);
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   // Sync activeContextId to localStorage when changed
   useEffect(() => {
@@ -65,101 +67,81 @@ export const App: React.FC = () => {
     }
   };
 
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
-    <div className={`app-root ${isMobileWrapper ? 'has-device-frame' : 'full-viewport'}`}>
-      {/* Top Preview Bar (Mobile Simulator / Responsive Toggle) */}
-      <div className="preview-mode-bar">
-        <div className="preview-mode-info">
-          <span className="prototype-pill">Stitch Lumina</span>
-          <span className="mode-text">Context Guardian Mobile Prototype</span>
-        </div>
-        <button
-          className="viewport-toggle-btn"
-          onClick={() => setIsMobileWrapper(!isMobileWrapper)}
-          title="Toggle Mobile Simulator / Full Layout"
-        >
-          <span className="material-symbols-outlined text-[15px]">
-            {isMobileWrapper ? 'desktop_windows' : 'smartphone'}
-          </span>
-          <span>{isMobileWrapper ? 'Full View' : 'Mobile Frame'}</span>
-        </button>
-      </div>
+    <DeviceFrame
+      isMobileFrame={isMobileWrapper}
+      onToggleFrame={() => setIsMobileWrapper(!isMobileWrapper)}
+      theme={theme}
+      onToggleTheme={toggleTheme}
+      currentScreen={currentScreen}
+    >
+      <Header
+        currentScreen={currentScreen}
+        contexts={contexts}
+        activeContextId={activeContextId}
+        onSelectContext={handleSelectContext}
+        onNavigate={setCurrentScreen}
+      />
 
-      {/* Main Container / Mobile Device Simulator */}
-      <div className="device-viewport-container">
-        <div className="mobile-chassis">
-          <div className="chassis-speaker"></div>
+      <main className="main-content-area" id="main-content">
+        {currentScreen === 'home' && (
+          <HomeScreen
+            contexts={contexts}
+            activeContextId={activeContextId}
+            onSelectContext={handleSelectContext}
+            onNavigate={setCurrentScreen}
+            onDeleteContext={handleDeleteContext}
+          />
+        )}
 
-          {/* Core App View */}
-          <div className="screen-viewport">
-            <Header
-              currentScreen={currentScreen}
-              contexts={contexts}
-              activeContextId={activeContextId}
-              onSelectContext={handleSelectContext}
-              onNavigate={setCurrentScreen}
-            />
+        {currentScreen === 'capture' && (
+          <CaptureScreen
+            onContextExtracted={handleContextExtracted}
+            onNavigate={setCurrentScreen}
+          />
+        )}
 
-            <main className="main-content-area">
-              {currentScreen === 'home' && (
-                <HomeScreen
-                  contexts={contexts}
-                  activeContextId={activeContextId}
-                  onSelectContext={handleSelectContext}
-                  onNavigate={setCurrentScreen}
-                  onDeleteContext={handleDeleteContext}
-                />
-              )}
+        {currentScreen === 'input' && (
+          <ConversationInputScreen
+            onContextExtracted={handleContextExtracted}
+            onNavigate={setCurrentScreen}
+          />
+        )}
 
-              {currentScreen === 'capture' && (
-                <CaptureScreen
-                  onContextExtracted={handleContextExtracted}
-                  onNavigate={setCurrentScreen}
-                />
-              )}
+        {currentScreen === 'analysis' && (
+          <ContextAnalysisScreen
+            context={activeContext}
+            onUpdateContext={handleUpdateContext}
+            onNavigate={setCurrentScreen}
+          />
+        )}
 
-              {currentScreen === 'input' && (
-                <ConversationInputScreen
-                  onContextExtracted={handleContextExtracted}
-                  onNavigate={setCurrentScreen}
-                />
-              )}
+        {currentScreen === 'graph' && (
+          <ContextGraphScreen
+            context={activeContext}
+            onNavigate={setCurrentScreen}
+          />
+        )}
 
-              {currentScreen === 'analysis' && (
-                <ContextAnalysisScreen
-                  context={activeContext}
-                  onUpdateContext={handleUpdateContext}
-                  onNavigate={setCurrentScreen}
-                />
-              )}
+        {currentScreen === 'dossier' && (
+          <ContextDossierScreen
+            context={activeContext}
+            onUpdateContext={handleUpdateContext}
+            onNavigate={setCurrentScreen}
+          />
+        )}
+      </main>
 
-              {currentScreen === 'graph' && (
-                <ContextGraphScreen
-                  context={activeContext}
-                  onNavigate={setCurrentScreen}
-                />
-              )}
-
-              {currentScreen === 'dossier' && (
-                <ContextDossierScreen
-                  context={activeContext}
-                  onUpdateContext={handleUpdateContext}
-                  onNavigate={setCurrentScreen}
-                />
-              )}
-            </main>
-
-            <Navigation
-              currentScreen={currentScreen}
-              onNavigate={setCurrentScreen}
-              hasActiveContext={!!activeContext}
-            />
-          </div>
-
-          <div className="chassis-home-bar"></div>
-        </div>
-      </div>
-    </div>
+      <Navigation
+        currentScreen={currentScreen}
+        onNavigate={setCurrentScreen}
+        hasActiveContext={!!activeContext}
+      />
+    </DeviceFrame>
   );
 };
 

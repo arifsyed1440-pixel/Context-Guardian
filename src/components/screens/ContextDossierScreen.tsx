@@ -169,6 +169,59 @@ Raw Snippet:
         </div>
       </div>
 
+      {/* 4 Pillars of Context Recovery (Goal 8: WHO, WHY, WHAT, WHEN) */}
+      <div className="context-pillars-card">
+        <div className="pillars-heading-row">
+          <div className="pillars-title-group">
+            <span className="material-symbols-outlined text-secondary text-[16px]">view_column</span>
+            <span className="pillars-title">Context Recovery Pillars</span>
+          </div>
+          <span className="pillars-badge">Synthesized Beyond Flat Reminders</span>
+        </div>
+
+        <div className="pillars-grid">
+          {/* WHO */}
+          <div className="pillar-cell who">
+            <div className="pillar-top">
+              <span className="material-symbols-outlined text-primary text-[14px]">person</span>
+              <span className="pillar-tag text-primary">WHO</span>
+            </div>
+            <span className="pillar-val">{context.actor}</span>
+            <span className="pillar-sub">Stakeholder Originator</span>
+          </div>
+
+          {/* WHY */}
+          <div className="pillar-cell why">
+            <div className="pillar-top">
+              <span className="material-symbols-outlined text-secondary text-[14px]">target</span>
+              <span className="pillar-tag text-secondary">WHY</span>
+            </div>
+            <span className="pillar-val">{context.purpose}</span>
+            <span className="pillar-sub">Milestone Goal</span>
+          </div>
+
+          {/* WHAT */}
+          <div className="pillar-cell what">
+            <div className="pillar-top">
+              <span className="material-symbols-outlined text-tertiary text-[14px]">checklist</span>
+              <span className="pillar-tag text-tertiary">WHAT</span>
+            </div>
+            <span className="pillar-val">{context.actions.length} Deliverables</span>
+            <span className="pillar-sub">{context.artifacts.length} Assets Linked</span>
+          </div>
+
+          {/* WHEN */}
+          <div className="pillar-cell when">
+            <div className="pillar-top">
+              <span className="material-symbols-outlined text-error text-[14px]">alarm</span>
+              <span className="pillar-tag text-error">WHEN</span>
+            </div>
+            <span className="pillar-val">{context.temporal.taskDeadline || 'Cutoff 5:00 PM'}</span>
+            <span className="pillar-sub">{context.temporal.eventTiming || 'Project review'}</span>
+          </div>
+        </div>
+      </div>
+
       {/* Core Metadata Matrix Bento (Stitch Screen 08) */}
       <div className="metadata-bento-column">
         {/* Actor Profile Card */}
@@ -348,15 +401,28 @@ Raw Snippet:
       <div className="dossier-actions-grid">
         <button
           className="stitch-btn secondary"
-          onClick={() => onNavigate('graph')}
+          onClick={() => onNavigate('analysis')}
+          title="Inspect entity decomposition"
+          type="button"
         >
-          <span className="material-symbols-outlined text-[16px]">hub</span>
-          <span>View Context Graph</span>
+          <span className="material-symbols-outlined text-[16px]">psychology</span>
+          <span>Analysis</span>
         </button>
 
         <button
-          className="stitch-btn primary"
+          className="stitch-btn secondary"
+          onClick={() => onNavigate('graph')}
+          title="Inspect semantic graph"
+          type="button"
+        >
+          <span className="material-symbols-outlined text-[16px]">hub</span>
+          <span>Graph</span>
+        </button>
+
+        <button
+          className="stitch-btn primary full-span"
           onClick={handleCopyDigest}
+          type="button"
         >
           <span className="material-symbols-outlined text-[16px]">
             {copiedDigest ? 'check_circle' : 'share'}

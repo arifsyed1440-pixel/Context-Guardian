@@ -144,14 +144,25 @@ export const ContextGraphScreen: React.FC<ContextGraphScreenProps> = ({
         </div>
       </div>
 
-      {/* Bottom CTA to Dossier */}
-      <div className="graph-bottom-cta-wrap">
+      {/* Bottom CTAs to Analysis and Dossier */}
+      <div className="graph-bottom-cta-wrap dual-actions">
         <button 
-          className="stitch-btn primary full-width"
-          onClick={() => onNavigate('dossier')}
+          className="stitch-btn secondary"
+          onClick={() => onNavigate('analysis')}
+          title="Review entity decomposition"
+          type="button"
         >
-          <span className="material-symbols-outlined text-[18px]">verified</span>
-          <span>Synthesize into Context Dossier</span>
+          <span className="material-symbols-outlined text-[16px]">psychology</span>
+          <span>Entity Breakdown</span>
+        </button>
+        <button 
+          className="stitch-btn primary"
+          onClick={() => onNavigate('dossier')}
+          title="Open executive recovery dossier"
+          type="button"
+        >
+          <span className="material-symbols-outlined text-[16px]">verified</span>
+          <span>Open Dossier</span>
         </button>
       </div>
     </div>

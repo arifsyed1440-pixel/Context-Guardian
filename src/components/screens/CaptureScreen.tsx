@@ -138,6 +138,16 @@ export const CaptureScreen: React.FC<CaptureScreenProps> = ({
     onNavigate('analysis');
   };
 
+  // Explicit workflow state machine
+  const workflowState: 'idle' | 'processing' | 'success' | 'review' | 'error' = 
+    isOcrRunning
+      ? 'processing'
+      : ocrError
+      ? 'error'
+      : extractedRawText.trim()
+      ? 'review'
+      : 'idle';
+
   return (
     <div className="screen-inner-container capture-stitch-screen">
       {/* Ambient Radial Highlights */}
@@ -171,7 +181,16 @@ export const CaptureScreen: React.FC<CaptureScreenProps> = ({
             <span className="material-symbols-outlined text-[13px] text-tertiary">document_scanner</span>
             <span className="node-label">Neural Vision Node</span>
           </div>
-          <span className="epoch-tag">CLIENT-SIDE TESSERACT</span>
+          {/* Visual Workflow State Indicator */}
+          <div className={`workflow-state-pill ${workflowState}`}>
+            <span className="workflow-dot"></span>
+            <span className="workflow-label">
+              {workflowState === 'idle' && 'STATE: IDLE (Select Screenshot)'}
+              {workflowState === 'processing' && `STATE: PROCESSING (${ocrProgress.progress}%)`}
+              {workflowState === 'review' && 'STATE: REVIEW (Editable OCR Text)'}
+              {workflowState === 'error' && 'STATE: ERROR (Fallback Active)'}
+            </span>
+          </div>
         </div>
         <h2 className="capture-title">Recover Context from Screenshots</h2>
         <p className="capture-desc">
