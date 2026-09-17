@@ -1,4 +1,4 @@
-import { ContextObject } from '../types/context';
+import type { ContextObject } from '../types/context';
 
 const STORAGE_KEY = 'context_guardian_contexts_v1';
 const ACTIVE_CONTEXT_ID_KEY = 'context_guardian_active_id_v1';

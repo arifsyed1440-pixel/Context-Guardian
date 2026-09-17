@@ -1,5 +1,5 @@
-import { Node, Edge, MarkerType } from '@xyflow/react';
-import { ContextObject } from '../types/context';
+import { MarkerType, type Node, type Edge } from '@xyflow/react';
+import type { ContextObject } from '../types/context';
 
 /**
  * Maps a single ContextObject into React Flow graph nodes and edges
