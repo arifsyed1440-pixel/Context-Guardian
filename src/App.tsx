@@ -17,24 +17,24 @@ import { ContextDossierScreen } from './components/screens/ContextDossierScreen'
 import './App.css';
 
 export const App: React.FC = () => {
-  const [contexts, setContexts] = useState<ContextObject[]>([]);
-  const [activeContextId, setActiveId] = useState<string | null>(null);
+  const [contexts, setContexts] = useState<ContextObject[]>(() => getStoredContexts());
+  const [activeContextId, setActiveId] = useState<string | null>(() => {
+    const storedActive = getActiveContextId();
+    const initial = getStoredContexts();
+    if (storedActive && initial.some((c) => c.id === storedActive)) {
+      return storedActive;
+    }
+    return initial.length > 0 ? initial[0].id : null;
+  });
   const [currentScreen, setCurrentScreen] = useState<ScreenType>('home');
   const [isMobileWrapper, setIsMobileWrapper] = useState<boolean>(true);
 
-  // Initialize contexts on mount
+  // Sync activeContextId to localStorage when changed
   useEffect(() => {
-    const loaded = getStoredContexts();
-    setContexts(loaded);
-
-    const storedActive = getActiveContextId();
-    if (storedActive && loaded.some((c) => c.id === storedActive)) {
-      setActiveId(storedActive);
-    } else if (loaded.length > 0) {
-      setActiveId(loaded[0].id);
-      setActiveContextId(loaded[0].id);
+    if (activeContextId) {
+      setActiveContextId(activeContextId);
     }
-  }, []);
+  }, [activeContextId]);
 
   const activeContext = contexts.find((c) => c.id === activeContextId) || contexts[0] || null;
 

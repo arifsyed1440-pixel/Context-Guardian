@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ContextObject, ScreenType } from '../../types/context';
+import { INITIAL_DEMO_CONTEXTS } from '../../services/storageService';
 
 interface HomeScreenProps {
   contexts: ContextObject[];
@@ -19,20 +20,23 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [showComparison, setShowComparison] = useState(true);
 
-  // Active spotlight context (defaults to Rahul's review)
-  const spotlightContext = contexts.find(c => c.id === 'demo-rahul-review') || contexts[0];
+  // Active spotlight context (defaults to Rahul's review, or first available, or seeded demo context)
+  const spotlightContext =
+    contexts.find((c) => c.id === 'demo-rahul-review') ||
+    contexts[0] ||
+    INITIAL_DEMO_CONTEXTS[0];
 
   const filteredContexts = searchQuery.trim()
     ? contexts.filter(
-        c =>
-          c.actor.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          c.purpose.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          c.actions.some(a => a.toLowerCase().includes(searchQuery.toLowerCase()))
+        (c) =>
+          (c.actor || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (c.purpose || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (c.actions || []).some((a) => a.toLowerCase().includes(searchQuery.toLowerCase()))
       )
     : contexts;
 
-  const totalActions = contexts.reduce((sum, c) => sum + c.actions.length, 0);
-  const completedActions = contexts.reduce((sum, c) => sum + c.completedActions.length, 0);
+  const totalActions = contexts.reduce((sum, c) => sum + (c.actions?.length || 0), 0);
+  const completedActions = contexts.reduce((sum, c) => sum + (c.completedActions?.length || 0), 0);
 
   return (
     <div className="screen-inner-container home-stitch-screen">
@@ -141,15 +145,15 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 <span className="protocol-label">Spotlight Protocol</span>
               </div>
               <span className="spotlight-time-tag">
-                {spotlightContext.temporal.taskDeadline || 'Tomorrow, 5:00 PM'}
+                {spotlightContext.temporal?.taskDeadline || 'Tomorrow, 5:00 PM'}
               </span>
             </div>
 
             {/* Spotlight Title & Description */}
             <div className="spotlight-title-group">
-              <h3 className="spotlight-title">Upcoming Review with {spotlightContext.actor}</h3>
+              <h3 className="spotlight-title">Upcoming Review with {spotlightContext.actor || 'Rahul'}</h3>
               <p className="spotlight-desc">
-                High-fidelity context reconstructed from conversation snippet. {spotlightContext.actions.length} action items and {spotlightContext.artifacts.length} referenced artifacts indexed.
+                High-fidelity context reconstructed from conversation snippet. {(spotlightContext.actions || []).length} action items and {(spotlightContext.artifacts || []).length} referenced artifacts indexed.
               </p>
             </div>
 
@@ -161,11 +165,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               <div className="readiness-text-col">
                 <span className="readiness-title">Context Readiness</span>
                 <span className="readiness-coherence">
-                  {(spotlightContext.confidenceScore * 100).toFixed(0)}% Coherence Verified
+                  {((spotlightContext.confidenceScore ?? 0.96) * 100).toFixed(0)}% Coherence Verified
                 </span>
               </div>
               <div className="readiness-counter">
-                {spotlightContext.completedActions.length}/{spotlightContext.actions.length} Tasks
+                {(spotlightContext.completedActions || []).length}/{(spotlightContext.actions || []).length} Tasks
               </div>
             </div>
 
@@ -242,7 +246,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 <span className="coherence-badge">Synthesized Memory</span>
               </div>
               <div className="guardian-quote-body">
-                "{spotlightContext.actor} asked you to {spotlightContext.actions.join(' and ').toLowerCase()} for {spotlightContext.temporal.eventTiming?.toLowerCase() || 'review'} ({spotlightContext.temporal.taskDeadline?.toLowerCase()})."
+                {spotlightContext ? (
+                  `"${spotlightContext.actor} asked you to ${(spotlightContext.actions || []).join(' and ').toLowerCase()} for ${spotlightContext.temporal?.eventTiming?.toLowerCase() || 'review'} (${spotlightContext.temporal?.taskDeadline?.toLowerCase() || 'before 5 PM'})."`
+                ) : (
+                  '"Rahul asked you to bring latest prototype and update architecture slides for tomorrow\'s project review (before 5 PM)."'
+                )}
               </div>
               <div className="guardian-features-row">
                 <span className="feature-chip">✓ Actor Grounded</span>
@@ -262,103 +270,112 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </div>
 
         <div className="threads-list">
-          {filteredContexts.map((ctx) => {
-            const isSelected = ctx.id === activeContextId;
-            const progress = ctx.actions.length > 0 
-              ? Math.round((ctx.completedActions.length / ctx.actions.length) * 100) 
-              : 0;
+          {filteredContexts.length === 0 ? (
+            <div className="no-threads-box" style={{ padding: '32px 16px', textAlign: 'center', color: '#a0a5ad' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '32px', color: '#68727d', marginBottom: '8px', display: 'block' }}>inventory_2</span>
+              <p style={{ margin: 0, fontSize: '13px' }}>No context threads found.</p>
+            </div>
+          ) : (
+            filteredContexts.map((ctx) => {
+              const isSelected = ctx.id === activeContextId;
+              const actionsCount = ctx.actions?.length || 0;
+              const completedCount = ctx.completedActions?.length || 0;
+              const progress = actionsCount > 0 
+                ? Math.round((completedCount / actionsCount) * 100) 
+                : 0;
 
-            return (
-              <div 
-                key={ctx.id} 
-                className={`thread-card ${isSelected ? 'selected-glow' : ''}`}
-                onClick={() => onSelectContext(ctx.id)}
-              >
-                <div className="thread-top-line">
-                  <div className="actor-profile-tag">
-                    <span className="actor-avatar-circle">
-                      {ctx.actor.charAt(0)}
-                    </span>
-                    <span className="actor-name">{ctx.actor}</span>
+              return (
+                <div 
+                  key={ctx.id} 
+                  className={`thread-card ${isSelected ? 'selected-glow' : ''}`}
+                  onClick={() => onSelectContext(ctx.id)}
+                >
+                  <div className="thread-top-line">
+                    <div className="actor-profile-tag">
+                      <span className="actor-avatar-circle">
+                        {(ctx.actor || '?').charAt(0)}
+                      </span>
+                      <span className="actor-name">{ctx.actor || 'Unknown'}</span>
+                    </div>
+
+                    <div className="thread-badges-right">
+                      <span className="category-pill-tag">{ctx.category || 'General'}</span>
+                      <button 
+                        className="delete-thread-btn" 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onDeleteContext(ctx.id);
+                        }}
+                        title="Delete thread"
+                      >
+                        <span className="material-symbols-outlined text-[15px]">delete</span>
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="thread-badges-right">
-                    <span className="category-pill-tag">{ctx.category}</span>
-                    <button 
-                      className="delete-thread-btn" 
+                  <h4 className="thread-purpose">{ctx.purpose}</h4>
+
+                  {/* Distinct Temporal Information */}
+                  <div className="temporal-chips-container">
+                    {ctx.temporal?.eventTiming && (
+                      <div className="temporal-chip event">
+                        <span className="material-symbols-outlined text-[12px]">calendar_today</span>
+                        <span>{ctx.temporal.eventTiming}</span>
+                      </div>
+                    )}
+                    {ctx.temporal?.taskDeadline && (
+                      <div className="temporal-chip deadline">
+                        <span className="material-symbols-outlined text-[12px]">schedule</span>
+                        <span>Due: {ctx.temporal.taskDeadline}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Actions Progress */}
+                  <div className="thread-progress-wrapper">
+                    <div className="thread-progress-labels">
+                      <span className="progress-task-count">
+                        {completedCount} of {actionsCount} deliverables resolved
+                      </span>
+                      <span className="progress-percentage">{progress}%</span>
+                    </div>
+                    <div className="thread-progress-track">
+                      <div 
+                        className="thread-progress-bar"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Footer Controls */}
+                  <div className="thread-footer-actions">
+                    <button
+                      className="thread-action-btn"
                       onClick={(e) => {
                         e.stopPropagation();
-                        onDeleteContext(ctx.id);
+                        onSelectContext(ctx.id);
+                        onNavigate('graph');
                       }}
-                      title="Delete thread"
                     >
-                      <span className="material-symbols-outlined text-[15px]">delete</span>
+                      <span className="material-symbols-outlined text-[14px]">hub</span>
+                      <span>Graph</span>
+                    </button>
+                    <button
+                      className="thread-action-btn primary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectContext(ctx.id);
+                        onNavigate('dossier');
+                      }}
+                    >
+                      <span className="material-symbols-outlined text-[14px]">verified</span>
+                      <span>Dossier</span>
                     </button>
                   </div>
                 </div>
-
-                <h4 className="thread-purpose">{ctx.purpose}</h4>
-
-                {/* Distinct Temporal Information */}
-                <div className="temporal-chips-container">
-                  {ctx.temporal.eventTiming && (
-                    <div className="temporal-chip event">
-                      <span className="material-symbols-outlined text-[12px]">calendar_today</span>
-                      <span>{ctx.temporal.eventTiming}</span>
-                    </div>
-                  )}
-                  {ctx.temporal.taskDeadline && (
-                    <div className="temporal-chip deadline">
-                      <span className="material-symbols-outlined text-[12px]">schedule</span>
-                      <span>Due: {ctx.temporal.taskDeadline}</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Actions Progress */}
-                <div className="thread-progress-wrapper">
-                  <div className="thread-progress-labels">
-                    <span className="progress-task-count">
-                      {ctx.completedActions.length} of {ctx.actions.length} deliverables resolved
-                    </span>
-                    <span className="progress-percentage">{progress}%</span>
-                  </div>
-                  <div className="thread-progress-track">
-                    <div 
-                      className="thread-progress-bar"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
-                </div>
-
-                {/* Footer Controls */}
-                <div className="thread-footer-actions">
-                  <button
-                    className="thread-action-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectContext(ctx.id);
-                      onNavigate('graph');
-                    }}
-                  >
-                    <span className="material-symbols-outlined text-[14px]">hub</span>
-                    <span>Graph</span>
-                  </button>
-                  <button
-                    className="thread-action-btn primary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectContext(ctx.id);
-                      onNavigate('dossier');
-                    }}
-                  >
-                    <span className="material-symbols-outlined text-[14px]">verified</span>
-                    <span>Dossier</span>
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
     </div>
