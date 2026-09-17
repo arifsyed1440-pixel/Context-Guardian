@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <rect width="96" height="96" rx="28" fill="url(#bg_grad)" />
+  <rect x="1" y="1" width="94" height="94" rx="27" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  <circle cx="48" cy="48" r="28" stroke="url(#accent_grad)" stroke-width="2.5" stroke-dasharray="4 6" opacity="0.6"/>
+  <path d="M48 24C34.745 24 24 34.745 24 48C24 61.255 34.745 72 48 72C61.255 72 72 61.255 72 48" stroke="#6366F1" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="48" cy="48" r="14" fill="#0B0F17" stroke="#8B5CF6" stroke-width="3"/>
+  <circle cx="48" cy="48" r="6" fill="#A855F7"/>
+  <circle cx="72" cy="48" r="5" fill="#38BDF8"/>
+  <circle cx="36" cy="36" r="3.5" fill="#818CF8"/>
+  <circle cx="60" cy="60" r="3.5" fill="#6366F1"/>
+  <defs>
+    <linearGradient id="bg_grad" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#161B26" />
+      <stop offset="1" stop-color="#090D15" />
+    </linearGradient>
+    <linearGradient id="accent_grad" x1="20" y1="20" x2="76" y2="76" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818CF8" />
+      <stop offset="1" stop-color="#C084FC" />
+    </linearGradient>
+  </defs>
+</svg>

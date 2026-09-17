@@ -10,11 +10,6 @@ import {
   BackgroundVariant
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { 
-  Network, 
-  FileCheck, 
-  Info 
-} from 'lucide-react';
 import { ContextObject, ScreenType } from '../../types/context';
 import { mapContextToGraph } from '../../utils/graphMapper';
 
@@ -39,11 +34,11 @@ export const ContextGraphScreen: React.FC<ContextGraphScreenProps> = ({
 
   if (!context) {
     return (
-      <div className="screen-container empty-state">
-        <Network size={36} className="empty-icon" />
+      <div className="screen-inner-container empty-state">
+        <span className="material-symbols-outlined empty-icon">hub</span>
         <h3>No Active Context Graph</h3>
-        <p>Input a conversation to reconstruct its semantic relationship graph.</p>
-        <button className="cta-primary-btn" onClick={() => onNavigate('input')}>
+        <p>Input a conversation to reconstruct its relational semantic map.</p>
+        <button className="stitch-btn primary" onClick={() => onNavigate('input')}>
           Create Context
         </button>
       </div>
@@ -55,23 +50,26 @@ export const ContextGraphScreen: React.FC<ContextGraphScreenProps> = ({
   };
 
   return (
-    <div className="screen-container graph-screen">
-      {/* Top Banner */}
-      <div className="graph-header-card">
-        <div className="graph-title-row">
-          <div className="graph-badge">
-            <Network size={14} />
-            <span>Semantic Context Graph</span>
+    <div className="screen-inner-container graph-stitch-screen">
+      {/* Header Banner (Stitch Screen 04) */}
+      <div className="graph-banner-card">
+        <div className="graph-banner-top">
+          <div className="graph-title-group">
+            <span className="material-symbols-outlined text-secondary text-[18px]">hub</span>
+            <span className="graph-title">Semantic Context Map</span>
           </div>
-          <span className="graph-context-label">{context.actor} ➔ {context.purpose}</span>
+          <div className="synced-streams-badge">
+            <span className="material-symbols-outlined text-[13px] text-secondary">sync_saved_locally</span>
+            <span>3 STREAMS SYNCED</span>
+          </div>
         </div>
-        <p className="graph-desc">
-          Interactive knowledge map linking originators, goals, deliverables, artifacts, and temporal constraints.
+        <p className="graph-caption">
+          Relational knowledge map connecting {context.actor}, {context.purpose}, action items, and referenced assets.
         </p>
       </div>
 
-      {/* React Flow Container */}
-      <div className="react-flow-wrapper">
+      {/* Interactive React Flow Canvas */}
+      <div className="graph-canvas-wrapper">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -79,80 +77,80 @@ export const ContextGraphScreen: React.FC<ContextGraphScreenProps> = ({
           onEdgesChange={onEdgesChange}
           onNodeClick={handleNodeClick}
           fitView
-          fitViewOptions={{ padding: 0.2 }}
+          fitViewOptions={{ padding: 0.25 }}
           minZoom={0.4}
           maxZoom={1.8}
           proOptions={{ hideAttribution: true }}
         >
-          <Background color="#334155" gap={18} size={1} variant={BackgroundVariant.Dots} />
-          <Controls className="custom-flow-controls" showInteractive={false} />
+          <Background color="#1e293b" gap={20} size={1} variant={BackgroundVariant.Dots} />
+          <Controls className="stitch-flow-controls" showInteractive={false} />
           <MiniMap 
             nodeColor={(node) => {
-              if (node.id.includes('actor')) return '#3b82f6';
-              if (node.id.includes('purpose')) return '#8b5cf6';
-              if (node.id.includes('deadline')) return '#e11d48';
-              if (node.id.includes('art')) return '#14b8a6';
-              return '#475569';
+              if (node.id.includes('purpose')) return '#8083ff';
+              if (node.id.includes('actor')) return '#4cd7f6';
+              if (node.id.includes('deadline')) return '#ffb4ab';
+              if (node.id.includes('art')) return '#4cd7f6';
+              return '#4edea3';
             }}
-            maskColor="rgba(15, 23, 42, 0.7)"
-            style={{ background: '#090d16', border: '1px solid #1e293b' }}
+            maskColor="rgba(10, 14, 22, 0.75)"
+            style={{ background: '#0a0e16', border: '1px solid #262a33', borderRadius: '8px' }}
           />
         </ReactFlow>
 
         {/* Node Inspector Overlay */}
         {selectedNodeData && (
-          <div className="node-inspector-overlay">
-            <div className="inspector-content">
-              <div className="inspector-header">
-                <Info size={14} />
-                <span>Selected Entity Node</span>
+          <div className="node-inspector-modal">
+            <div className="inspector-top-row">
+              <div className="inspector-label-group">
+                <span className="material-symbols-outlined text-primary text-[15px]">info</span>
+                <span className="inspector-label">Entity Node Selected</span>
               </div>
-              <pre className="inspector-text">{selectedNodeData}</pre>
+              <button 
+                className="inspector-dismiss-btn" 
+                onClick={() => setSelectedNodeData(null)}
+              >
+                ✕
+              </button>
             </div>
-            <button 
-              className="inspector-close" 
-              onClick={() => setSelectedNodeData(null)}
-            >
-              ✕
-            </button>
+            <pre className="inspector-content-text">{selectedNodeData}</pre>
           </div>
         )}
       </div>
 
-      {/* Graph Legend */}
-      <div className="graph-legend-card">
-        <div className="legend-title">Graph Node Archetypes:</div>
-        <div className="legend-items-grid">
-          <div className="legend-item">
-            <span className="legend-color actor"></span>
+      {/* Node Archetypes Legend */}
+      <div className="graph-legend-module">
+        <span className="legend-heading">Semantic Node Archetypes:</span>
+        <div className="legend-grid">
+          <div className="legend-entry">
+            <span className="entry-dot purpose"></span>
+            <span>Master Goal (Purpose)</span>
+          </div>
+          <div className="legend-entry">
+            <span className="entry-dot actor"></span>
             <span>Originator / Actor</span>
           </div>
-          <div className="legend-item">
-            <span className="legend-color purpose"></span>
-            <span>Core Purpose</span>
-          </div>
-          <div className="legend-item">
-            <span className="legend-color action"></span>
+          <div className="legend-entry">
+            <span className="entry-dot action"></span>
             <span>Required Actions</span>
           </div>
-          <div className="legend-item">
-            <span className="legend-color deadline"></span>
+          <div className="legend-entry">
+            <span className="entry-dot deadline"></span>
             <span>Task Deadline</span>
           </div>
-          <div className="legend-item">
-            <span className="legend-color artifact"></span>
+          <div className="legend-entry">
+            <span className="entry-dot artifact"></span>
             <span>Artifact Concepts</span>
           </div>
         </div>
       </div>
 
-      {/* Dossier CTA */}
-      <div className="graph-footer-cta">
+      {/* Bottom CTA to Dossier */}
+      <div className="graph-bottom-cta-wrap">
         <button 
-          className="cta-primary-btn" 
+          className="stitch-btn primary full-width"
           onClick={() => onNavigate('dossier')}
         >
-          <FileCheck size={16} />
+          <span className="material-symbols-outlined text-[18px]">verified</span>
           <span>Synthesize into Context Dossier</span>
         </button>
       </div>

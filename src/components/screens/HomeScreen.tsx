@@ -1,17 +1,4 @@
-import React from 'react';
-import { 
-  Sparkles, 
-  Calendar, 
-  Clock, 
-  CheckCircle2, 
-  ArrowRight, 
-  MessageSquarePlus, 
-  Network, 
-  FileCheck, 
-  Package, 
-  User,
-  Trash2
-} from 'lucide-react';
+import React, { useState } from 'react';
 import { ContextObject, ScreenType } from '../../types/context';
 
 interface HomeScreenProps {
@@ -29,175 +16,350 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onNavigate,
   onDeleteContext,
 }) => {
-  // Aggregate stats from the single source of truth
-  const totalContexts = contexts.length;
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showComparison, setShowComparison] = useState(true);
+
+  // Active spotlight context (defaults to Rahul's review)
+  const spotlightContext = contexts.find(c => c.id === 'demo-rahul-review') || contexts[0];
+
+  const filteredContexts = searchQuery.trim()
+    ? contexts.filter(
+        c =>
+          c.actor.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          c.purpose.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          c.actions.some(a => a.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : contexts;
+
   const totalActions = contexts.reduce((sum, c) => sum + c.actions.length, 0);
   const completedActions = contexts.reduce((sum, c) => sum + c.completedActions.length, 0);
-  const pendingActions = totalActions - completedActions;
 
   return (
-    <div className="screen-container home-screen">
-      {/* Hero Mission Card */}
-      <div className="mission-card">
-        <div className="mission-badge">
-          <Sparkles size={14} />
-          <span>Context Recovery</span>
-        </div>
-        <h2 className="mission-title">
-          Never lose the <em>why</em> behind your tasks.
-        </h2>
-        <p className="mission-desc">
-          Instead of flat reminders, Context Guardian reconstructs the originator, purpose, event timing, and referenced artifacts from fragmented conversations.
-        </p>
+    <div className="screen-inner-container home-stitch-screen">
+      {/* Ambient Radial Highlights */}
+      <div className="ambient-glows-wrap">
+        <div className="ambient-glow top-left"></div>
+        <div className="ambient-glow top-right"></div>
+      </div>
 
-        <div className="quick-actions-row">
-          <button 
-            className="cta-primary-btn" 
-            onClick={() => onNavigate('input')}
-          >
-            <MessageSquarePlus size={16} />
-            <span>Process New Message</span>
-          </button>
-          <button 
-            className="cta-secondary-btn" 
-            onClick={() => onNavigate('capture')}
-          >
-            <span>Scan Screenshot</span>
-          </button>
+      {/* Greeting & Time Context Section */}
+      <div className="greeting-section">
+        <div className="greeting-text-col">
+          <div className="greeting-title-row">
+            <span className="greeting-heading">Good evening, Alex</span>
+            <span className="sparkle-symbol">✦</span>
+          </div>
+          <div className="greeting-subtitle-row">
+            <span className="material-symbols-outlined text-tertiary">check_circle</span>
+            <p className="greeting-subtext">
+              Reconstructed <span className="highlight-tertiary">{contexts.length} active context threads</span> ({completedActions}/{totalActions} deliverables resolved)
+            </p>
+          </div>
+        </div>
+
+        {/* Quick Neural Radar Status */}
+        <div className="radar-status-orb" title="Continuous local semantic surveillance">
+          <svg className="radar-circular-svg" viewBox="0 0 36 36">
+            <circle className="radar-track" cx="18" cy="18" fill="none" r="14" strokeWidth="2.5" />
+            <circle
+              className="radar-indicator"
+              cx="18"
+              cy="18"
+              fill="none"
+              r="14"
+              strokeDasharray="88"
+              strokeDashoffset="18"
+              strokeLinecap="round"
+              strokeWidth="2.5"
+            />
+          </svg>
+          <span className="material-symbols-outlined radar-icon">radar</span>
         </div>
       </div>
 
-      {/* Metrics Row */}
-      <div className="stats-grid">
-        <div className="stat-card">
-          <span className="stat-num">{totalContexts}</span>
-          <span className="stat-label">Active Contexts</span>
-        </div>
-        <div className="stat-card">
-          <span className="stat-num">{pendingActions}</span>
-          <span className="stat-label">Pending Actions</span>
-        </div>
-        <div className="stat-card">
-          <span className="stat-num">{completedActions}</span>
-          <span className="stat-label">Resolved Items</span>
-        </div>
-      </div>
-
-      {/* Context List Header */}
-      <div className="section-header">
-        <h3 className="section-title">Recovered Contexts ({contexts.length})</h3>
-        <span className="section-meta">Single Source of Truth</span>
-      </div>
-
-      {/* Context Cards */}
-      <div className="context-card-list">
-        {contexts.map((ctx) => {
-          const isActive = ctx.id === activeContextId;
-          const isFinished = ctx.actions.length > 0 && ctx.completedActions.length === ctx.actions.length;
-
-          return (
-            <div 
-              key={ctx.id} 
-              className={`context-card ${isActive ? 'active-selection' : ''}`}
+      {/* Search / Query Bar */}
+      <div className="search-pill-container">
+        <div className="search-pill-glow"></div>
+        <div className="search-pill-inner">
+          <span className="material-symbols-outlined search-icon">search</span>
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Ask anything across your conversations or files..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <div className="search-adornments">
+            <kbd className="shortcut-kbd">⌘K</kbd>
+            <button 
+              className="mic-btn" 
+              type="button" 
+              onClick={() => onNavigate('input')}
+              title="Enter new conversation"
             >
-              <div className="card-top-row">
-                <div className="actor-badge">
-                  <User size={13} />
-                  <span>{ctx.actor}</span>
-                </div>
-                <div className="category-pill">{ctx.category}</div>
-                <button
-                  className="card-delete-btn"
-                  title="Remove context"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDeleteContext(ctx.id);
-                  }}
-                >
-                  <Trash2 size={14} />
-                </button>
-              </div>
+              <span className="material-symbols-outlined">mic</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-              <h4 className="context-purpose-title">{ctx.purpose}</h4>
+      {/* Ambient Micro-Action: Silent Context Vigilance */}
+      <div className="vigilance-banner">
+        <div className="vigilance-status-row">
+          <span className="live-pulse-container">
+            <span className="live-pulse-ping"></span>
+            <span className="live-pulse-dot"></span>
+          </span>
+          <span className="vigilance-text">Silent Context Vigilance: Active</span>
+        </div>
+        <button 
+          className="instant-scan-btn" 
+          onClick={() => onNavigate('input')}
+        >
+          <span className="material-symbols-outlined bolt-icon">bolt</span>
+          <span>New Ingestion</span>
+        </button>
+      </div>
 
-              {/* Distinct Temporal Information */}
-              <div className="temporal-chips-wrap">
-                {ctx.temporal.eventTiming && (
-                  <div className="temporal-chip event">
-                    <Calendar size={12} />
-                    <span>Event: {ctx.temporal.eventTiming}</span>
-                  </div>
-                )}
-                {ctx.temporal.taskDeadline && (
-                  <div className="temporal-chip deadline">
-                    <Clock size={12} />
-                    <span>Due: {ctx.temporal.taskDeadline}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Action Progress Summary */}
-              <div className="action-progress-bar-wrap">
-                <div className="progress-info">
-                  <span className="progress-label">
-                    <CheckCircle2 size={12} />
-                    {ctx.completedActions.length} of {ctx.actions.length} actions complete
-                  </span>
-                  <span className="progress-percent">
-                    {ctx.actions.length > 0
-                      ? Math.round((ctx.completedActions.length / ctx.actions.length) * 100)
-                      : 0}%
-                  </span>
-                </div>
-                <div className="progress-track">
-                  <div 
-                    className={`progress-fill ${isFinished ? 'complete' : ''}`}
-                    style={{
-                      width: `${ctx.actions.length > 0 ? (ctx.completedActions.length / ctx.actions.length) * 100 : 0}%`
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Artifact Concepts */}
-              {ctx.artifacts.length > 0 && (
-                <div className="artifact-concepts-row">
-                  <Package size={12} className="artifact-icon" />
-                  <div className="artifact-tags">
-                    {ctx.artifacts.map((art, idx) => (
-                      <span key={idx} className="artifact-tag">{art}</span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Card Action CTAs */}
-              <div className="card-actions-footer">
-                <button
-                  className="card-btn secondary"
-                  onClick={() => {
-                    onSelectContext(ctx.id);
-                    onNavigate('graph');
-                  }}
-                >
-                  <Network size={14} />
-                  <span>Graph</span>
-                </button>
-                <button
-                  className="card-btn primary"
-                  onClick={() => {
-                    onSelectContext(ctx.id);
-                    onNavigate('dossier');
-                  }}
-                >
-                  <FileCheck size={14} />
-                  <span>Dossier</span>
-                  <ArrowRight size={13} />
-                </button>
+      {/* Live Hero Card / Spotlight Protocol */}
+      {spotlightContext && (
+        <div className="spotlight-card">
+          {/* Decorative Radar Rings */}
+          <div className="spotlight-radar-decor">
+            <div className="radar-outer-ring">
+              <div className="radar-inner-ring">
+                <div className="radar-pulse-core"></div>
               </div>
             </div>
-          );
-        })}
+          </div>
+
+          <div className="spotlight-content-wrap">
+            {/* Spotlight Header */}
+            <div className="spotlight-tag-row">
+              <div className="spotlight-protocol-pill">
+                <span className="material-symbols-outlined text-[13px]">sensors</span>
+                <span className="protocol-label">Spotlight Protocol</span>
+              </div>
+              <span className="spotlight-time-tag">
+                {spotlightContext.temporal.taskDeadline || 'Tomorrow, 5:00 PM'}
+              </span>
+            </div>
+
+            {/* Spotlight Title & Description */}
+            <div className="spotlight-title-group">
+              <h3 className="spotlight-title">Upcoming Review with {spotlightContext.actor}</h3>
+              <p className="spotlight-desc">
+                High-fidelity context reconstructed from conversation snippet. {spotlightContext.actions.length} action items and {spotlightContext.artifacts.length} referenced artifacts indexed.
+              </p>
+            </div>
+
+            {/* Key Insights Sub-Pill */}
+            <div className="spotlight-readiness-pill">
+              <div className="readiness-icon-box">
+                <span className="material-symbols-outlined text-[18px]">verified_user</span>
+              </div>
+              <div className="readiness-text-col">
+                <span className="readiness-title">Context Readiness</span>
+                <span className="readiness-coherence">
+                  {(spotlightContext.confidenceScore * 100).toFixed(0)}% Coherence Verified
+                </span>
+              </div>
+              <div className="readiness-counter">
+                {spotlightContext.completedActions.length}/{spotlightContext.actions.length} Tasks
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="spotlight-cta-grid">
+              <button
+                className="spotlight-btn secondary"
+                onClick={() => {
+                  onSelectContext(spotlightContext.id);
+                  onNavigate('graph');
+                }}
+              >
+                <span className="material-symbols-outlined text-[16px]">hub</span>
+                <span>Inspect Graph</span>
+              </button>
+              <button
+                className="spotlight-btn primary"
+                onClick={() => {
+                  onSelectContext(spotlightContext.id);
+                  onNavigate('dossier');
+                }}
+              >
+                <span className="material-symbols-outlined text-[16px]">verified</span>
+                <span>Open Dossier</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Traditional vs Context Guardian Contrast Card (Stitch Screen 07) */}
+      <div className="contrast-module-card">
+        <div 
+          className="contrast-header-toggle"
+          onClick={() => setShowComparison(!showComparison)}
+        >
+          <div className="contrast-header-left">
+            <span className="material-symbols-outlined text-secondary">compare_arrows</span>
+            <span className="contrast-heading">Traditional Reminder vs Context Guardian</span>
+          </div>
+          <span className="material-symbols-outlined text-outline text-[18px]">
+            {showComparison ? 'expand_less' : 'expand_more'}
+          </span>
+        </div>
+
+        {showComparison && (
+          <div className="contrast-body">
+            {/* The Dull Item */}
+            <div className="status-quo-box">
+              <div className="status-quo-header">
+                <span className="status-quo-tag">Flat Reminder App</span>
+                <span className="blind-spots-badge">5 Blind Spots</span>
+              </div>
+              <div className="status-quo-quote">
+                <span className="material-symbols-outlined text-outline">check_box_outline_blank</span>
+                <span className="flat-text">"Bring prototype" (Tomorrow 5:00 PM)</span>
+              </div>
+              <ul className="blind-spots-list">
+                <li><span className="cross">✕</span> Who explicitly asked for this?</li>
+                <li><span className="cross">✕</span> Which iteration (Figma, Web, or Expo)?</li>
+                <li><span className="cross">✕</span> Which meeting does this feed into?</li>
+                <li><span className="cross">✕</span> Where are the referenced files stored?</li>
+              </ul>
+              <div className="penalty-tag">
+                <span className="material-symbols-outlined text-[13px]">timer</span>
+                <span>+18-25 min wasted searching chat threads</span>
+              </div>
+            </div>
+
+            {/* The Guardian Solution */}
+            <div className="guardian-solution-box">
+              <div className="guardian-solution-header">
+                <span className="guardian-solution-tag">Context Guardian</span>
+                <span className="coherence-badge">Synthesized Memory</span>
+              </div>
+              <div className="guardian-quote-body">
+                "{spotlightContext.actor} asked you to {spotlightContext.actions.join(' and ').toLowerCase()} for {spotlightContext.temporal.eventTiming?.toLowerCase() || 'review'} ({spotlightContext.temporal.taskDeadline?.toLowerCase()})."
+              </div>
+              <div className="guardian-features-row">
+                <span className="feature-chip">✓ Actor Grounded</span>
+                <span className="feature-chip">✓ Files Linked</span>
+                <span className="feature-chip">✓ Semantic Graph</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Recovered Context Threads List */}
+      <div className="threads-section">
+        <div className="threads-header-row">
+          <h3 className="threads-title">Active Context Threads ({filteredContexts.length})</h3>
+          <span className="threads-subtitle">Single Source of Truth</span>
+        </div>
+
+        <div className="threads-list">
+          {filteredContexts.map((ctx) => {
+            const isSelected = ctx.id === activeContextId;
+            const progress = ctx.actions.length > 0 
+              ? Math.round((ctx.completedActions.length / ctx.actions.length) * 100) 
+              : 0;
+
+            return (
+              <div 
+                key={ctx.id} 
+                className={`thread-card ${isSelected ? 'selected-glow' : ''}`}
+                onClick={() => onSelectContext(ctx.id)}
+              >
+                <div className="thread-top-line">
+                  <div className="actor-profile-tag">
+                    <span className="actor-avatar-circle">
+                      {ctx.actor.charAt(0)}
+                    </span>
+                    <span className="actor-name">{ctx.actor}</span>
+                  </div>
+
+                  <div className="thread-badges-right">
+                    <span className="category-pill-tag">{ctx.category}</span>
+                    <button 
+                      className="delete-thread-btn" 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onDeleteContext(ctx.id);
+                      }}
+                      title="Delete thread"
+                    >
+                      <span className="material-symbols-outlined text-[15px]">delete</span>
+                    </button>
+                  </div>
+                </div>
+
+                <h4 className="thread-purpose">{ctx.purpose}</h4>
+
+                {/* Distinct Temporal Information */}
+                <div className="temporal-chips-container">
+                  {ctx.temporal.eventTiming && (
+                    <div className="temporal-chip event">
+                      <span className="material-symbols-outlined text-[12px]">calendar_today</span>
+                      <span>{ctx.temporal.eventTiming}</span>
+                    </div>
+                  )}
+                  {ctx.temporal.taskDeadline && (
+                    <div className="temporal-chip deadline">
+                      <span className="material-symbols-outlined text-[12px]">schedule</span>
+                      <span>Due: {ctx.temporal.taskDeadline}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Actions Progress */}
+                <div className="thread-progress-wrapper">
+                  <div className="thread-progress-labels">
+                    <span className="progress-task-count">
+                      {ctx.completedActions.length} of {ctx.actions.length} deliverables resolved
+                    </span>
+                    <span className="progress-percentage">{progress}%</span>
+                  </div>
+                  <div className="thread-progress-track">
+                    <div 
+                      className="thread-progress-bar"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                </div>
+
+                {/* Footer Controls */}
+                <div className="thread-footer-actions">
+                  <button
+                    className="thread-action-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelectContext(ctx.id);
+                      onNavigate('graph');
+                    }}
+                  >
+                    <span className="material-symbols-outlined text-[14px]">hub</span>
+                    <span>Graph</span>
+                  </button>
+                  <button
+                    className="thread-action-btn primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelectContext(ctx.id);
+                      onNavigate('dossier');
+                    }}
+                  >
+                    <span className="material-symbols-outlined text-[14px]">verified</span>
+                    <span>Dossier</span>
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

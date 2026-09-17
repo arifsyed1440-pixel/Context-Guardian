@@ -1,18 +1,4 @@
 import React, { useState } from 'react';
-import { 
-  FileCheck, 
-  Calendar, 
-  Clock, 
-  Check, 
-  Download, 
-  Share2, 
-  Quote, 
-  Archive, 
-  FileText, 
-  Code, 
-  Sparkles,
-  Network
-} from 'lucide-react';
 import { ContextObject, ScreenType } from '../../types/context';
 
 interface ContextDossierScreenProps {
@@ -26,16 +12,16 @@ export const ContextDossierScreen: React.FC<ContextDossierScreenProps> = ({
   onUpdateContext,
   onNavigate,
 }) => {
-  const [copiedDigest, setCopiedDigest] = useState<boolean>(false);
+  const [copiedDigest, setCopiedDigest] = useState(false);
   const [simulatedDownload, setSimulatedDownload] = useState<string | null>(null);
 
   if (!context) {
     return (
-      <div className="screen-container empty-state">
-        <FileCheck size={36} className="empty-icon" />
+      <div className="screen-inner-container empty-state">
+        <span className="material-symbols-outlined empty-icon">verified</span>
         <h3>No Active Context Dossier</h3>
-        <p>Select or extract a context to view its reconstructed executive dossier.</p>
-        <button className="cta-primary-btn" onClick={() => onNavigate('home')}>
+        <p>Select or extract a context to view its executive recovery dossier.</p>
+        <button className="stitch-btn primary" onClick={() => onNavigate('home')}>
           Return to Home
         </button>
       </div>
@@ -47,7 +33,7 @@ export const ContextDossierScreen: React.FC<ContextDossierScreenProps> = ({
     const actor = context.actor || 'The sender';
     const actionList = context.actions.length > 0
       ? context.actions.map(a => a.charAt(0).toLowerCase() + a.slice(1)).join(' and ')
-      : 'follow up on the conversation';
+      : 'follow up on deliverables';
     
     let narrative = `${actor} asked you to ${actionList}`;
     
@@ -58,7 +44,7 @@ export const ContextDossierScreen: React.FC<ContextDossierScreenProps> = ({
       narrative += ` (${context.temporal.taskDeadline.toLowerCase()})`;
     }
     
-    narrative += '. Here are the related files and original context.';
+    narrative += ', with links to related files and the original conversation.';
     return narrative;
   };
 
@@ -75,7 +61,7 @@ export const ContextDossierScreen: React.FC<ContextDossierScreenProps> = ({
   };
 
   const handleCopyDigest = () => {
-    const digest = `CONTEXT GUARDIAN RECOVERY DIGEST
+    const digest = `CONTEXT GUARDIAN DOSSIER
 Originator: ${context.actor}
 Purpose: ${context.purpose}
 Event: ${context.temporal.eventTiming || 'N/A'}
@@ -87,13 +73,16 @@ ${context.actions.map((a, i) => `${i + 1}. [${context.completedActions.includes(
 Artifact Concepts:
 ${context.artifacts.join(', ')}
 
-Original Snippet:
+Reconstructed Context:
+"${generateNarrative()}"
+
+Raw Snippet:
 "${context.rawText}"
 `;
 
     navigator.clipboard.writeText(digest);
     setCopiedDigest(true);
-    setTimeout(() => setCopiedDigest(false), 2000);
+    setTimeout(() => setCopiedDigest(false), 2200);
   };
 
   const handleDownloadFile = (fileName: string) => {
@@ -101,80 +90,183 @@ Original Snippet:
     setTimeout(() => setSimulatedDownload(null), 1800);
   };
 
-  const getFileIcon = (type: string) => {
-    switch (type) {
-      case 'archive': return <Archive size={16} className="file-icon-archive" />;
-      case 'presentation': return <FileText size={16} className="file-icon-pres" />;
-      case 'design': return <FileText size={16} className="file-icon-design" />;
-      case 'code': return <Code size={16} className="file-icon-code" />;
-      default: return <FileText size={16} className="file-icon-doc" />;
-    }
-  };
-
-  const totalActions = context.actions.length;
   const completedCount = context.completedActions.length;
+  const totalActions = context.actions.length;
   const isAllDone = totalActions > 0 && completedCount === totalActions;
 
   return (
-    <div className="screen-container dossier-screen">
-      {/* Dossier Header */}
-      <div className="dossier-header-bar">
-        <div className="dossier-badge">
-          <FileCheck size={14} />
-          <span>Context Dossier</span>
-        </div>
-        <div className="dossier-meta-chips">
-          <span className="meta-tag category">{context.category}</span>
-          <span className="meta-tag status">{context.status}</span>
-        </div>
+    <div className="screen-inner-container dossier-stitch-screen">
+      {/* Ambient Atmospheric Backdrop Glows */}
+      <div className="ambient-glows-wrap">
+        <div className="ambient-glow top-right"></div>
+        <div className="ambient-glow mid-left"></div>
       </div>
 
-      {/* Signature Narrative Box */}
-      <div className="dossier-narrative-card">
-        <div className="narrative-label">
-          <Sparkles size={14} />
-          <span>Reconstructed Context Synthesis</span>
-        </div>
-        <p className="narrative-text">"{generateNarrative()}"</p>
-        <div className="narrative-subtext">
-          Synthesized on-device by Context Guardian from raw fragmented communication.
-        </div>
-      </div>
-
-      {/* Action Checklist */}
-      <div className="dossier-card checklist-card">
-        <div className="card-heading-row">
-          <div className="heading-with-icon">
-            <Check size={16} className="icon-badge-green" />
-            <h4 className="card-title">Actionable Deliverables</h4>
+      {/* Meta Header Bar (Stitch Screen 08) */}
+      <div className="dossier-meta-bar">
+        <div className="dossier-meta-left">
+          <div className="dossier-id-capsule">
+            <span className="live-pulse-container">
+              <span className="live-pulse-ping"></span>
+              <span className="live-pulse-dot"></span>
+            </span>
+            <span className="dossier-id-text">DOSSIER #CG-{context.id.slice(-4).toUpperCase()}</span>
           </div>
-          <span className="checklist-counter">
+          <span className="critical-badge">P1 Critical</span>
+        </div>
+
+        <div className="dossier-meta-right">
+          <button 
+            className="round-icon-btn" 
+            onClick={handleCopyDigest}
+            title="Share / Copy Digest"
+          >
+            <span className="material-symbols-outlined text-[17px]">share</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Executive Synthesis Hero Card (Stitch Screen 08) */}
+      <div className="executive-synthesis-card">
+        {/* Background Radar Rings SVG */}
+        <div className="synthesis-radar-decor">
+          <svg className="synthesis-svg-spin" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="85" stroke="#c0c1ff" strokeDasharray="6 8" strokeWidth="1.5" />
+            <circle cx="100" cy="100" r="55" stroke="#4cd7f6" strokeDasharray="80 120" strokeLinecap="round" strokeWidth="2" />
+            <circle cx="100" cy="100" r="30" stroke="#8083ff" strokeWidth="1.5" />
+            <circle cx="140" cy="100" fill="#4cd7f6" r="6" />
+            <circle cx="75" cy="65" fill="#c0c1ff" r="4.5" />
+          </svg>
+        </div>
+
+        {/* Precision Context Badge */}
+        <div className="synthesis-badges-row">
+          <div className="precision-pill">
+            <span className="material-symbols-outlined text-tertiary text-[15px]">verified</span>
+            <span className="precision-label">{(context.confidenceScore * 100).toFixed(0)}% PRECISION</span>
+          </div>
+          <div className="streams-synced-pill">
+            <span className="material-symbols-outlined text-secondary text-[14px]">sync_saved_locally</span>
+            <span>3 STREAMS SYNCED</span>
+          </div>
+        </div>
+
+        {/* Executive Synthesis Callout */}
+        <div className="synthesis-body">
+          <span className="synthesis-subheading">Executive Synthesis</span>
+          <h2 className="synthesis-narrative-text">
+            “{generateNarrative()}”
+          </h2>
+        </div>
+
+        {/* Visual Spark Divider */}
+        <div className="synthesis-footer-bar">
+          <span className="synthesis-status-chip">
+            <span className="status-spark-dot"></span>
+            <span>Neural extraction active</span>
+          </span>
+          <span className="t-minus-tag">T-MINUS 21h 14m</span>
+        </div>
+      </div>
+
+      {/* Core Metadata Matrix Bento (Stitch Screen 08) */}
+      <div className="metadata-bento-column">
+        {/* Actor Profile Card */}
+        <div className="actor-profile-card">
+          <div className="actor-profile-info">
+            <div className="actor-avatar-frame">
+              <img
+                src="/avatar-rahul.png"
+                alt="Rahul"
+                className="actor-img"
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80';
+                }}
+              />
+              <span className="actor-online-indicator">
+                <span className="online-green-dot"></span>
+              </span>
+            </div>
+            <div className="actor-details">
+              <div className="actor-name-row">
+                <h3 className="actor-full-name">{context.actor} S.</h3>
+                <span className="role-tag">Design Lead</span>
+              </div>
+              <p className="actor-status-text">
+                <span className="material-symbols-outlined text-[13px] text-tertiary">headphones</span>
+                <span>Slack status: “In deep work”</span>
+              </p>
+            </div>
+          </div>
+          <button 
+            className="actor-chat-btn" 
+            onClick={() => onNavigate('input')}
+            title="Inspect conversation"
+          >
+            <span className="material-symbols-outlined text-[16px]">chat</span>
+          </button>
+        </div>
+
+        {/* Dual Metric Cards: Purpose & Task Deadline */}
+        <div className="dual-metrics-grid">
+          {/* Milestone / Purpose */}
+          <div className="metric-box">
+            <div className="metric-header">
+              <span className="material-symbols-outlined text-secondary text-[14px]">event_note</span>
+              <span className="metric-label text-secondary">Milestone Context</span>
+            </div>
+            <div className="metric-val">{context.purpose}</div>
+            <span className="metric-sub">{context.temporal.eventTiming || 'Synced with Room C'}</span>
+          </div>
+
+          {/* Task Deadline */}
+          <div className="metric-box">
+            <div className="metric-header">
+              <span className="material-symbols-outlined text-error text-[14px]">timer</span>
+              <span className="metric-label text-error">Task Deadline</span>
+            </div>
+            <div className="metric-val text-error">
+              {context.temporal.taskDeadline || 'Tomorrow, 5:00 PM'}
+            </div>
+            <span className="metric-sub">Firm submission cutoff</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Actionable Deliverables Checklist */}
+      <div className="deliverables-checklist-card">
+        <div className="checklist-heading-row">
+          <div className="checklist-title-group">
+            <span className="material-symbols-outlined text-tertiary text-[18px]">checklist_rtl</span>
+            <h4 className="checklist-heading">Actionable Deliverables</h4>
+          </div>
+          <span className="checklist-progress-pill">
             {completedCount} of {totalActions} done
           </span>
         </div>
 
-        <div className="dossier-progress-bar">
+        <div className="checklist-track">
           <div 
-            className={`dossier-progress-fill ${isAllDone ? 'complete' : ''}`}
+            className={`checklist-fill ${isAllDone ? 'complete' : ''}`}
             style={{ width: `${totalActions > 0 ? (completedCount / totalActions) * 100 : 0}%` }}
           />
         </div>
 
-        <div className="dossier-actions-checklist">
+        <div className="checklist-items-stack">
           {context.actions.map((action, idx) => {
             const isDone = context.completedActions.includes(action);
             return (
               <div 
                 key={idx} 
-                className={`checklist-item ${isDone ? 'checked' : ''}`}
+                className={`checklist-entry ${isDone ? 'checked' : ''}`}
                 onClick={() => handleToggleAction(action)}
               >
-                <div className={`checkbox-square ${isDone ? 'checked' : ''}`}>
-                  {isDone && <Check size={13} />}
+                <div className={`entry-checkbox ${isDone ? 'checked' : ''}`}>
+                  {isDone && <span className="material-symbols-outlined text-[14px]">check</span>}
                 </div>
-                <div className="checklist-text-wrap">
-                  <span className="checklist-action-name">{action}</span>
-                  <span className="checklist-actor-hint">Requested by {context.actor}</span>
+                <div className="entry-text-col">
+                  <span className="entry-action-name">{action}</span>
+                  <span className="entry-actor-sub">Requested by {context.actor}</span>
                 </div>
               </div>
             );
@@ -182,78 +274,58 @@ Original Snippet:
         </div>
       </div>
 
-      {/* Temporal Timeline Breakdown */}
-      <div className="dossier-card temporal-dossier-card">
-        <h4 className="card-title">Temporal Constraints</h4>
-        <div className="temporal-dossier-grid">
-          <div className="temporal-dossier-cell event-cell">
-            <div className="cell-header">
-              <Calendar size={14} />
-              <span>Event Timing</span>
-            </div>
-            <div className="cell-value">
-              {context.temporal.eventTiming || 'Flexible / Unspecified'}
-            </div>
-            <span className="cell-desc">Contextual milestone</span>
+      {/* Referenced Artifacts Vault (Stitch Screen 08) */}
+      <div className="artifacts-vault-card">
+        <div className="vault-heading-row">
+          <div className="vault-title-group">
+            <span className="material-symbols-outlined text-secondary text-[18px]">folder_open</span>
+            <h4 className="vault-heading">Referenced Artifacts Vault</h4>
           </div>
-
-          <div className="temporal-dossier-cell deadline-cell">
-            <div className="cell-header">
-              <Clock size={14} />
-              <span>Task Deadline</span>
-            </div>
-            <div className="cell-value highlight-deadline">
-              {context.temporal.taskDeadline || 'None specified'}
-            </div>
-            <span className="cell-desc">Hard submission cutoff</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Associated Artifacts Vault */}
-      <div className="dossier-card artifacts-vault-card">
-        <div className="card-heading-row">
-          <h4 className="card-title">Referenced Artifacts Vault</h4>
-          <span className="artifacts-count">
-            {context.linkedArtifacts?.length || context.artifacts.length} assets
+          <span className="vault-assets-count">
+            {context.linkedArtifacts?.length || context.artifacts.length} Assets
           </span>
         </div>
 
-        <p className="vault-subtext">
-          Extracted conceptual requirements mapped to demo-linked project files:
+        <p className="vault-desc">
+          Extracted conceptual requirements mapped to demo project files:
         </p>
 
-        <div className="vault-files-grid">
+        <div className="vault-files-stack">
           {context.linkedArtifacts && context.linkedArtifacts.length > 0 ? (
             context.linkedArtifacts.map((file) => (
-              <div key={file.id} className="vault-file-card">
-                <div className="file-icon-box">{getFileIcon(file.fileType)}</div>
-                <div className="file-details">
-                  <div className="file-name-title">{file.name}</div>
-                  <div className="file-concept-tag">
-                    Tied to: <strong>{file.conceptRef}</strong>
-                  </div>
-                  {file.size && <span className="file-size-badge">{file.size}</span>}
+              <div key={file.id} className="vault-file-entry">
+                <div className="file-icon-box">
+                  <span className="material-symbols-outlined text-[18px]">
+                    {file.fileType === 'archive' && 'inventory'}
+                    {file.fileType === 'presentation' && 'slideshow'}
+                    {file.fileType === 'design' && 'draw'}
+                    {file.fileType === 'code' && 'code'}
+                    {file.fileType === 'document' && 'description'}
+                  </span>
+                </div>
+                <div className="file-info-col">
+                  <span className="file-title">{file.name}</span>
+                  <span className="file-relation">
+                    Tied to: <strong>{file.conceptRef}</strong> {file.size && `• ${file.size}`}
+                  </span>
                 </div>
                 <button
-                  className="file-action-btn"
+                  className="file-download-btn"
                   onClick={() => handleDownloadFile(file.name)}
                   title="Simulate open/download file"
                 >
-                  {simulatedDownload === file.name ? (
-                    <Check size={14} className="download-done" />
-                  ) : (
-                    <Download size={14} />
-                  )}
+                  <span className="material-symbols-outlined text-[16px]">
+                    {simulatedDownload === file.name ? 'check_circle' : 'download'}
+                  </span>
                 </button>
               </div>
             ))
           ) : (
             context.artifacts.map((art, idx) => (
-              <div key={idx} className="vault-file-card fallback">
-                <div className="file-details">
-                  <div className="file-name-title">{art}</div>
-                  <div className="file-concept-tag">Extracted conversation asset</div>
+              <div key={idx} className="vault-file-entry">
+                <div className="file-info-col">
+                  <span className="file-title">{art}</span>
+                  <span className="file-relation">Extracted conversation concept</span>
                 </div>
               </div>
             ))
@@ -261,45 +333,35 @@ Original Snippet:
         </div>
       </div>
 
-      {/* Original Fragment Quote */}
-      <div className="dossier-card original-quote-card">
-        <div className="card-heading-row">
-          <div className="heading-with-icon">
-            <Quote size={15} />
-            <h4 className="card-title">Original Conversation Source</h4>
-          </div>
-          <span className="source-label">Source: {context.sourceType}</span>
+      {/* Original Conversation Snippet Card */}
+      <div className="original-signal-card">
+        <div className="signal-card-header">
+          <span className="material-symbols-outlined text-outline text-[16px]">format_quote</span>
+          <span className="signal-card-title">Original Conversation Signal</span>
         </div>
-        <blockquote className="quote-content">
+        <blockquote className="signal-quote-text">
           "{context.rawText}"
         </blockquote>
       </div>
 
-      {/* Footer Controls & Share */}
-      <div className="dossier-footer-actions">
+      {/* Bottom Footer Actions */}
+      <div className="dossier-actions-grid">
         <button
-          className="dossier-cta-btn secondary"
+          className="stitch-btn secondary"
           onClick={() => onNavigate('graph')}
         >
-          <Network size={16} />
-          <span>View Relationship Graph</span>
+          <span className="material-symbols-outlined text-[16px]">hub</span>
+          <span>View Context Graph</span>
         </button>
 
         <button
-          className="dossier-cta-btn primary"
+          className="stitch-btn primary"
           onClick={handleCopyDigest}
         >
-          {copiedDigest ? (
-            <>
-              <Check size={16} />
-              <span>Digest Copied!</span>
-            </>
-          ) : (
-            <>
-              <Share2 size={16} />
-              <span>Copy Context Digest</span>
-            </>
-          )}
+          <span className="material-symbols-outlined text-[16px]">
+            {copiedDigest ? 'check_circle' : 'share'}
+          </span>
+          <span>{copiedDigest ? 'Digest Copied!' : 'Copy Context Digest'}</span>
         </button>
       </div>
     </div>

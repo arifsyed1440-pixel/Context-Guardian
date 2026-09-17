@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-fixed": "#002113", "surface-container-lowest": "#0a0e16", "on-surface": "#dfe2ee", "primary-fixed": "#e1e0ff", "surface-variant": "#31353e", "inverse-on-surface": "#2c3039", "on-background": "#dfe2ee", "error": "#ffb4ab", "surface-container-high": "#262a33", "on-error-container": "#ffdad6", "on-primary": "#1000a9", "inverse-primary": "#494bd6", "on-secondary-container": "#00424e", "error-container": "#93000a", "surface-container-low": "#181c24", "on-secondary": "#003640", "primary-fixed-dim": "#c0c1ff", "surface-container": "#1c2028", "on-tertiary-container": "#000703", "on-error": "#690005", "on-secondary-fixed": "#001f26", "surface-container-highest": "#31353e", "secondary-container": "#03b5d3", "outline": "#908fa0", "secondary-fixed-dim": "#4cd7f6", "secondary": "#4cd7f6", "on-tertiary-fixed-variant": "#005236", "on-primary-fixed-variant": "#2f2ebe", "primary": "#c0c1ff", "on-tertiary": "#003824", "primary-container": "#8083ff", "on-surface-variant": "#c7c4d7", "background": "#0f131c", "tertiary-fixed-dim": "#4edea3", "on-primary-container": "#0d0096", "on-primary-fixed": "#07006c", "outline-variant": "#464554", "tertiary": "#4edea3", "surface": "#0f131c", "inverse-surface": "#dfe2ee", "secondary-fixed": "#acedff", "tertiary-fixed": "#6ffbbe", "surface-dim": "#0f131c", "surface-bright": "#353942", "tertiary-container": "#00885d", "on-secondary-fixed-variant": "#004e5c", "surface-tint": "#c0c1ff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xl": "2rem", "margin": "1.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter": "1rem", "space-xs": "0.25rem" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-md": ["Inter"], "label-sm": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-mono": ["Inter"], "headline-xl-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-sm": ["17px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-mono": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-primary selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="px-margin h-16 flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Context Guardian Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X292ul_a0IrImCLxPW3Jn-1pFtGgwl37YRIViQ7PUsZJ7F1gF7ycPytCQIuHCR9LKtQvpi1iGdKU73j3rIWUQ2JNxfwR-eOpzFx7DcyDfUGS1Ys6SmoUxbqpruI2-Wi6JFqya7l3OZGiZw_cMKi3zIqZIzPnf9pAR1mDdbX9b-chfSjmwfZOFV2ukEWeHUISiu5w3Y7PMBdDhXEvOfQ6wD6CMdSxgAmdYJTtgAw2WXQOwITh0-8ozA5w"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Context Guardian</span><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Stream Comparison</span></div></div><div class="flex items-center"><a class="flex items-center justify-center rounded-full p-space-xs" data-path="profile-settings" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_12px_rgba(192,193,255,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAThIoyY6nPP5XgG79LaipsThsTcEoX-RGOG15rfbuBhhpp4RbPmvfhveMX7k-5kO1NKp2Z-yQqoDYUfnHiszxs7aE6Nhal8dm8O_abTUzSC5Er35EtMk7LcuEBi0VsQR7A9XOYzmzTTQbLwaaGHivz26p1DK39Kz0ZMjqCDJ1C9oYPkro7-vIZWXGSCithdeIzYpkfyOQqNDXYSOVJiEjsfxL9NWMT4MnNczyjObW0GwvHSClbniMr"/></a></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full px-margin pb-space-xl gap-space-lg">
+<!-- Interactive View Switcher / Pitch Hook -->
+<section class="flex flex-col gap-space-xs pt-space-xs">
+<div class="inline-flex items-center gap-space-xs self-start px-3 py-1 rounded-full bg-surface-container-high shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[14px]">psychology_alt</span>
+<span class="font-label-mono text-label-mono text-secondary uppercase tracking-wider">Cognitive Architectural Shift</span>
+</div>
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface tracking-tight mt-1">
+      The Context Gap
+    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+      Why traditional todo lists sabotage deep creative &amp; engineering workflows through silent context decay.
+    </p>
+<!-- Radar Micro Visual Banner inspired by logo -->
+<div class="mt-space-sm w-full p-space-md rounded-2xl bg-surface-container-low flex items-center justify-between relative overflow-hidden shadow-inner">
+<div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-primary/10 blur-2xl pointer-events-none"></div>
+<div class="flex items-center gap-space-md relative z-10">
+<div class="relative w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0">
+<svg class="w-10 h-10 animate-spin" style="animation-duration: 20s;" viewbox="0 0 48 48">
+<circle class="text-outline-variant/30" cx="24" cy="24" fill="none" r="20" stroke="currentColor" stroke-dasharray="3 4" stroke-width="1.5"></circle>
+<circle class="text-primary/40" cx="24" cy="24" fill="none" r="14" stroke="currentColor" stroke-dasharray="16 6" stroke-width="2"></circle>
+<circle class="text-secondary" cx="24" cy="24" fill="none" r="8" stroke="currentColor" stroke-width="2"></circle>
+<circle class="fill-secondary" cx="24" cy="10" r="3"></circle>
+<circle class="fill-tertiary" cx="34" cy="24" r="2.5"></circle>
+</svg>
+<span class="material-symbols-outlined text-primary text-[18px] absolute">radar</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Memory Degradation Simulator</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tap to inspect cognitive friction vs. augmented recall</span>
+</div>
+</div>
+<button class="relative z-10 px-3 py-1.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm shadow-sm flex items-center gap-1 active:scale-95 transition-transform" id="toggleComparisonMode">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span>Toggle View</span>
+</button>
+</div>
+</section>
+<!-- Interactive Dual State Cards Container -->
+<div class="flex flex-col gap-space-lg relative" id="cardsContainer">
+<!-- CARD 1: Traditional Reminder App (Dull, Broken, High Cognitive Friction) -->
+<div class="w-full rounded-2xl bg-surface-container-low p-space-md flex flex-col gap-space-md shadow-md transition-all duration-300" id="traditionalCard">
+<!-- Card Header Status -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-outline">Status Quo Tool</span>
+</div>
+<div class="px-2.5 py-0.5 rounded-full bg-surface-container text-outline font-label-mono text-label-mono">
+          Flat Text Object
+        </div>
+</div>
+<!-- The Dull Item Display -->
+<div class="p-space-md rounded-xl bg-surface-container flex items-start gap-space-md opacity-85">
+<div class="w-6 h-6 rounded-md bg-surface-container-high flex items-center justify-center text-outline-variant flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface line-through decoration-outline/40">Bring prototype</span>
+<div class="flex items-center gap-1 mt-1 text-outline">
+<span class="material-symbols-outlined text-[14px]">event</span>
+<span class="font-body-sm text-body-sm">Tomorrow 5:00 PM</span>
+</div>
+</div>
+</div>
+<!-- Cognitive Void Callout Grid -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-mono text-label-mono text-error uppercase tracking-wider font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">report_problem</span>
+            5 Critical Unknowns (Blind Spots)
+          </span>
+<span class="font-label-mono text-label-mono text-error-container bg-error/20 px-2 py-0.5 rounded-full">High Cognitive Cost</span>
+</div>
+<div class="grid grid-cols-1 gap-1.5">
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container/60 text-error">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"><strong class="text-on-surface">Who</strong> explicitly asked for this artifact?</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container/60 text-error">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"><strong class="text-on-surface">Which iteration</strong> (Figma v1, Web v2, or Expo build)?</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container/60 text-error">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"><strong class="text-on-surface">Which meeting</strong> does this feed into tomorrow?</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container/60 text-error">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"><strong class="text-on-surface">Where are the files</strong> stored across Slack, Drive, GitHub?</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container/60 text-error">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"><strong class="text-on-surface">What exact constraints</strong> were mentioned during the sync?</span>
+</div>
+</div>
+</div>
+<!-- Friction Cost Meter -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest">
+<span class="font-label-mono text-label-mono text-outline">Search overhead penalty</span>
+<span class="font-label-mono text-label-mono text-error font-semibold">+18-25 min lost searching threads</span>
+</div>
+</div>
+<!-- Central Contrast Bridge Visual -->
+<div class="flex items-center justify-center relative my-[-6px] z-20">
+<div class="h-[1px] bg-outline-variant/30 flex-1"></div>
+<div class="px-3 py-1 rounded-full bg-surface-container-highest shadow-lg flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px] text-tertiary">swap_vert</span>
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface">Context Reconstruction</span>
+</div>
+<div class="h-[1px] bg-outline-variant/30 flex-1"></div>
+</div>
+<!-- CARD 2: Context Guardian (Ambient, Hyper-Enriched, Glassmorphic) -->
+<div class="w-full rounded-2xl bg-surface-container p-space-md flex flex-col gap-space-md relative overflow-hidden shadow-[0_0_32px_-4px_rgba(99,102,241,0.25)] transition-all duration-300" id="guardianCard">
+<!-- Ambient Glows -->
+<div class="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-primary/20 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-12 -left-12 w-40 h-40 rounded-full bg-secondary/15 blur-3xl pointer-events-none"></div>
+<!-- Card Top Meta Bar -->
+<div class="flex items-center justify-between relative z-10">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span>
+</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-tertiary font-semibold">Autonomous Context Shield</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 text-secondary">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span class="font-label-mono text-label-mono font-medium">Zero Void State</span>
+</div>
+</div>
+<!-- Synthesized Natural Narrative -->
+<div class="relative z-10 p-space-md rounded-xl bg-surface-container-high/90 backdrop-blur-xl flex flex-col gap-space-sm shadow-sm">
+<div class="flex items-center gap-2 text-primary font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-[15px]">auto_awesome</span>
+<span>Synthesized Neural Directive</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface font-medium leading-relaxed">
+          “<span class="text-secondary font-semibold">Rahul</span> asked you to bring the <span class="text-tertiary font-semibold">latest prototype</span> for tomorrow’s <span class="text-primary font-semibold">project review</span>, with links to related files and the original conversation.”
+        </p>
+</div>
+<!-- Linked Context Pill Nodes -->
+<div class="relative z-10 flex flex-col gap-space-sm">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">
+          Reconstructed Graph Nodes
+        </span>
+<!-- Node 1: Actor -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-high/60 backdrop-blur-md">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Request Originator</span>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Rahul S. <span class="text-on-surface-variant font-normal text-[12px]">(Staff Design Lead)</span></span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-mono text-label-mono flex-shrink-0">
+            Author
+          </span>
+</div>
+<!-- Node 2: Purpose & Target Epoch -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-high/60 backdrop-blur-md">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Meeting Epoch</span>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Q3 Executive Project Review</span>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary">Tomorrow 5:00 PM</span>
+</div>
+<!-- Node 3: Artifacts with Quick Trigger -->
+<div class="p-2.5 rounded-xl bg-surface-container-high/60 backdrop-blur-md flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Embedded Artifacts (1-Tap Direct)</span>
+<span class="font-label-mono text-label-mono text-secondary">Verified Valid</span>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-1">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-highest active:bg-surface-bright text-on-surface font-label-sm text-label-sm whitespace-nowrap shadow-sm transition-colors">
+<span class="material-symbols-outlined text-secondary text-[16px]">folder_zip</span>
+<span>prototype-v3.zip</span>
+<span class="text-outline-variant font-label-mono text-[10px] ml-1">42MB</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-highest active:bg-surface-bright text-on-surface font-label-sm text-label-sm whitespace-nowrap shadow-sm transition-colors">
+<span class="material-symbols-outlined text-primary text-[16px]">slideshow</span>
+<span>architecture.pptx</span>
+<span class="text-outline-variant font-label-mono text-[10px] ml-1">12MB</span>
+</button>
+</div>
+</div>
+<!-- Node 4: Provenance Source Trace -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-high/60 backdrop-blur-md">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Conversation Source</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate">Slack • #design-sync • Today at 3:14 PM</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">open_in_new</span>
+</div>
+</div>
+<!-- Advantage Metrics Grid -->
+<div class="relative z-10 grid grid-cols-3 gap-2 pt-space-xs">
+<div class="p-2.5 rounded-xl bg-surface-container-lowest flex flex-col items-center text-center">
+<span class="font-headline-sm text-headline-sm text-tertiary">0s</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant mt-0.5">Context Shift</span>
+</div>
+<div class="p-2.5 rounded-xl bg-surface-container-lowest flex flex-col items-center text-center">
+<span class="font-headline-sm text-headline-sm text-secondary">~18m</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant mt-0.5">Time Saved</span>
+</div>
+<div class="p-2.5 rounded-xl bg-surface-container-lowest flex flex-col items-center text-center">
+<span class="font-headline-sm text-headline-sm text-primary">100%</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant mt-0.5">Confidence</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Simulator Card: Live Query Response -->
+<section class="flex flex-col gap-space-sm p-space-md rounded-2xl bg-surface-container-low shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">smart_toy</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Simulate Pre-Meeting Recall</span>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary">Live Ambient Engine</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+      Experience what happens when you step into the meeting room tomorrow at 4:58 PM:
+    </p>
+<!-- Simulated Prompt Card -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm transition-all duration-300" id="recallDemoBox">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-secondary uppercase">Autonomous Briefing</span>
+<span class="font-label-mono text-label-mono text-outline">Trigger: Geofence + Calendar</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface" id="recallDemoText">
+        “Entering Room 402 for Project Review. Displaying Rahul’s requested prototype-v3 and the 3 conversation bullet points from design-sync.”
+      </div>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-3 py-1.5 rounded-full bg-primary/20 hover:bg-primary/30 text-primary font-label-sm text-label-sm flex items-center gap-1 active:scale-95 transition-all" id="triggerPulseBtn">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>Simulate Audio Query</span>
+</button>
+<span class="font-label-mono text-label-mono text-outline-variant" id="audioStatusText">Listening for ‘What do I need here?’</span>
+</div>
+</div>
+</section>
+<!-- Primary Call To Action Section -->
+<section class="flex flex-col gap-space-sm pt-space-xs">
+<button class="w-full py-3.5 px-space-md rounded-full bg-gradient-to-r from-primary-container via-primary to-secondary text-on-primary font-label-md text-label-md uppercase tracking-wider shadow-[0_0_24px_-2px_rgba(192,193,255,0.65)] hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">security</span>
+<span>Experience Full Context Guardian</span>
+</button>
+<div class="flex items-center justify-center gap-space-sm text-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">
+        No manual notes • Zero configuration • Seamless background graph ingestion
+      </span>
+</div>
+</section>
+</div>
+<script>
+  (function() {
+    const toggleBtn = document.getElementById('toggleComparisonMode');
+    const traditionalCard = document.getElementById('traditionalCard');
+    const guardianCard = document.getElementById('guardianCard');
+    const pulseBtn = document.getElementById('triggerPulseBtn');
+    const recallDemoText = document.getElementById('recallDemoText');
+    const audioStatusText = document.getElementById('audioStatusText');
+
+    let guardianFocused = false;
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        guardianFocused = !guardianFocused;
+        if (guardianFocused) {
+          traditionalCard.classList.add('opacity-40', 'scale-[0.98]');
+          guardianCard.classList.add('scale-[1.02]', 'shadow-[0_0_40px_rgba(78,222,163,0.3)]');
+          toggleBtn.innerHTML = '<span class="material-symbols-outlined text-[14px]">visibility</span><span>Show Both</span>';
+        } else {
+          traditionalCard.classList.remove('opacity-40', 'scale-[0.98]');
+          guardianCard.classList.remove('scale-[1.02]', 'shadow-[0_0_40px_rgba(78,222,163,0.3)]');
+          toggleBtn.innerHTML = '<span class="material-symbols-outlined text-[14px]">tune</span><span>Toggle View</span>';
+        }
+      });
+    }
+
+    if (pulseBtn) {
+      pulseBtn.addEventListener('click', () => {
+        audioStatusText.textContent = "Processing neural recall query...";
+        audioStatusText.classList.remove('text-outline-variant');
+        audioStatusText.classList.add('text-tertiary', 'animate-pulse');
+
+        setTimeout(() => {
+          recallDemoText.innerHTML = "&ldquo;Ready. Handing off prototype-v3.zip to meeting projector. Rahul acknowledged you updated the onboarding wireframes 14 minutes ago.&rdquo;";
+          audioStatusText.textContent = "Query resolved in 140ms &bull; Zero context switching";
+          audioStatusText.classList.remove('animate-pulse');
+        }, 800);
+      });
+    }
+  })();
+</script></main><div class="fixed bottom-0 w-full z-50 pointer-events-none pb-safe"><div class="px-margin pb-space-md pt-space-xs flex justify-center w-full"><nav class="pointer-events-auto flex items-center justify-between w-full max-w-md px-space-sm py-space-xs bg-surface-container/85 backdrop-blur-2xl rounded-full shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]" data-active-classes="text-primary font-semibold drop-shadow-[0_0_8px_rgba(192,193,255,0.45)]"><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="guardian-home" href="#"><span class="material-symbols-outlined text-[22px]">auto_awesome</span><span class="font-label-mono text-label-mono mt-0.5">Home</span></a><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="context-graph" href="#"><span class="material-symbols-outlined text-[22px]">hub</span><span class="font-label-mono text-label-mono mt-0.5">Graph</span></a><div class="flex items-center justify-center -my-3"><a class="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-on-primary shadow-[0_0_24px_-2px_rgba(192,193,255,0.65)] hover:scale-105 active:scale-95 transition-all" data-path="neural-capture" href="#"><span class="material-symbols-outlined text-[24px]">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="dossiers-archive" href="#"><span class="material-symbols-outlined text-[22px]">folder_managed</span><span class="font-label-mono text-label-mono mt-0.5">Dossiers</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] transition-colors text-primary font-semibold drop-shadow-[0_0_8px_rgba(192,193,255,0.45)]" data-path="stream-comparison" href="#"><span class="material-symbols-outlined text-[22px]">compare_arrows</span><span class="font-label-mono text-label-mono mt-0.5">Compare</span></a></nav></div></div></body></html>

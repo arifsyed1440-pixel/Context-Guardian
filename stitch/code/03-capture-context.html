@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-fixed": "#002113", "surface-container-lowest": "#0a0e16", "on-surface": "#dfe2ee", "primary-fixed": "#e1e0ff", "surface-variant": "#31353e", "inverse-on-surface": "#2c3039", "on-background": "#dfe2ee", "error": "#ffb4ab", "surface-container-high": "#262a33", "on-error-container": "#ffdad6", "on-primary": "#1000a9", "inverse-primary": "#494bd6", "on-secondary-container": "#00424e", "error-container": "#93000a", "surface-container-low": "#181c24", "on-secondary": "#003640", "primary-fixed-dim": "#c0c1ff", "surface-container": "#1c2028", "on-tertiary-container": "#000703", "on-error": "#690005", "on-secondary-fixed": "#001f26", "surface-container-highest": "#31353e", "secondary-container": "#03b5d3", "outline": "#908fa0", "secondary-fixed-dim": "#4cd7f6", "secondary": "#4cd7f6", "on-tertiary-fixed-variant": "#005236", "on-primary-fixed-variant": "#2f2ebe", "primary": "#c0c1ff", "on-tertiary": "#003824", "primary-container": "#8083ff", "on-surface-variant": "#c7c4d7", "background": "#0f131c", "tertiary-fixed-dim": "#4edea3", "on-primary-container": "#0d0096", "on-primary-fixed": "#07006c", "outline-variant": "#464554", "tertiary": "#4edea3", "surface": "#0f131c", "inverse-surface": "#dfe2ee", "secondary-fixed": "#acedff", "tertiary-fixed": "#6ffbbe", "surface-dim": "#0f131c", "surface-bright": "#353942", "tertiary-container": "#00885d", "on-secondary-fixed-variant": "#004e5c", "surface-tint": "#c0c1ff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xl": "2rem", "margin": "1.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter": "1rem", "space-xs": "0.25rem" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-md": ["Inter"], "label-sm": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-mono": ["Inter"], "headline-xl-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-sm": ["17px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-mono": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-primary selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="px-margin h-16 flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Context Guardian Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X292ul_a0IrImCLxPW3Jn-1pFtGgwl37YRIViQ7PUsZJ7F1gF7ycPytCQIuHCR9LKtQvpi1iGdKU73j3rIWUQ2JNxfwR-eOpzFx7DcyDfUGS1Ys6SmoUxbqpruI2-Wi6JFqya7l3OZGiZw_cMKi3zIqZIzPnf9pAR1mDdbX9b-chfSjmwfZOFV2ukEWeHUISiu5w3Y7PMBdDhXEvOfQ6wD6CMdSxgAmdYJTtgAw2WXQOwITh0-8ozA5w"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Context Guardian</span><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Neural Capture</span></div></div><div class="flex items-center"><a class="flex items-center justify-center rounded-full p-space-xs" data-path="profile-settings" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_12px_rgba(192,193,255,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAThIoyY6nPP5XgG79LaipsThsTcEoX-RGOG15rfbuBhhpp4RbPmvfhveMX7k-5kO1NKp2Z-yQqoDYUfnHiszxs7aE6Nhal8dm8O_abTUzSC5Er35EtMk7LcuEBi0VsQR7A9XOYzmzTTQbLwaaGHivz26p1DK39Kz0ZMjqCDJ1C9oYPkro7-vIZWXGSCithdeIzYpkfyOQqNDXYSOVJiEjsfxL9NWMT4MnNczyjObW0GwvHSClbniMr"/></a></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full px-margin pb-space-xl space-y-space-lg">
+<!-- Ambient Radar Aura & Title Block -->
+<section class="relative pt-space-sm flex flex-col items-start overflow-hidden">
+<!-- Ambient Radial Glows -->
+<div class="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-8 -left-8 w-44 h-44 rounded-full bg-secondary-container/10 blur-3xl pointer-events-none"></div>
+<div class="flex items-center gap-space-sm mb-space-xs">
+<div class="relative flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-high shadow-[0_0_16px_rgba(192,193,255,0.2)]">
+<!-- Stylized Radar Icon inspired by app mark -->
+<svg class="w-5 h-5 text-secondary animate-[spin_12s_linear_infinite]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<circle class="text-primary" cx="12" cy="12" opacity="0.4" r="9" stroke-dasharray="3 3"></circle>
+<path class="text-secondary" d="M12 3a9 9 0 0 1 9 9" stroke="currentColor" stroke-linecap="round"></path>
+<circle class="text-primary-fixed-dim" cx="12" cy="12" opacity="0.7" r="5"></circle>
+<circle class="text-tertiary" cx="12" cy="12" fill="currentColor" r="2"></circle>
+<circle class="text-secondary" cx="18" cy="8" fill="currentColor" r="1.5"></circle>
+</svg>
+</div>
+<span class="font-label-mono text-label-mono text-secondary uppercase tracking-widest flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+        Neural Ingestion Node
+      </span>
+</div>
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface tracking-tight">
+      Capture New Context
+    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+      Drop a raw reminder, chat snippet, or voice memo.
+    </p>
+</section>
+<!-- Interactive Intelligent Input Card -->
+<section class="relative rounded-2xl bg-surface-container/70 backdrop-blur-xl p-space-md shadow-[0_12px_36px_rgba(0,0,0,0.45)]">
+<!-- Active Scanning Pulse Edge Top -->
+<div class="absolute inset-x-6 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-80"></div>
+<div class="flex items-center justify-between pb-space-sm mb-space-sm border-b border-outline-variant/30">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary">memory</span>
+<span class="font-label-sm text-label-sm text-on-surface">Raw Buffer Stream</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-1 px-2 py-1 rounded-full bg-surface-container-highest/60 hover:bg-surface-container-highest text-secondary transition-all active:scale-95" id="voiceBtn">
+<span class="material-symbols-outlined text-[14px]">mic</span>
+<span class="font-label-mono text-label-mono">Voice</span>
+</button>
+<button class="px-2 py-1 rounded-full bg-surface-container-highest/60 hover:bg-surface-container-highest text-on-surface-variant transition-all text-[11px] font-label-mono" id="clearBtn">
+          Clear
+        </button>
+</div>
+</div>
+<!-- Textarea with Synthetic Active Cursor Simulation -->
+<div class="relative w-full min-h-[140px] rounded-xl bg-surface-container-lowest/80 p-3.5 focus-within:ring-1 focus-within:ring-primary/60 transition-all shadow-inner">
+<textarea class="w-full bg-transparent border-0 resize-none font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-0 leading-relaxed tracking-normal" id="contextInput" placeholder='Paste or type a vague note e.g. "Bring prototype" or drop a Slack message link...' rows="4">Rahul mentioned in today's huddle: make sure to bring the latest prototype for tomorrow's 5pm project review, and don't forget to update architecture slides too.</textarea>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 mt-1">
+<div class="flex items-center gap-1.5">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-label-mono text-label-mono text-tertiary tracking-wider uppercase">3 Entities Detected</span>
+</div>
+<span class="font-label-mono text-label-mono text-outline">162 chars • UTF-8</span>
+</div>
+</div>
+<!-- Micro Metadata Extraction Previews -->
+<div class="grid grid-cols-2 gap-space-xs mt-space-sm pt-space-xs">
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-high/40">
+<span class="material-symbols-outlined text-[18px] text-primary">schedule</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase">Temporal Anchor</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate">Tomorrow @ 5:00 PM</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-high/40">
+<span class="material-symbols-outlined text-[18px] text-secondary">group</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase">Key Stakeholder</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate">Rahul S. (Lead PM)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Connected Source Integrations -->
+<section class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-mono text-label-mono uppercase text-on-surface-variant tracking-wider">Live Neural Feeds</span>
+<span class="font-label-mono text-label-mono text-secondary hover:underline cursor-pointer">+ Configure</span>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-1 -mx-margin px-margin no-scrollbar">
+<!-- Active Slack Chip -->
+<div class="flex-shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high shadow-sm hover:bg-surface-variant transition-colors cursor-pointer group">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">tag</span>
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary transition-colors">Slack #product-design</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-secondary-container/20 text-secondary font-label-mono text-[9px] uppercase font-semibold">Active</span>
+</div>
+<!-- Synced GCal Chip -->
+<div class="flex-shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high shadow-sm hover:bg-surface-variant transition-colors cursor-pointer group">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">calendar_today</span>
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary transition-colors">Google Calendar</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-label-mono text-[9px] uppercase font-semibold">Synced</span>
+</div>
+<!-- Figma Chip -->
+<div class="flex-shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-variant transition-colors cursor-pointer text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="material-symbols-outlined text-[16px]">draw</span>
+<span class="font-label-sm text-label-sm">Figma</span>
+</div>
+<!-- Gmail Chip -->
+<div class="flex-shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-variant transition-colors cursor-pointer text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="material-symbols-outlined text-[16px]">mail</span>
+<span class="font-label-sm text-label-sm">Gmail</span>
+</div>
+</div>
+</section>
+<!-- Instant File Attachment Tray -->
+<section class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-mono text-label-mono uppercase text-on-surface-variant tracking-wider">Detected Memory Attachments (2)</span>
+<span class="font-label-mono text-label-mono text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> Auto-linked
+      </span>
+</div>
+<div class="grid grid-cols-1 gap-2.5">
+<!-- File 1: Prototype Zip -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">folder_zip</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold truncate">prototype-v3.zip</span>
+<div class="flex items-center gap-2">
+<span class="font-label-mono text-label-mono text-on-surface-variant">14.2 MB</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-mono text-label-mono text-secondary">Figma Export Bundle</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-mono text-[10px] uppercase font-medium">Extracted</span>
+<button class="p-1 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- File 2: Presentation PPTX -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container hover:bg-surface-container-high transition-all shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">slideshow</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold truncate">architecture.pptx</span>
+<div class="flex items-center gap-2">
+<span class="font-label-mono text-label-mono text-on-surface-variant">8.7 MB</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-mono text-label-mono text-tertiary">Deck Rev 4</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-mono text-[10px] uppercase font-medium">Synced</span>
+<button class="p-1 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Primary Action: Detect Context Threads Button -->
+<section class="pt-space-xs">
+<button class="relative w-full group overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-primary-container to-secondary-container p-px transition-all duration-300 active:scale-[0.98] shadow-[0_0_32px_-4px_rgba(192,193,255,0.4)] hover:shadow-[0_0_40px_-2px_rgba(78,222,163,0.5)]" id="detectCTA">
+<div class="relative flex items-center justify-center gap-2 px-6 py-4 rounded-[15px] bg-surface-container-lowest/90 group-hover:bg-surface-container-lowest/70 transition-colors">
+<span class="material-symbols-outlined text-[22px] text-primary animate-pulse">auto_awesome</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-wide">
+          Detect Context Threads
+        </span>
+<span class="material-symbols-outlined text-[20px] text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</button>
+</section>
+<!-- Secondary Safeguard & Intelligence Toggles -->
+<section class="flex flex-col space-y-3 pt-space-xs">
+<!-- Auto-Scan Notifications Toggle Card -->
+<div class="flex items-center justify-between p-3.5 rounded-xl bg-surface-container/60 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Auto-scan notifications</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Synthesize thread triggers in background</span>
+</div>
+</div>
+<!-- Tactile Custom Toggle Switch -->
+<button aria-checked="true" class="w-12 h-6 rounded-full bg-tertiary-container p-0.5 transition-colors duration-300 focus:outline-none shadow-inner flex items-center" id="toggleAutoScan" role="switch">
+<span class="w-5 h-5 rounded-full bg-on-surface shadow-md transform translate-x-6 transition-transform duration-300"></span>
+</button>
+</div>
+<!-- Privacy Vault Status Capsule -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-surface-container-lowest/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary">shield_lock</span>
+<span class="font-label-sm text-label-sm text-on-surface">Privacy Vault Encryption</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-mono text-label-mono text-tertiary font-semibold uppercase tracking-wider">Active AES-GCM</span>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Micro-interactions & Tactile Delight
+  const toggleBtn = document.getElementById('toggleAutoScan');
+  let isToggled = true;
+
+  toggleBtn?.addEventListener('click', () => {
+    isToggled = !isToggled;
+    toggleBtn.setAttribute('aria-checked', isToggled);
+    const thumb = toggleBtn.querySelector('span');
+    if (isToggled) {
+      toggleBtn.classList.remove('bg-surface-variant');
+      toggleBtn.classList.add('bg-tertiary-container');
+      thumb.classList.remove('translate-x-0');
+      thumb.classList.add('translate-x-6');
+    } else {
+      toggleBtn.classList.remove('bg-tertiary-container');
+      toggleBtn.classList.add('bg-surface-variant');
+      thumb.classList.remove('translate-x-6');
+      thumb.classList.add('translate-x-0');
+    }
+  });
+
+  const clearBtn = document.getElementById('clearBtn');
+  const contextInput = document.getElementById('contextInput');
+  clearBtn?.addEventListener('click', () => {
+    if (contextInput) {
+      contextInput.value = '';
+      contextInput.focus();
+    }
+  });
+
+  const voiceBtn = document.getElementById('voiceBtn');
+  let isRecording = false;
+  voiceBtn?.addEventListener('click', () => {
+    isRecording = !isRecording;
+    if (isRecording) {
+      voiceBtn.classList.add('bg-error/20', 'text-error');
+      voiceBtn.querySelector('.material-symbols-outlined').textContent = 'graphic_eq';
+      voiceBtn.querySelector('span:last-child').textContent = 'Listening...';
+    } else {
+      voiceBtn.classList.remove('bg-error/20', 'text-error');
+      voiceBtn.querySelector('.material-symbols-outlined').textContent = 'mic';
+      voiceBtn.querySelector('span:last-child').textContent = 'Voice';
+    }
+  });
+
+  const detectCTA = document.getElementById('detectCTA');
+  detectCTA?.addEventListener('click', () => {
+    const icon = detectCTA.querySelector('.material-symbols-outlined:first-child');
+    const label = detectCTA.querySelector('.font-headline-sm');
+    if (label && icon) {
+      label.textContent = 'Synthesizing Neural Graph...';
+      icon.textContent = 'progress_activity';
+      icon.classList.add('animate-spin');
+      setTimeout(() => {
+        label.textContent = 'Threads Extracted & Mapped!';
+        icon.textContent = 'task_alt';
+        icon.classList.remove('animate-spin');
+      }, 1400);
+    }
+  });
+</script></main><div class="fixed bottom-0 w-full z-50 pointer-events-none pb-safe"><div class="px-margin pb-space-md pt-space-xs flex justify-center w-full"><nav class="pointer-events-auto flex items-center justify-between w-full max-w-md px-space-sm py-space-xs bg-surface-container/85 backdrop-blur-2xl rounded-full shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]" data-active-classes="text-primary font-semibold drop-shadow-[0_0_8px_rgba(192,193,255,0.45)]"><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="guardian-home" href="#"><span class="material-symbols-outlined text-[22px]">auto_awesome</span><span class="font-label-mono text-label-mono mt-0.5">Home</span></a><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="context-graph" href="#"><span class="material-symbols-outlined text-[22px]">hub</span><span class="font-label-mono text-label-mono mt-0.5">Graph</span></a><div class="flex items-center justify-center -my-3"><a aria-current="page" class="flex items-center justify-center w-12 h-12 rounded-full bg-primary shadow-[0_0_24px_-2px_rgba(192,193,255,0.65)] hover:scale-105 active:scale-95 transition-all text-primary font-semibold drop-shadow-[0_0_8px_rgba(192,193,255,0.45)]" data-path="neural-capture" href="#"><span class="material-symbols-outlined text-[24px]">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="dossiers-archive" href="#"><span class="material-symbols-outlined text-[22px]">folder_managed</span><span class="font-label-mono text-label-mono mt-0.5">Dossiers</span></a><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="stream-comparison" href="#"><span class="material-symbols-outlined text-[22px]">compare_arrows</span><span class="font-label-mono text-label-mono mt-0.5">Compare</span></a></nav></div></div></body></html>

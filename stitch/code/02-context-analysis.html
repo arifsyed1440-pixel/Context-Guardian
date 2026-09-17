@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-fixed": "#002113", "surface-container-lowest": "#0a0e16", "on-surface": "#dfe2ee", "primary-fixed": "#e1e0ff", "surface-variant": "#31353e", "inverse-on-surface": "#2c3039", "on-background": "#dfe2ee", "error": "#ffb4ab", "surface-container-high": "#262a33", "on-error-container": "#ffdad6", "on-primary": "#1000a9", "inverse-primary": "#494bd6", "on-secondary-container": "#00424e", "error-container": "#93000a", "surface-container-low": "#181c24", "on-secondary": "#003640", "primary-fixed-dim": "#c0c1ff", "surface-container": "#1c2028", "on-tertiary-container": "#000703", "on-error": "#690005", "on-secondary-fixed": "#001f26", "surface-container-highest": "#31353e", "secondary-container": "#03b5d3", "outline": "#908fa0", "secondary-fixed-dim": "#4cd7f6", "secondary": "#4cd7f6", "on-tertiary-fixed-variant": "#005236", "on-primary-fixed-variant": "#2f2ebe", "primary": "#c0c1ff", "on-tertiary": "#003824", "primary-container": "#8083ff", "on-surface-variant": "#c7c4d7", "background": "#0f131c", "tertiary-fixed-dim": "#4edea3", "on-primary-container": "#0d0096", "on-primary-fixed": "#07006c", "outline-variant": "#464554", "tertiary": "#4edea3", "surface": "#0f131c", "inverse-surface": "#dfe2ee", "secondary-fixed": "#acedff", "tertiary-fixed": "#6ffbbe", "surface-dim": "#0f131c", "surface-bright": "#353942", "tertiary-container": "#00885d", "on-secondary-fixed-variant": "#004e5c", "surface-tint": "#c0c1ff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xl": "2rem", "margin": "1.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter": "1rem", "space-xs": "0.25rem" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-md": ["Inter"], "label-sm": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-mono": ["Inter"], "headline-xl-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-sm": ["17px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-mono": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-primary selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="px-margin h-16 flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Context Guardian Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X292ul_a0IrImCLxPW3Jn-1pFtGgwl37YRIViQ7PUsZJ7F1gF7ycPytCQIuHCR9LKtQvpi1iGdKU73j3rIWUQ2JNxfwR-eOpzFx7DcyDfUGS1Ys6SmoUxbqpruI2-Wi6JFqya7l3OZGiZw_cMKi3zIqZIzPnf9pAR1mDdbX9b-chfSjmwfZOFV2ukEWeHUISiu5w3Y7PMBdDhXEvOfQ6wD6CMdSxgAmdYJTtgAw2WXQOwITh0-8ozA5w"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Context Guardian</span><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Neural Capture</span></div></div><div class="flex items-center"><a class="flex items-center justify-center rounded-full p-space-xs" data-path="profile-settings" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_12px_rgba(192,193,255,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAThIoyY6nPP5XgG79LaipsThsTcEoX-RGOG15rfbuBhhpp4RbPmvfhveMX7k-5kO1NKp2Z-yQqoDYUfnHiszxs7aE6Nhal8dm8O_abTUzSC5Er35EtMk7LcuEBi0VsQR7A9XOYzmzTTQbLwaaGHivz26p1DK39Kz0ZMjqCDJ1C9oYPkro7-vIZWXGSCithdeIzYpkfyOQqNDXYSOVJiEjsfxL9NWMT4MnNczyjObW0GwvHSClbniMr"/></a></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full px-margin space-y-space-lg pb-12">
+<!-- Radial Ambient Backdrop Highlights -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+<div class="absolute -top-16 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[110px]"></div>
+<div class="absolute top-1/2 -left-20 w-72 h-72 bg-secondary/10 rounded-full blur-[90px]"></div>
+<div class="absolute bottom-12 right-6 w-64 h-64 bg-tertiary/10 rounded-full blur-[100px]"></div>
+</div>
+<!-- Realtime Diagnostic Synthesis Orb Card -->
+<div class="relative w-full rounded-[28px] bg-surface-container/70 backdrop-blur-2xl p-space-md shadow-[0_12px_36px_rgba(0,0,0,0.45)] overflow-hidden">
+<div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shadow-[0_0_16px_rgba(192,193,255,0.3)]">
+<span class="material-symbols-outlined text-[18px] animate-spin" style="animation-duration: 9s;">psychology</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface">Neural Decomposition</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-label-mono bg-tertiary/15 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-1 animate-ping"></span> LIVE
+            </span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface-variant">PIPELINE EPOCH: #9842-SYNTH</span>
+</div>
+</div>
+<!-- Compact Circular Progress Meter -->
+<div class="relative flex items-center justify-center w-12 h-12">
+<svg class="w-12 h-12 -rotate-90" viewbox="0 0 48 48">
+<circle class="text-surface-variant/40" cx="24" cy="24" fill="none" r="19" stroke="currentColor" stroke-width="3"></circle>
+<circle class="text-primary" cx="24" cy="24" fill="none" r="19" stroke="currentColor" stroke-dasharray="119.38" stroke-dashoffset="17.9" stroke-linecap="round" stroke-width="3.5"></circle>
+</svg>
+<span class="absolute font-label-mono text-[11px] font-bold text-primary">85%</span>
+</div>
+</div>
+<!-- Interactive Radar Visual Core -->
+<div class="relative mt-space-md py-4 flex flex-col items-center justify-center bg-surface-container-lowest/80 rounded-2xl overflow-hidden">
+<div class="relative w-36 h-36 flex items-center justify-center">
+<!-- Orbit 1: Outer dashed scanner -->
+<div class="absolute inset-0 rounded-full border border-dashed border-primary/25 animate-spin" style="animation-duration: 20s;"></div>
+<!-- Orbit 2: Cyan counter-rotation -->
+<div class="absolute inset-3 rounded-full border border-secondary/30 animate-spin" style="animation-duration: 12s; animation-direction: reverse;">
+<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-secondary shadow-[0_0_12px_#4cd7f6]"></div>
+</div>
+<!-- Orbit 3: Deep violet boundary -->
+<div class="absolute inset-7 rounded-full border-2 border-primary/40 flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary-fixed absolute -right-1 shadow-[0_0_10px_#c0c1ff]"></div>
+</div>
+<!-- Center Nucleus -->
+<div class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-primary-container to-secondary flex items-center justify-center shadow-[0_0_24px_rgba(128,131,255,0.7)]">
+<span class="material-symbols-outlined text-[16px] text-on-primary-container">scatter_plot</span>
+</div>
+</div>
+<div class="mt-2 text-center">
+<p class="font-label-mono text-label-mono text-secondary tracking-widest uppercase">Cross-Entropy Disambiguation</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Grounding implicit multi-actor intent</p>
+</div>
+</div>
+</div>
+<!-- Raw Input vs Synthesized Context Pill -->
+<div class="w-full rounded-2xl bg-surface-container-low p-space-md shadow-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-outline">Semantic Transformation</span>
+<span class="font-label-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-full">NLP v4.28</span>
+</div>
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex items-start gap-2.5 bg-surface-container-lowest/90 px-3 py-2.5 rounded-xl">
+<span class="material-symbols-outlined text-outline text-[18px] mt-0.5">input</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-mono text-[10px] text-outline uppercase">Raw Human Signal</span>
+<span class="font-body-md text-body-md text-on-surface truncate">"Bring prototype"</span>
+</div>
+</div>
+<div class="flex justify-center -my-1">
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+</div>
+</div>
+<div class="flex items-start gap-2.5 bg-secondary-container/15 px-3 py-2.5 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-[18px] mt-0.5">hub</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-mono text-[10px] text-secondary uppercase tracking-wider font-semibold">Synthesized Target Context</span>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Multi-threaded Project Review Context</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Extraction Breakdown Timeline Cards -->
+<div class="space-y-space-md">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-on-surface-variant">Extracted Neural Entities</span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</div>
+<span class="font-label-mono text-[11px] text-outline">4 RESOLUTIONS</span>
+</div>
+<!-- Pipeline List -->
+<div class="relative pl-6 space-y-space-md before:content-[''] before:absolute before:left-2.5 before:top-4 before:bottom-4 before:w-[2px] before:bg-gradient-to-b before:from-primary before:via-secondary before:to-tertiary">
+<!-- Step 1: Actor Resolution -->
+<div class="relative group">
+<!-- Timeline Glow Node -->
+<div class="absolute -left-[27px] top-4 w-4 h-4 rounded-full bg-surface border-2 border-primary flex items-center justify-center shadow-[0_0_12px_rgba(192,193,255,0.6)]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+</div>
+<div class="rounded-2xl bg-surface-container/90 p-space-md shadow-md space-y-space-sm hover:bg-surface-container-high/90 transition-all duration-200">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase text-primary tracking-wide">01 · Actor Resolution</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-label-mono font-semibold bg-tertiary/15 text-tertiary">
+<span class="material-symbols-outlined text-[12px]">verified</span> 99% CONF
+            </span>
+</div>
+<div class="flex items-center gap-3 pt-1">
+<img class="w-10 h-10 rounded-full object-cover shadow-md" data-alt="Portrait avatar of Rahul, a thoughtful South Asian male Principal Product Designer with sleek minimalist glasses, soft moody studio rim light in tones of deep slate and indigo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZvDwTrhnXgBBHwugkyw311NA3mouOTkALf3S2aqsN4irBgpLrB9loOcDnsQB4qrm4PDyq3e77RKMm97hXwec-A1IOHU6ZiepTHnzOQnxNXFG-L6RDR5HkD6nkLTrPmGdYixo5Y5s3EoZW_Jb5y7XaRP944IUIGGSaijqBJQMFnw-WL8xwznfPIFwmFq8AfdI_ykG3aL1HhuEuJgpRXt_kWNZegZgUES2k6XxbIU4RvgHeA8WfQJHH"/>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Rahul</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Principal Product Designer</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-secondary">chat</span> Slack DM @rahul
+            </div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px] text-primary">record_voice_over</span> Huddle transcript
+            </div>
+</div>
+</div>
+</div>
+<!-- Step 2: Intent & Actions Extracted -->
+<div class="relative group">
+<!-- Timeline Glow Node -->
+<div class="absolute -left-[27px] top-4 w-4 h-4 rounded-full bg-surface border-2 border-secondary flex items-center justify-center shadow-[0_0_12px_rgba(76,215,246,0.6)]">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+</div>
+<div class="rounded-2xl bg-surface-container/90 p-space-md shadow-md space-y-space-sm hover:bg-surface-container-high/90 transition-all duration-200">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase text-secondary tracking-wide">02 · Deconstructed Actions</span>
+<span class="font-label-mono text-[10px] text-outline px-2 py-0.5 rounded-full bg-surface-container-lowest">2 EXECUTABLES</span>
+</div>
+<div class="space-y-2 pt-1">
+<div class="p-2.5 rounded-xl bg-surface-container-lowest/80 space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Bring latest prototype</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pl-4">
+                Linked to <span class="text-primary font-medium">Figma build v3.4</span> &amp; <span class="text-secondary font-mono text-[11px]">prototype-v3.zip</span>
+</p>
+</div>
+<div class="p-2.5 rounded-xl bg-surface-container-lowest/80 space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">Update architecture slides</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pl-4">
+                Target: <span class="text-on-surface font-medium">architecture.pptx</span> (Slides 12-16)
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 3: Temporal Anchor -->
+<div class="relative group">
+<!-- Timeline Glow Node -->
+<div class="absolute -left-[27px] top-4 w-4 h-4 rounded-full bg-surface border-2 border-tertiary flex items-center justify-center shadow-[0_0_12px_rgba(78,222,163,0.6)]">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+</div>
+<div class="rounded-2xl bg-surface-container/90 p-space-md shadow-md space-y-space-sm hover:bg-surface-container-high/90 transition-all duration-200">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase text-tertiary tracking-wide">03 · Temporal Anchor</span>
+<span class="inline-flex items-center gap-1 font-label-mono text-[10px] text-tertiary">
+<span class="material-symbols-outlined text-[12px]">schedule</span> MATCHED
+            </span>
+</div>
+<div class="flex items-start justify-between pt-1">
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Tomorrow, 5:00 PM</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Cross-referenced with calendar schedules</p>
+</div>
+<div class="w-9 h-9 rounded-xl bg-tertiary-container/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">event_available</span>
+</div>
+</div>
+<div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm">
+<span class="material-symbols-outlined text-[15px] text-secondary">meeting_room</span>
+<span>Quarterly Design Review • <strong class="font-semibold text-primary">Conf Room C</strong></span>
+</div>
+</div>
+</div>
+<!-- Step 4: Artifact Linking -->
+<div class="relative group">
+<!-- Timeline Glow Node -->
+<div class="absolute -left-[27px] top-4 w-4 h-4 rounded-full bg-surface border-2 border-primary-container flex items-center justify-center shadow-[0_0_12px_rgba(128,131,255,0.6)]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary-container"></div>
+</div>
+<div class="rounded-2xl bg-surface-container/90 p-space-md shadow-md space-y-space-sm hover:bg-surface-container-high/90 transition-all duration-200">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase text-primary tracking-wide">04 · Artifact Association</span>
+<span class="font-label-mono text-[10px] text-tertiary bg-tertiary/10 px-2 py-0.5 rounded-full">SYMMETRIC DISCOVERY</span>
+</div>
+<div class="space-y-2 pt-1">
+<!-- Artifact 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high/60 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-secondary/15 flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[18px]">folder_zip</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">prototype-v3.zip</span>
+<span class="font-label-mono text-[10px] text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Verified in Downloads / Drive
+                  </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px] shrink-0">open_in_new</span>
+</div>
+<!-- Artifact 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high/60 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">slideshow</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">architecture.pptx</span>
+<span class="font-label-mono text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Modified 2h ago by Rahul
+                  </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px] shrink-0">open_in_new</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tactical CTA Transition Area -->
+<div class="relative pt-2">
+<!-- Glow Backdrop for Primary Action -->
+<div class="absolute inset-x-8 top-4 h-12 bg-primary/25 rounded-full blur-xl pointer-events-none"></div>
+<button class="relative w-full py-4 px-6 rounded-full bg-gradient-to-r from-primary-container via-primary to-secondary text-on-primary-container font-label-md text-label-md font-semibold tracking-wide flex items-center justify-center gap-3 shadow-[0_8px_32px_rgba(128,131,255,0.4)] hover:brightness-110 active:scale-[0.98] transition-all overflow-hidden group" id="proceed-dossier-btn">
+<span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+<span class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform">auto_stories</span>
+<span>Proceed to Synthesized Dossier</span>
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-2 mt-3 text-center">
+<span class="material-symbols-outlined text-[14px] text-tertiary">lock</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">Cognitive Ledger Locked &amp; End-to-End Encrypted</span>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const btn = document.getElementById('proceed-dossier-btn');
+    if (btn) {
+      btn.addEventListener('click', function() {
+        btn.classList.add('scale-95');
+        setTimeout(() => {
+          btn.classList.remove('scale-95');
+        }, 150);
+      });
+    }
+  })();
+</script></main><div class="fixed bottom-0 w-full z-50 pointer-events-none pb-safe"><div class="px-margin pb-space-md pt-space-xs flex justify-center w-full"><nav class="pointer-events-auto flex items-center justify-between w-full max-w-md px-space-sm py-space-xs bg-surface-container/85 backdrop-blur-2xl rounded-full shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]" data-active-classes="text-primary font-semibold drop-shadow-[0_0_8px_rgba(192,193,255,0.45)]"><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="guardian-home" href="#"><span class="material-symbols-outlined text-[22px]">auto_awesome</span><span class="font-label-mono text-label-mono mt-0.5">Home</span></a><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="context-graph" href="#"><span class="material-symbols-outlined text-[22px]">hub</span><span class="font-label-mono text-label-mono mt-0.5">Graph</span></a><div class="flex items-center justify-center -my-3"><a aria-current="page" class="flex items-center justify-center w-12 h-12 rounded-full bg-primary shadow-[0_0_24px_-2px_rgba(192,193,255,0.65)] hover:scale-105 active:scale-95 transition-all text-primary font-semibold drop-shadow-[0_0_8px_rgba(192,193,255,0.45)]" data-path="neural-capture" href="#"><span class="material-symbols-outlined text-[24px]">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="dossiers-archive" href="#"><span class="material-symbols-outlined text-[22px]">folder_managed</span><span class="font-label-mono text-label-mono mt-0.5">Dossiers</span></a><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="stream-comparison" href="#"><span class="material-symbols-outlined text-[22px]">compare_arrows</span><span class="font-label-mono text-label-mono mt-0.5">Compare</span></a></nav></div></div></body></html>

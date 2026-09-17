@@ -1,20 +1,4 @@
 import React, { useState } from 'react';
-import { 
-  User, 
-  Target, 
-  Calendar, 
-  Clock, 
-  ListTodo, 
-  Package, 
-  Sparkles, 
-  CheckCircle, 
-  Network, 
-  FileCheck, 
-  Edit3, 
-  Check, 
-  Plus, 
-  Trash
-} from 'lucide-react';
 import { ContextObject, ScreenType } from '../../types/context';
 
 interface ContextAnalysisScreenProps {
@@ -28,147 +12,221 @@ export const ContextAnalysisScreen: React.FC<ContextAnalysisScreenProps> = ({
   onUpdateContext,
   onNavigate,
 }) => {
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [newActionInput, setNewActionInput] = useState<string>('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [newActionText, setNewActionText] = useState('');
 
   if (!context) {
     return (
-      <div className="screen-container empty-state">
-        <Sparkles size={36} className="empty-icon" />
+      <div className="screen-inner-container empty-state">
+        <span className="material-symbols-outlined empty-icon">psychology</span>
         <h3>No Active Context to Analyze</h3>
-        <p>Input a conversation or scan a screenshot to extract context.</p>
-        <button className="cta-primary-btn" onClick={() => onNavigate('input')}>
+        <p>Input a conversation to inspect its neural decomposition.</p>
+        <button className="stitch-btn primary" onClick={() => onNavigate('input')}>
           Go to Input
         </button>
       </div>
     );
   }
 
-  const handleToggleActionDone = (actionText: string) => {
+  const handleToggleAction = (actionText: string) => {
     const isCompleted = context.completedActions.includes(actionText);
-    const updatedCompleted = isCompleted
-      ? context.completedActions.filter((a) => a !== actionText)
+    const updated = isCompleted
+      ? context.completedActions.filter(a => a !== actionText)
       : [...context.completedActions, actionText];
 
     onUpdateContext({
       ...context,
-      completedActions: updatedCompleted,
+      completedActions: updated,
     });
   };
 
   const handleAddAction = () => {
-    if (!newActionInput.trim()) return;
+    if (!newActionText.trim()) return;
     onUpdateContext({
       ...context,
-      actions: [...context.actions, newActionInput.trim()],
+      actions: [...context.actions, newActionText.trim()],
     });
-    setNewActionInput('');
+    setNewActionText('');
   };
 
   const handleRemoveAction = (index: number) => {
-    const updatedActions = context.actions.filter((_, idx) => idx !== index);
     onUpdateContext({
       ...context,
-      actions: updatedActions,
+      actions: context.actions.filter((_, idx) => idx !== index),
     });
   };
 
   return (
-    <div className="screen-container analysis-screen">
-      {/* Header Bar */}
-      <div className="analysis-header-card">
-        <div className="analysis-status-row">
-          <div className="status-pill success">
-            <CheckCircle size={13} />
-            <span>Context Extracted Successfully</span>
+    <div className="screen-inner-container analysis-stitch-screen">
+      {/* Realtime Diagnostic Synthesis Orb Card (Stitch Screen 02) */}
+      <div className="diagnostic-card">
+        <div className="diagnostic-top-line"></div>
+        <div className="diagnostic-header-row">
+          <div className="diagnostic-badge-group">
+            <div className="diagnostic-icon-circle">
+              <span className="material-symbols-outlined text-primary text-[18px] rotating-orb">
+                psychology
+              </span>
+            </div>
+            <div className="diagnostic-titles">
+              <div className="diagnostic-title-row">
+                <span className="diagnostic-title">Neural Decomposition</span>
+                <span className="live-tag">
+                  <span className="live-dot"></span> LIVE
+                </span>
+              </div>
+              <span className="epoch-label">PIPELINE EPOCH: #{context.id.slice(-6).toUpperCase()}</span>
+            </div>
           </div>
-          <div className="confidence-pill" title="Local rule-based heuristic confidence">
-            <Sparkles size={12} />
-            <span>{(context.confidenceScore * 100).toFixed(0)}% Confidence</span>
+
+          {/* Compact Circular Progress Meter */}
+          <div className="circular-meter-box">
+            <svg className="circular-meter-svg" viewBox="0 0 48 48">
+              <circle className="meter-bg-track" cx="24" cy="24" fill="none" r="19" strokeWidth="3" />
+              <circle
+                className="meter-bar"
+                cx="24"
+                cy="24"
+                fill="none"
+                r="19"
+                strokeDasharray="119.38"
+                strokeDashoffset={119.38 * (1 - context.confidenceScore)}
+                strokeLinecap="round"
+                strokeWidth="3.5"
+              />
+            </svg>
+            <span className="meter-percent">{(context.confidenceScore * 100).toFixed(0)}%</span>
           </div>
         </div>
 
-        <h2 className="analysis-title">Extracted Semantic Entities</h2>
-        <p className="analysis-subtitle">
-          Recovered personal context parsed by the Local Context Extraction Engine.
-        </p>
-
-        <div className="analysis-edit-toggle">
-          <button 
-            className={`toggle-edit-btn ${isEditing ? 'active' : ''}`}
-            onClick={() => setIsEditing(!isEditing)}
-          >
-            {isEditing ? <Check size={14} /> : <Edit3 size={14} />}
-            <span>{isEditing ? 'Done Editing' : 'Adjust Entities'}</span>
-          </button>
+        {/* Interactive Radar Visual Core (Stitch Screen 02) */}
+        <div className="radar-core-module">
+          <div className="radar-orbit-stage">
+            {/* Orbit 1: Outer dashed scanner */}
+            <div className="radar-orbit-outer"></div>
+            {/* Orbit 2: Cyan counter-rotation */}
+            <div className="radar-orbit-mid">
+              <div className="radar-satellite-cyan"></div>
+            </div>
+            {/* Orbit 3: Deep violet boundary */}
+            <div className="radar-orbit-inner">
+              <div className="radar-satellite-violet"></div>
+            </div>
+            {/* Center Nucleus */}
+            <div className="radar-center-nucleus">
+              <span className="material-symbols-outlined text-[16px] text-on-primary-container">
+                scatter_plot
+              </span>
+            </div>
+          </div>
+          <div className="radar-core-caption">
+            <span className="caption-title">Cross-Entropy Disambiguation</span>
+            <span className="caption-subtitle">Grounding implicit multi-actor intent locally</span>
+          </div>
         </div>
       </div>
 
-      {/* Raw Original Quote */}
-      <div className="raw-quote-card">
-        <div className="quote-label">Original Fragmented Input</div>
-        <blockquote className="quote-body">"{context.rawText}"</blockquote>
+      {/* Semantic Transformation Card (Stitch Screen 02) */}
+      <div className="transformation-card">
+        <div className="transformation-header">
+          <span className="transformation-title">Semantic Transformation</span>
+          <span className="engine-version-pill">Local Engine v1.0</span>
+        </div>
+
+        {/* Raw Human Signal */}
+        <div className="signal-box raw-signal">
+          <span className="material-symbols-outlined signal-icon">input</span>
+          <div className="signal-content">
+            <span className="signal-type">Raw Human Signal</span>
+            <span className="signal-value">"{context.rawText}"</span>
+          </div>
+        </div>
+
+        {/* Grounded Persona Synthesis */}
+        <div className="signal-box grounded-signal">
+          <span className="material-symbols-outlined signal-icon text-secondary">verified_user</span>
+          <div className="signal-content">
+            <span className="signal-type text-secondary">Grounded Persona & Scope</span>
+            <span className="signal-value text-on-surface">
+              {context.actor} requests deliverables for <strong>{context.purpose}</strong>
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* Primary Entities Grid */}
-      <div className="entities-grid">
+      {/* Adjust / Edit Toggle Bar */}
+      <div className="adjust-entities-bar">
+        <span className="adjust-label">Extracted Entities & Metadata</span>
+        <button
+          className={`adjust-toggle-btn ${isEditing ? 'active' : ''}`}
+          onClick={() => setIsEditing(!isEditing)}
+        >
+          <span className="material-symbols-outlined text-[14px]">
+            {isEditing ? 'check' : 'edit'}
+          </span>
+          <span>{isEditing ? 'Save Changes' : 'Adjust Entities'}</span>
+        </button>
+      </div>
+
+      {/* Core Entity Bento Matrix */}
+      <div className="bento-grid">
         {/* Actor Card */}
-        <div className="entity-card">
-          <div className="entity-header">
-            <User size={16} className="entity-icon actor-icon" />
-            <span className="entity-type">Actor / Originator</span>
+        <div className="bento-card">
+          <div className="bento-card-header">
+            <span className="material-symbols-outlined text-primary text-[16px]">person</span>
+            <span className="bento-card-type">Actor / Communicator</span>
           </div>
           {isEditing ? (
             <input
               type="text"
-              className="entity-edit-input"
+              className="bento-edit-input"
               value={context.actor}
               onChange={(e) => onUpdateContext({ ...context, actor: e.target.value })}
             />
           ) : (
-            <div className="entity-value highlight-actor">{context.actor}</div>
+            <div className="bento-value text-primary">{context.actor}</div>
           )}
-          <span className="entity-subtext">Communicator requesting the actions</span>
+          <span className="bento-subtext">Originator requesting tasks</span>
         </div>
 
         {/* Purpose Card */}
-        <div className="entity-card">
-          <div className="entity-header">
-            <Target size={16} className="entity-icon purpose-icon" />
-            <span className="entity-type">Purpose / Intent</span>
+        <div className="bento-card">
+          <div className="bento-card-header">
+            <span className="material-symbols-outlined text-secondary text-[16px]">target</span>
+            <span className="bento-card-type">Purpose / Goal</span>
           </div>
           {isEditing ? (
             <input
               type="text"
-              className="entity-edit-input"
+              className="bento-edit-input"
               value={context.purpose}
               onChange={(e) => onUpdateContext({ ...context, purpose: e.target.value })}
             />
           ) : (
-            <div className="entity-value highlight-purpose">{context.purpose}</div>
+            <div className="bento-value text-secondary">{context.purpose}</div>
           )}
-          <span className="entity-subtext">Core initiative or meeting theme</span>
+          <span className="bento-subtext">{context.category} Domain</span>
         </div>
       </div>
 
-      {/* Distinct Temporal Information */}
-      <div className="temporal-section-card">
-        <div className="temporal-section-header">
-          <h4 className="temporal-title">Temporal Information (Disambiguated)</h4>
-          <span className="temporal-badge">Distinct Models</span>
+      {/* Distinct Temporal Disambiguation */}
+      <div className="temporal-matrix-card">
+        <div className="temporal-matrix-header">
+          <span className="temporal-matrix-title">Temporal Disambiguation</span>
+          <span className="distinct-tag">Separated Models</span>
         </div>
 
-        <div className="temporal-split-grid">
+        <div className="temporal-boxes-grid">
           {/* Event Timing */}
-          <div className="temporal-box event-box">
-            <div className="temporal-box-label">
-              <Calendar size={14} />
-              <span>Event Timing</span>
+          <div className="temporal-box event-cell">
+            <div className="cell-top">
+              <span className="material-symbols-outlined text-tertiary text-[14px]">calendar_month</span>
+              <span className="cell-label text-tertiary">Event Timing</span>
             </div>
             {isEditing ? (
               <input
                 type="text"
-                className="entity-edit-input"
+                className="bento-edit-input"
                 placeholder="e.g. Tomorrow's project review"
                 value={context.temporal.eventTiming || ''}
                 onChange={(e) =>
@@ -179,23 +237,21 @@ export const ContextAnalysisScreen: React.FC<ContextAnalysisScreenProps> = ({
                 }
               />
             ) : (
-              <div className="temporal-box-value">
-                {context.temporal.eventTiming || 'Not specified in conversation'}
-              </div>
+              <div className="cell-value">{context.temporal.eventTiming || 'Unspecified'}</div>
             )}
-            <span className="temporal-box-hint">When the overarching event takes place</span>
+            <span className="cell-caption">When the overarching milestone occurs</span>
           </div>
 
           {/* Task Deadline */}
-          <div className="temporal-box deadline-box">
-            <div className="temporal-box-label">
-              <Clock size={14} />
-              <span>Task Deadline</span>
+          <div className="temporal-box deadline-cell">
+            <div className="cell-top">
+              <span className="material-symbols-outlined text-error text-[14px]">alarm</span>
+              <span className="cell-label text-error">Task Deadline</span>
             </div>
             {isEditing ? (
               <input
                 type="text"
-                className="entity-edit-input"
+                className="bento-edit-input"
                 placeholder="e.g. Before 5 PM"
                 value={context.temporal.taskDeadline || ''}
                 onChange={(e) =>
@@ -206,44 +262,42 @@ export const ContextAnalysisScreen: React.FC<ContextAnalysisScreenProps> = ({
                 }
               />
             ) : (
-              <div className="temporal-box-value">
-                {context.temporal.taskDeadline || 'Not specified in conversation'}
-              </div>
+              <div className="cell-value text-error">{context.temporal.taskDeadline || 'Unspecified'}</div>
             )}
-            <span className="temporal-box-hint">Cutoff time for required deliverables</span>
+            <span className="cell-caption">Hard cutoff for deliverables</span>
           </div>
         </div>
       </div>
 
-      {/* Action Items */}
-      <div className="actions-section-card">
-        <div className="actions-section-header">
+      {/* Action Items List */}
+      <div className="actions-matrix-card">
+        <div className="actions-matrix-header">
           <div className="actions-title-wrap">
-            <ListTodo size={16} className="entity-icon" />
-            <h4 className="actions-title">Extracted Actions ({context.actions.length})</h4>
+            <span className="material-symbols-outlined text-[16px] text-tertiary">checklist</span>
+            <span className="actions-title">Extracted Action Deliverables ({context.actions.length})</span>
           </div>
-          <span className="actions-subtext">Imperative statements parsed from text</span>
+          <span className="actions-hint">Imperative clauses parsed on-device</span>
         </div>
 
-        <div className="actions-list">
+        <div className="actions-items-container">
           {context.actions.map((action, idx) => {
             const isDone = context.completedActions.includes(action);
             return (
-              <div key={idx} className={`action-item-row ${isDone ? 'done' : ''}`}>
+              <div key={idx} className={`action-row-item ${isDone ? 'done' : ''}`}>
                 <button
-                  className={`action-check-btn ${isDone ? 'checked' : ''}`}
-                  onClick={() => handleToggleActionDone(action)}
+                  className={`action-checkbox ${isDone ? 'checked' : ''}`}
+                  onClick={() => handleToggleAction(action)}
                 >
-                  {isDone && <Check size={13} />}
+                  {isDone && <span className="material-symbols-outlined text-[14px]">check</span>}
                 </button>
-                <span className="action-item-text">{action}</span>
+                <span className="action-text">{action}</span>
                 {isEditing && (
-                  <button
-                    className="action-delete-btn"
+                  <button 
+                    className="delete-action-btn" 
                     onClick={() => handleRemoveAction(idx)}
                     title="Remove action"
                   >
-                    <Trash size={13} />
+                    <span className="material-symbols-outlined text-[14px]">close</span>
                   </button>
                 )}
               </div>
@@ -252,54 +306,47 @@ export const ContextAnalysisScreen: React.FC<ContextAnalysisScreenProps> = ({
         </div>
 
         {isEditing && (
-          <div className="add-action-bar">
+          <div className="add-action-inline">
             <input
               type="text"
               placeholder="Add another action item..."
-              value={newActionInput}
-              onChange={(e) => setNewActionInput(e.target.value)}
+              value={newActionText}
+              onChange={(e) => setNewActionText(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddAction()}
             />
             <button className="add-action-btn" onClick={handleAddAction}>
-              <Plus size={14} />
+              <span className="material-symbols-outlined text-[14px]">add</span>
               <span>Add</span>
             </button>
           </div>
         )}
       </div>
 
-      {/* Extracted Artifact Concepts */}
-      <div className="artifacts-section-card">
+      {/* Artifact Concepts */}
+      <div className="artifacts-matrix-card">
         <div className="artifacts-header">
-          <Package size={16} className="entity-icon" />
-          <h4 className="artifacts-title">Referenced Artifact Concepts</h4>
+          <span className="material-symbols-outlined text-[16px] text-secondary">inventory_2</span>
+          <span className="artifacts-title">Extracted Artifact Concepts</span>
         </div>
-        <p className="artifacts-hint">
-          Directly parsed from sentence terms (no fake filenames created):
-        </p>
+        <p className="artifacts-subtitle">Concepts directly parsed from conversation text:</p>
 
-        <div className="artifact-concepts-tags">
+        <div className="artifact-pills-row">
           {context.artifacts.map((art, idx) => (
-            <div key={idx} className="artifact-concept-badge">
-              <span className="concept-bullet">●</span>
+            <div key={idx} className="artifact-capsule">
+              <span className="capsule-dot">●</span>
               <span>{art}</span>
             </div>
           ))}
         </div>
 
-        {/* Demo-Linked Concrete Files */}
         {context.linkedArtifacts && context.linkedArtifacts.length > 0 && (
-          <div className="linked-files-preview">
-            <div className="linked-files-header">
-              <span>Demo-Associated Files Linked to Concepts:</span>
-            </div>
-            <div className="linked-files-list">
+          <div className="linked-files-drawer">
+            <span className="linked-drawer-title">Demo-Associated Concrete Files:</span>
+            <div className="linked-drawer-list">
               {context.linkedArtifacts.map((file) => (
-                <div key={file.id} className="linked-file-item">
-                  <span className="file-name">{file.name}</span>
-                  <span className="file-meta">
-                    ({file.size}) ➔ tied to <em>{file.conceptRef}</em>
-                  </span>
+                <div key={file.id} className="linked-drawer-item">
+                  <span className="file-code-name">{file.name}</span>
+                  <span className="file-code-meta">({file.size}) ➔ fulfills <em>{file.conceptRef}</em></span>
                 </div>
               ))}
             </div>
@@ -307,20 +354,20 @@ export const ContextAnalysisScreen: React.FC<ContextAnalysisScreenProps> = ({
         )}
       </div>
 
-      {/* Primary Transition CTAs */}
-      <div className="analysis-navigation-footer">
-        <button 
-          className="nav-cta-btn secondary"
+      {/* Navigation Transitions */}
+      <div className="analysis-actions-grid">
+        <button
+          className="stitch-btn secondary"
           onClick={() => onNavigate('graph')}
         >
-          <Network size={16} />
-          <span>Inspect Context Graph</span>
+          <span className="material-symbols-outlined text-[16px]">hub</span>
+          <span>Inspect Semantic Graph</span>
         </button>
-        <button 
-          className="nav-cta-btn primary"
+        <button
+          className="stitch-btn primary"
           onClick={() => onNavigate('dossier')}
         >
-          <FileCheck size={16} />
+          <span className="material-symbols-outlined text-[16px]">verified</span>
           <span>Open Context Dossier</span>
         </button>
       </div>

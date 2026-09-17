@@ -11,11 +11,9 @@ import { Header } from './components/Header';
 import { Navigation } from './components/Navigation';
 import { HomeScreen } from './components/screens/HomeScreen';
 import { ConversationInputScreen } from './components/screens/ConversationInputScreen';
-import { CaptureScreen } from './components/screens/CaptureScreen';
 import { ContextAnalysisScreen } from './components/screens/ContextAnalysisScreen';
 import { ContextGraphScreen } from './components/screens/ContextGraphScreen';
 import { ContextDossierScreen } from './components/screens/ContextDossierScreen';
-import { Smartphone, Monitor } from 'lucide-react';
 import './App.css';
 
 export const App: React.FC = () => {
@@ -68,28 +66,21 @@ export const App: React.FC = () => {
 
   return (
     <div className={`app-root ${isMobileWrapper ? 'has-device-frame' : 'full-viewport'}`}>
-      {/* Device frame preview toggle bar */}
+      {/* Top Preview Bar (Mobile Simulator / Responsive Toggle) */}
       <div className="preview-mode-bar">
         <div className="preview-mode-info">
-          <span className="prototype-pill">Screening Prototype</span>
-          <span className="mode-text">Mobile-First Personal Context Engine</span>
+          <span className="prototype-pill">Stitch Lumina</span>
+          <span className="mode-text">Context Guardian Mobile Prototype</span>
         </div>
         <button
           className="viewport-toggle-btn"
           onClick={() => setIsMobileWrapper(!isMobileWrapper)}
           title="Toggle Mobile Simulator / Full Layout"
         >
-          {isMobileWrapper ? (
-            <>
-              <Monitor size={14} />
-              <span>Full View</span>
-            </>
-          ) : (
-            <>
-              <Smartphone size={14} />
-              <span>Mobile Frame</span>
-            </>
-          )}
+          <span className="material-symbols-outlined text-[15px]">
+            {isMobileWrapper ? 'desktop_windows' : 'smartphone'}
+          </span>
+          <span>{isMobileWrapper ? 'Full View' : 'Mobile Frame'}</span>
         </button>
       </div>
 
@@ -121,13 +112,6 @@ export const App: React.FC = () => {
 
               {currentScreen === 'input' && (
                 <ConversationInputScreen
-                  onContextExtracted={handleContextExtracted}
-                  onNavigate={setCurrentScreen}
-                />
-              )}
-
-              {currentScreen === 'capture' && (
-                <CaptureScreen
                   onContextExtracted={handleContextExtracted}
                   onNavigate={setCurrentScreen}
                 />

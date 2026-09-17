@@ -1,45 +1,70 @@
-/* Design System & Base Variables */
+/* Obsidian Lumina Design System - Context Guardian */
 :root {
-  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-label: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Color Palette - Deep Slate / Midnight Cyber */
-  --bg-app: #090d16;
-  --bg-surface: #0f172a;
-  --bg-surface-elevated: #1e293b;
-  --bg-card: rgba(15, 23, 42, 0.85);
-  --bg-card-hover: rgba(30, 41, 59, 0.9);
+  /* Stitch Obsidian Lumina Theme Tokens */
+  --bg-app: #0a0e16;
+  --surface: #0f131c;
+  --surface-dim: #0f131c;
+  --surface-bright: #353942;
+  --surface-container-lowest: #0a0e16;
+  --surface-container-low: #181c24;
+  --surface-container: #1c2028;
+  --surface-container-high: #262a33;
+  --surface-container-highest: #31353e;
   
-  /* Primary & Accents */
-  --primary: #3b82f6;
-  --primary-glow: rgba(59, 130, 246, 0.25);
-  --accent-purple: #8b5cf6;
-  --accent-teal: #14b8a6;
-  --accent-rose: #f43f5e;
-  --accent-amber: #f59e0b;
-  --accent-emerald: #10b981;
+  /* Text & Outline */
+  --on-surface: #dfe2ee;
+  --on-surface-variant: #c7c4d7;
+  --on-background: #dfe2ee;
+  --outline: #908fa0;
+  --outline-variant: #464554;
 
-  /* Text colors */
-  --text-main: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  /* Core Signals */
+  --primary: #c0c1ff;
+  --primary-glow: rgba(192, 193, 255, 0.35);
+  --primary-container: #8083ff;
+  --on-primary: #1000a9;
+  --on-primary-container: #0d0096;
+  --primary-fixed: #e1e0ff;
 
-  /* Borders & Glass */
-  --border-subtle: rgba(148, 163, 184, 0.12);
-  --border-highlight: rgba(148, 163, 184, 0.25);
-  --glass-bg: rgba(15, 23, 42, 0.7);
-  --glass-blur: blur(16px);
+  --secondary: #4cd7f6;
+  --secondary-container: #03b5d3;
+  --on-secondary: #003640;
+  --on-secondary-container: #00424e;
+  --secondary-fixed: #acedff;
+
+  --tertiary: #4edea3;
+  --tertiary-container: #00885d;
+  --on-tertiary: #003824;
+  --on-tertiary-container: #000703;
+  --tertiary-fixed: #6ffbbe;
+
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+
+  /* Glassmorphism & Depth */
   --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-border-bright: 1px solid rgba(192, 193, 255, 0.25);
+  --glass-blur: blur(24px);
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.2);
+  /* Elevation Shadows */
+  --shadow-active: 0 0 24px -4px rgba(128, 131, 255, 0.4);
+  --shadow-protected: 0 0 24px -4px rgba(78, 222, 163, 0.35);
+  --shadow-cyan: 0 0 20px -4px rgba(76, 215, 246, 0.4);
+  --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.45);
 
-  /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --margin: 20px;
 }
 
 *, *::before, *::after {
@@ -51,9 +76,9 @@
 html, body {
   width: 100%;
   height: 100%;
-  background-color: #050811;
-  color: var(--text-main);
-  font-family: var(--font-main);
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -65,30 +90,39 @@ html, body {
   flex-direction: column;
 }
 
+/* Material Symbols alignment helper */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.2);
-  border-radius: 999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.4);
+  display: none;
 }
 
 button {
-  font-family: var(--font-main);
+  font-family: var(--font-display);
   cursor: pointer;
   border: none;
   background: none;
-  transition: all var(--transition-fast);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+button:active {
+  transform: scale(0.97);
 }
 
 input, textarea, select {
-  font-family: var(--font-main);
+  font-family: var(--font-body);
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Home, MessageSquarePlus, Image as ImageIcon, Cpu, Network, FileCheck } from 'lucide-react';
 import { ScreenType } from '../types/context';
 
 interface NavigationProps {
@@ -14,33 +13,31 @@ export const Navigation: React.FC<NavigationProps> = ({
   hasActiveContext,
 }) => {
   const navItems = [
-    { id: 'home' as ScreenType, label: 'Home', icon: Home, enabled: true },
-    { id: 'input' as ScreenType, label: 'Input', icon: MessageSquarePlus, enabled: true },
-    { id: 'capture' as ScreenType, label: 'Capture', icon: ImageIcon, enabled: true },
-    { id: 'analysis' as ScreenType, label: 'Analysis', icon: Cpu, enabled: hasActiveContext },
-    { id: 'graph' as ScreenType, label: 'Graph', icon: Network, enabled: hasActiveContext },
-    { id: 'dossier' as ScreenType, label: 'Dossier', icon: FileCheck, enabled: hasActiveContext },
+    { id: 'home' as ScreenType, label: 'Home', icon: 'home', enabled: true },
+    { id: 'input' as ScreenType, label: 'Ingest', icon: 'chat_bubble', enabled: true },
+    { id: 'analysis' as ScreenType, label: 'Analysis', icon: 'psychology', enabled: hasActiveContext },
+    { id: 'graph' as ScreenType, label: 'Graph', icon: 'hub', enabled: hasActiveContext },
+    { id: 'dossier' as ScreenType, label: 'Dossier', icon: 'verified', enabled: hasActiveContext },
   ];
 
   return (
-    <nav className="bottom-nav">
-      <div className="nav-items-container">
+    <nav className="stitch-bottom-nav">
+      <div className="nav-bar-dock">
         {navItems.map((item) => {
-          const Icon = item.icon;
           const isActive = currentScreen === item.id;
           return (
             <button
               key={item.id}
-              className={`nav-btn ${isActive ? 'active' : ''} ${!item.enabled ? 'disabled' : ''}`}
+              className={`stitch-nav-item ${isActive ? 'active' : ''} ${!item.enabled ? 'disabled' : ''}`}
               onClick={() => item.enabled && onNavigate(item.id)}
               disabled={!item.enabled}
               title={item.enabled ? item.label : 'Select or extract a context first'}
             >
-              <div className="nav-icon-wrapper">
-                <Icon size={19} />
+              <div className="icon-halo">
+                <span className="material-symbols-outlined nav-icon">{item.icon}</span>
               </div>
               <span className="nav-label">{item.label}</span>
-              {isActive && <span className="nav-indicator"></span>}
+              {isActive && <span className="active-dot"></span>}
             </button>
           );
         })}

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-fixed": "#002113", "surface-container-lowest": "#0a0e16", "on-surface": "#dfe2ee", "primary-fixed": "#e1e0ff", "surface-variant": "#31353e", "inverse-on-surface": "#2c3039", "on-background": "#dfe2ee", "error": "#ffb4ab", "surface-container-high": "#262a33", "on-error-container": "#ffdad6", "on-primary": "#1000a9", "inverse-primary": "#494bd6", "on-secondary-container": "#00424e", "error-container": "#93000a", "surface-container-low": "#181c24", "on-secondary": "#003640", "primary-fixed-dim": "#c0c1ff", "surface-container": "#1c2028", "on-tertiary-container": "#000703", "on-error": "#690005", "on-secondary-fixed": "#001f26", "surface-container-highest": "#31353e", "secondary-container": "#03b5d3", "outline": "#908fa0", "secondary-fixed-dim": "#4cd7f6", "secondary": "#4cd7f6", "on-tertiary-fixed-variant": "#005236", "on-primary-fixed-variant": "#2f2ebe", "primary": "#c0c1ff", "on-tertiary": "#003824", "primary-container": "#8083ff", "on-surface-variant": "#c7c4d7", "background": "#0f131c", "tertiary-fixed-dim": "#4edea3", "on-primary-container": "#0d0096", "on-primary-fixed": "#07006c", "outline-variant": "#464554", "tertiary": "#4edea3", "surface": "#0f131c", "inverse-surface": "#dfe2ee", "secondary-fixed": "#acedff", "tertiary-fixed": "#6ffbbe", "surface-dim": "#0f131c", "surface-bright": "#353942", "tertiary-container": "#00885d", "on-secondary-fixed-variant": "#004e5c", "surface-tint": "#c0c1ff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xl": "2rem", "margin": "1.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter": "1rem", "space-xs": "0.25rem" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-md": ["Inter"], "label-sm": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-mono": ["Inter"], "headline-xl-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-sm": ["17px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-mono": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-primary selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="px-margin h-16 flex items-center justify-between"><div class="flex items-center gap-space-sm"><button class="w-11 h-11 -ml-2 flex items-center justify-center text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span></button><div class="flex items-center gap-space-xs"><img alt="Context Guardian Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X292ul_a0IrImCLxPW3Jn-1pFtGgwl37YRIViQ7PUsZJ7F1gF7ycPytCQIuHCR9LKtQvpi1iGdKU73j3rIWUQ2JNxfwR-eOpzFx7DcyDfUGS1Ys6SmoUxbqpruI2-Wi6JFqya7l3OZGiZw_cMKi3zIqZIzPnf9pAR1mDdbX9b-chfSjmwfZOFV2ukEWeHUISiu5w3Y7PMBdDhXEvOfQ6wD6CMdSxgAmdYJTtgAw2WXQOwITh0-8ozA5w"/><h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Dossier Detail</h1></div></div><div class="flex items-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_12px_rgba(192,193,255,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAThIoyY6nPP5XgG79LaipsThsTcEoX-RGOG15rfbuBhhpp4RbPmvfhveMX7k-5kO1NKp2Z-yQqoDYUfnHiszxs7aE6Nhal8dm8O_abTUzSC5Er35EtMk7LcuEBi0VsQR7A9XOYzmzTTQbLwaaGHivz26p1DK39Kz0ZMjqCDJ1C9oYPkro7-vIZWXGSCithdeIzYpkfyOQqNDXYSOVJiEjsfxL9NWMT4MnNczyjObW0GwvHSClbniMr"/></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface"><div class="flex flex-col w-full px-margin pb-32 space-y-space-lg relative overflow-hidden">
+<!-- Ambient Atmospheric Radar Glows inspired by brand emblem -->
+<div class="absolute -top-12 -right-16 w-80 h-80 rounded-full bg-primary/10 blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-96 -left-20 w-72 h-72 rounded-full bg-secondary-container/10 blur-3xl pointer-events-none -z-10"></div>
+<!-- Meta Header Bar -->
+<div class="flex items-center justify-between pt-space-md">
+<div class="flex items-center space-x-space-xs">
+<div class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-surface-container-high shadow-inner">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-mono text-label-mono text-tertiary tracking-widest uppercase font-semibold">DOSSIER #CG-8942</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-error-container/40 text-error font-label-sm text-label-sm">P1 Critical</span>
+</div>
+<div class="flex items-center space-x-space-xs">
+<button class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center justify-center transition-all active:scale-95 shadow-sm" id="shareBtn">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+<button class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center justify-center transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Executive Synthesis Hero Card (Glassmorphic Radar Core) -->
+<div class="relative w-full rounded-3xl bg-surface-container/85 backdrop-blur-2xl p-space-lg shadow-xl shadow-surface-container-lowest/60 overflow-hidden">
+<!-- Stylized Background Radar Rings SVG -->
+<div class="absolute right-0 top-0 translate-x-8 -translate-y-8 pointer-events-none opacity-25">
+<svg class="animate-spin" fill="none" height="180" style="animation-duration: 40s;" viewbox="0 0 200 200" width="180">
+<circle cx="100" cy="100" r="85" stroke="#c0c1ff" stroke-dasharray="6 8" stroke-width="1.5"></circle>
+<circle cx="100" cy="100" r="55" stroke="#4cd7f6" stroke-dasharray="80 120" stroke-linecap="round" stroke-width="2"></circle>
+<circle cx="100" cy="100" r="30" stroke="#8083ff" stroke-width="1.5"></circle>
+<circle cx="140" cy="100" fill="#4cd7f6" r="6"></circle>
+<circle cx="75" cy="65" fill="#c0c1ff" r="4.5"></circle>
+</svg>
+</div>
+<!-- Precision Context Badge -->
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center space-x-space-xs px-2.5 py-1 rounded-full bg-tertiary-container/30">
+<span class="material-symbols-outlined text-tertiary text-[15px]">verified</span>
+<span class="font-label-mono text-label-mono text-tertiary font-bold tracking-wider">98% PRECISION</span>
+</div>
+<div class="flex items-center space-x-1.5 font-label-mono text-label-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[14px]">sync_saved_locally</span>
+<span>3 STREAMS SYNCED</span>
+</div>
+</div>
+<!-- Executive Synthesis Callout -->
+<div class="relative z-10 space-y-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-semibold">Executive Synthesis</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug tracking-tight">
+        “Rahul asked you to bring the <span class="text-primary underline decoration-primary-container decoration-2 underline-offset-4 font-semibold">latest prototype</span> for tomorrow’s project review, with links to related files and the original conversation.”
+      </h2>
+</div>
+<!-- Visual Spark Divider -->
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-label-mono text-label-mono">
+<span class="flex items-center space-x-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Neural extraction active</span>
+</span>
+<span>T-MINUS 21h 14m</span>
+</div>
+</div>
+<!-- Core Metadata Matrix Bento -->
+<div class="grid grid-cols-1 gap-space-sm">
+<!-- Actor Card -->
+<div class="p-space-md rounded-2xl bg-surface-container-high/60 backdrop-blur-xl shadow-md flex items-center justify-between">
+<div class="flex items-center space-x-space-md min-w-0">
+<div class="relative flex-shrink-0">
+<img class="w-12 h-12 rounded-2xl object-cover shadow-sm" data-alt="A portrait of Rahul, a thoughtful tech design lead in his early 30s with wire-rimmed glasses and dark hair, soft studio key light with slate and indigo mood tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLfdAehTBsuyEdHz0zK_Fh-z_eoW3NhtJh7KGYZY1a2NlSNNlpKJwZ5BkNkUKB3tDHuQQHw_0SaBjgXwHO3vSHBTlbddEDrO-YbaqnCJ9LUdR0hD0bsm6wA6IRyfNl3ld9aRXWoBKhUQVzQB6M5Xfr-q2uabJfBwKP5qKZVPgkPl_JpjsBvhz-5WqgQtzJbjS2dDArYR7kutwLIWPThcxBZz5k66RE6_wgR4I04JeovSnWZ9uuZ5go"/>
+<span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center space-x-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Rahul S.</h3>
+<span class="px-2 py-0.5 rounded-md bg-surface-variant font-label-mono text-label-mono text-on-surface-variant">Design Lead</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center space-x-1 pt-0.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary">headphones</span>
+<span>Slack status: “In deep work”</span>
+</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface hover:text-primary transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</button>
+</div>
+<!-- Dual Metric Cards: Purpose & Critical Deadline -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-md rounded-2xl bg-surface-container-high/60 backdrop-blur-xl shadow-md flex flex-col justify-between">
+<div class="flex items-center space-x-space-xs text-primary">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-on-surface-variant">Purpose</span>
+</div>
+<div class="mt-space-sm">
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Project Review</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant truncate">Q3 Design Architecture</div>
+</div>
+</div>
+<div class="p-space-md rounded-2xl bg-surface-container-high/60 backdrop-blur-xl shadow-md flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-space-xs text-secondary">
+<span class="material-symbols-outlined text-[18px]">alarm</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-on-surface-variant">Deadline</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
+</div>
+<div class="mt-space-sm">
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold">Tomorrow 5:00 PM</div>
+<div class="inline-flex items-center mt-1 px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-mono text-label-mono font-medium">
+            In 21 hours
+          </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions & Deliverables Checklist -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">checklist</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Required Actions</h3>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary bg-tertiary-container/20 px-2 py-0.5 rounded-full" id="taskCounter">0 of 2 complete</span>
+</div>
+<div class="space-y-space-xs">
+<!-- Item 1 -->
+<div class="group relative flex items-start justify-between p-space-md rounded-2xl bg-surface-container/70 backdrop-blur-md shadow-sm transition-all duration-200 hover:bg-surface-container-high/80" id="task-1">
+<div class="flex items-start space-x-space-md min-w-0">
+<button aria-label="Toggle task" class="mt-0.5 w-6 h-6 rounded-lg bg-surface-variant flex items-center justify-center transition-all group-hover:scale-105 active:scale-90" onclick="toggleCheck('task-1', 'check-icon-1')">
+<span class="material-symbols-outlined text-[16px] text-transparent transition-colors" id="check-icon-1">check</span>
+</button>
+<div class="min-w-0">
+<div class="flex items-center space-x-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface select-none task-title">Bring latest prototype</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container/30 text-error font-label-mono text-label-mono uppercase">#high-priority</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Validate gesture micro-interactions on hardware device.</p>
+</div>
+</div>
+<button class="ml-2 px-3 py-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-label-sm text-label-sm whitespace-nowrap transition-all flex items-center space-x-1 flex-shrink-0" onclick="stageDevice(this)">
+<span class="material-symbols-outlined text-[14px]">tablet_mac</span>
+<span>Stage to iPad</span>
+</button>
+</div>
+<!-- Item 2 -->
+<div class="group relative flex items-start justify-between p-space-md rounded-2xl bg-surface-container/70 backdrop-blur-md shadow-sm transition-all duration-200 hover:bg-surface-container-high/80" id="task-2">
+<div class="flex items-start space-x-space-md min-w-0">
+<button aria-label="Toggle task" class="mt-0.5 w-6 h-6 rounded-lg bg-surface-variant flex items-center justify-center transition-all group-hover:scale-105 active:scale-90" onclick="toggleCheck('task-2', 'check-icon-2')">
+<span class="material-symbols-outlined text-[16px] text-transparent transition-colors" id="check-icon-2">check</span>
+</button>
+<div class="min-w-0">
+<div class="flex items-center space-x-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface select-none task-title">Update architecture slides</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-mono text-label-mono uppercase">#deck</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Reflect low-latency websocket pipeline revisions.</p>
+</div>
+</div>
+<button class="ml-2 px-3 py-1.5 rounded-xl bg-surface-variant hover:bg-surface-bright text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-all flex items-center space-x-1 flex-shrink-0">
+<span class="material-symbols-outlined text-[14px]">slideshow</span>
+<span>Open Keynote</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Associated Artifacts Section -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">attachment</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Synchronized Artifacts</h3>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface-variant">2 files verified</span>
+</div>
+<div class="grid grid-cols-1 gap-space-sm">
+<!-- Artifact 1 -->
+<div class="p-space-md rounded-2xl bg-surface-container/70 backdrop-blur-md shadow-md flex items-center justify-between">
+<div class="flex items-center space-x-space-md min-w-0">
+<div class="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">folder_zip</span>
+</div>
+<div class="min-w-0">
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">prototype-v3.zip</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center space-x-2">
+<span>14.2 MB</span>
+<span>•</span>
+<span class="text-primary-fixed-dim">Figma Export build 3.4.1</span>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-1">
+<button class="w-9 h-9 rounded-xl bg-surface-variant hover:bg-surface-bright text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="w-9 h-9 rounded-xl bg-surface-variant hover:bg-surface-bright text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+</div>
+</div>
+<!-- Artifact 2 -->
+<div class="p-space-md rounded-2xl bg-surface-container/70 backdrop-blur-md shadow-md flex items-center justify-between">
+<div class="flex items-center space-x-space-md min-w-0">
+<div class="w-11 h-11 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">co_present</span>
+</div>
+<div class="min-w-0">
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">architecture.pptx</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center space-x-2">
+<span>8.7 MB</span>
+<span>•</span>
+<span class="text-secondary-fixed-dim">Master Deck v2.2</span>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-1">
+<button class="w-9 h-9 rounded-xl bg-surface-variant hover:bg-surface-bright text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-9 h-9 rounded-xl bg-surface-variant hover:bg-surface-bright text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Source Provenance Section -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[20px]">bubble_chart</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Source Provenance</h3>
+</div>
+<div class="flex items-center space-x-1 font-label-mono text-label-mono text-tertiary">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>Cryptographically verified</span>
+</div>
+</div>
+<!-- Chat Message Bubble Preview -->
+<div class="p-space-md rounded-2xl bg-surface-container-low backdrop-blur-sm space-y-space-sm shadow-inner">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-space-xs">
+<div class="w-5 h-5 rounded-md bg-[#4A154B] flex items-center justify-center text-white text-[10px] font-bold">#</div>
+<span class="font-label-mono text-label-mono text-on-surface">#core-design-review</span>
+<span class="font-label-mono text-label-mono text-outline">• Yesterday, 4:42 PM</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant font-label-mono text-label-mono">Original Source</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-high/80 text-on-surface space-y-space-xs">
+<div class="flex items-center space-x-space-xs">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">Rahul</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">Slack DM / Project Channel</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+          “Hey Alex, please bring the latest prototype for tomorrow’s 5pm project review! Also let’s update the architecture slides beforehand.”
+        </p>
+</div>
+<!-- Calendar Sync Pill -->
+<div class="flex items-center justify-between px-3 py-2 rounded-xl bg-surface-container-highest/60 text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center space-x-space-xs">
+<span class="material-symbols-outlined text-secondary text-[16px]">event_available</span>
+<span class="text-on-surface">Design Review</span>
+<span class="text-outline">@ Conf Room C &amp; Google Meet</span>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary">Cal synced</span>
+</div>
+</div>
+</div>
+<!-- Floating Sticky Action Deck -->
+<div class="fixed bottom-4 left-0 right-0 max-w-[640px] mx-auto px-margin z-40 pointer-events-none">
+<div class="pointer-events-auto p-2 rounded-2xl bg-surface-container-high/90 backdrop-blur-2xl shadow-2xl shadow-surface-container-lowest/90 flex items-center space-x-space-xs">
+<button class="flex-1 py-3 px-4 rounded-xl bg-surface-variant hover:bg-surface-bright text-on-surface font-label-md text-label-md flex items-center justify-center space-x-1.5 transition-all active:scale-95 shadow-sm" id="snoozeBtn">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">schedule</span>
+<span>Snooze (4 PM)</span>
+</button>
+<button class="flex-[1.4] py-3 px-4 rounded-xl bg-gradient-to-r from-primary-container via-primary to-secondary text-on-primary-container font-label-md text-label-md font-semibold flex items-center justify-center space-x-2 transition-all active:scale-95 shadow-lg shadow-primary-container/30" id="completeBtn" onclick="markAllComplete()">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>Mark Context Prepared</span>
+</button>
+</div>
+</div>
+<!-- Micro Interaction Toast Slot -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-surface-bright text-on-surface shadow-2xl font-label-sm text-label-sm opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center space-x-2" id="toast">
+<span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span>
+<span id="toastMsg">Context state updated</span>
+</div>
+</div>
+<script>
+  let completedTasks = 0;
+  const totalTasks = 2;
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    toastMsg.textContent = msg;
+    toast.classList.remove('opacity-0', 'translate-y-2');
+    toast.classList.add('opacity-100', 'translate-y-0');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100', 'translate-y-0');
+      toast.classList.add('opacity-0', 'translate-y-2');
+    }, 2400);
+  }
+
+  function toggleCheck(taskId, iconId) {
+    const card = document.getElementById(taskId);
+    const icon = document.getElementById(iconId);
+    const title = card.querySelector('.task-title');
+    const isChecked = icon.classList.contains('text-tertiary');
+
+    if (!isChecked) {
+      icon.classList.remove('text-transparent');
+      icon.classList.add('text-tertiary');
+      title.classList.add('line-through', 'text-on-surface-variant');
+      card.classList.add('opacity-75');
+      completedTasks++;
+    } else {
+      icon.classList.add('text-transparent');
+      icon.classList.remove('text-tertiary');
+      title.classList.remove('line-through', 'text-on-surface-variant');
+      card.classList.remove('opacity-75');
+      completedTasks--;
+    }
+
+    document.getElementById('taskCounter').textContent = `${completedTasks} of ${totalTasks} complete`;
+    if (completedTasks === totalTasks) {
+      showToast('All deliverables staged & verified!');
+    }
+  }
+
+  function stageDevice(btn) {
+    btn.innerHTML = '<span class="material-symbols-outlined text-[14px] animate-spin">sync</span><span>Staging...</span>';
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[14px] text-tertiary">done</span><span>Staged</span>';
+      btn.classList.remove('text-primary');
+      btn.classList.add('text-tertiary');
+      showToast('Prototype pushed to iPad Pro (Studio)');
+    }, 900);
+  }
+
+  function markAllComplete() {
+    const icon1 = document.getElementById('check-icon-1');
+    const icon2 = document.getElementById('check-icon-2');
+    if (icon1.classList.contains('text-transparent')) toggleCheck('task-1', 'check-icon-1');
+    if (icon2.classList.contains('text-transparent')) toggleCheck('task-2', 'check-icon-2');
+    
+    const completeBtn = document.getElementById('completeBtn');
+    completeBtn.classList.replace('from-primary-container', 'from-tertiary-container');
+    completeBtn.classList.replace('to-secondary', 'to-tertiary');
+    completeBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">task_alt</span><span>Guardian Vigilant</span>';
+    showToast('Dossier #CG-8942 archived to active focus!');
+  }
+
+  document.getElementById('snoozeBtn').addEventListener('click', () => {
+    showToast('Context snooze set for 4:00 PM tomorrow');
+  });
+
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    showToast('Encrypted dossier link copied to clipboard');
+  });
+</script></main></body></html>

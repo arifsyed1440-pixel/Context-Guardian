@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-fixed": "#002113", "surface-container-lowest": "#0a0e16", "on-surface": "#dfe2ee", "primary-fixed": "#e1e0ff", "surface-variant": "#31353e", "inverse-on-surface": "#2c3039", "on-background": "#dfe2ee", "error": "#ffb4ab", "surface-container-high": "#262a33", "on-error-container": "#ffdad6", "on-primary": "#1000a9", "inverse-primary": "#494bd6", "on-secondary-container": "#00424e", "error-container": "#93000a", "surface-container-low": "#181c24", "on-secondary": "#003640", "primary-fixed-dim": "#c0c1ff", "surface-container": "#1c2028", "on-tertiary-container": "#000703", "on-error": "#690005", "on-secondary-fixed": "#001f26", "surface-container-highest": "#31353e", "secondary-container": "#03b5d3", "outline": "#908fa0", "secondary-fixed-dim": "#4cd7f6", "secondary": "#4cd7f6", "on-tertiary-fixed-variant": "#005236", "on-primary-fixed-variant": "#2f2ebe", "primary": "#c0c1ff", "on-tertiary": "#003824", "primary-container": "#8083ff", "on-surface-variant": "#c7c4d7", "background": "#0f131c", "tertiary-fixed-dim": "#4edea3", "on-primary-container": "#0d0096", "on-primary-fixed": "#07006c", "outline-variant": "#464554", "tertiary": "#4edea3", "surface": "#0f131c", "inverse-surface": "#dfe2ee", "secondary-fixed": "#acedff", "tertiary-fixed": "#6ffbbe", "surface-dim": "#0f131c", "surface-bright": "#353942", "tertiary-container": "#00885d", "on-secondary-fixed-variant": "#004e5c", "surface-tint": "#c0c1ff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xl": "2rem", "margin": "1.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter": "1rem", "space-xs": "0.25rem" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-md": ["Inter"], "label-sm": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-mono": ["Inter"], "headline-xl-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-xl": ["34px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-sm": ["17px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-mono": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#0f131c;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-primary selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="px-margin h-16 flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Context Guardian Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X292ul_a0IrImCLxPW3Jn-1pFtGgwl37YRIViQ7PUsZJ7F1gF7ycPytCQIuHCR9LKtQvpi1iGdKU73j3rIWUQ2JNxfwR-eOpzFx7DcyDfUGS1Ys6SmoUxbqpruI2-Wi6JFqya7l3OZGiZw_cMKi3zIqZIzPnf9pAR1mDdbX9b-chfSjmwfZOFV2ukEWeHUISiu5w3Y7PMBdDhXEvOfQ6wD6CMdSxgAmdYJTtgAw2WXQOwITh0-8ozA5w"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Context Guardian</span><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Context Graph</span></div></div><div class="flex items-center"><a class="flex items-center justify-center rounded-full p-space-xs" data-path="profile-settings" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_12px_rgba(192,193,255,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAThIoyY6nPP5XgG79LaipsThsTcEoX-RGOG15rfbuBhhpp4RbPmvfhveMX7k-5kO1NKp2Z-yQqoDYUfnHiszxs7aE6Nhal8dm8O_abTUzSC5Er35EtMk7LcuEBi0VsQR7A9XOYzmzTTQbLwaaGHivz26p1DK39Kz0ZMjqCDJ1C9oYPkro7-vIZWXGSCithdeIzYpkfyOQqNDXYSOVJiEjsfxL9NWMT4MnNczyjObW0GwvHSClbniMr"/></a></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full px-margin space-y-space-md">
+<!-- Subtle Ambient Glows -->
+<div class="relative w-full overflow-hidden">
+<!-- Header Banner -->
+<div class="flex flex-col pt-space-xs pb-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[16px]">bubble_chart</span>
+</span>
+<span class="font-label-mono text-label-mono text-primary uppercase tracking-widest">Neural Topology</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-mono font-label-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span>SYNCED 98.4%</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1 tracking-tight">Context Knowledge Graph</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Visualizing semantic links behind tomorrow's review</p>
+</div>
+<!-- Entity Filter Chips Horizontal Scroll -->
+<div class="flex items-center gap-space-xs overflow-x-auto py-1 -mx-margin px-margin scrollbar-none" id="filterChips">
+<button class="filter-chip active flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all whitespace-nowrap shadow-[0_0_16px_rgba(192,193,255,0.35)]" data-filter="all">
+<span class="material-symbols-outlined text-[14px]">grain</span>
+<span>All Entities</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all whitespace-nowrap" data-filter="people">
+<span class="material-symbols-outlined text-[14px]">account_circle</span>
+<span>People</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all whitespace-nowrap" data-filter="files">
+<span class="material-symbols-outlined text-[14px]">attachment</span>
+<span>Files</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all whitespace-nowrap" data-filter="conversations">
+<span class="material-symbols-outlined text-[14px]">forum</span>
+<span>Conversations</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-all whitespace-nowrap" data-filter="temporal">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Temporal</span>
+</button>
+</div>
+<!-- Central Interactive Graph Canvas -->
+<div class="relative w-full h-[370px] mt-space-sm rounded-2xl bg-surface-container-lowest overflow-hidden select-none shadow-[inset_0_0_40px_rgba(0,0,0,0.6)]">
+<!-- Ambient Backlit Gradients -->
+<div class="absolute -top-16 -left-16 w-52 h-52 rounded-full bg-primary/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-16 -right-16 w-56 h-56 rounded-full bg-secondary-container/10 blur-3xl pointer-events-none"></div>
+<!-- Grid Coordinates Background -->
+<div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, #c0c1ff 1px, transparent 0); background-size: 24px 24px;"></div>
+<!-- SVG Neural Stream Connections -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 360 370">
+<defs>
+<lineargradient id="grad-indigo-cyan" x1="50%" x2="20%" y1="50%" y2="20%">
+<stop offset="0%" stop-color="#c0c1ff" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#4cd7f6" stop-opacity="0.4"></stop>
+</lineargradient>
+<lineargradient id="grad-indigo-violet" x1="50%" x2="80%" y1="50%" y2="20%">
+<stop offset="0%" stop-color="#c0c1ff" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#8083ff" stop-opacity="0.6"></stop>
+</lineargradient>
+<lineargradient id="grad-indigo-emerald" x1="50%" x2="25%" y1="50%" y2="80%">
+<stop offset="0%" stop-color="#c0c1ff" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#4edea3" stop-opacity="0.4"></stop>
+</lineargradient>
+<lineargradient id="grad-indigo-amber" x1="50%" x2="78%" y1="50%" y2="78%">
+<stop offset="0%" stop-color="#c0c1ff" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#4cd7f6" stop-opacity="0.5"></stop>
+</lineargradient>
+<filter height="140%" id="glow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<!-- Vectors from Center (180, 185) to Satellite Nodes -->
+<!-- Link to Rahul (68, 70) -->
+<path class="animate-pulse" d="M180,185 C140,150 100,105 68,70" fill="none" stroke="url(#grad-indigo-cyan)" stroke-dasharray="4,4" stroke-width="1.75"></path>
+<!-- Link to Action 1 (290, 68) -->
+<path d="M180,185 C225,145 260,105 290,68" fill="none" stroke="url(#grad-indigo-violet)" stroke-width="2"></path>
+<!-- Sublink from Action 1 to prototype-v3.zip (305, 125) -->
+<path d="M290,68 Q315,95 305,125" fill="none" opacity="0.85" stroke="#4cd7f6" stroke-dasharray="3,3" stroke-width="1.5"></path>
+<!-- Link to Calendar Room C (75, 295) -->
+<path d="M180,185 C135,225 105,260 75,295" fill="none" stroke="url(#grad-indigo-emerald)" stroke-dasharray="4,4" stroke-width="1.75"></path>
+<!-- Link to Action 2 Architecture (275, 290) -->
+<path d="M180,185 C220,225 250,260 275,290" fill="none" stroke="url(#grad-indigo-amber)" stroke-width="1.75"></path>
+<!-- Sublink from Action 2 to architecture.pptx (295, 230) -->
+<path d="M275,290 Q298,260 295,230" fill="none" opacity="0.8" stroke="#8083ff" stroke-dasharray="3,3" stroke-width="1.5"></path>
+</svg>
+<!-- Center Master Node: Project Review -->
+<div class="node-item absolute top-[185px] left-[180px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer z-20 group" data-node="master">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-20 h-20 rounded-full bg-primary/20 animate-ping opacity-70"></div>
+<div class="absolute w-16 h-16 rounded-full bg-primary/30 blur-md"></div>
+<div class="relative w-12 h-12 rounded-full bg-gradient-to-br from-primary-container to-primary flex items-center justify-center text-on-primary shadow-[0_0_24px_rgba(192,193,255,0.7)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+</div>
+<div class="mt-2 text-center pointer-events-none">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-highest/90 backdrop-blur-md text-primary font-headline-sm text-headline-sm leading-tight drop-shadow-md whitespace-nowrap">Project Review</span>
+<span class="block font-label-mono text-label-mono text-on-surface-variant/90">Tomorrow 5:00 PM</span>
+</div>
+</div>
+<!-- Node 1: Rahul (Actor) -->
+<div class="node-item absolute top-[70px] left-[68px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer z-10 group" data-node="rahul">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-10 h-10 rounded-full bg-secondary/25 blur-sm"></div>
+<div class="relative w-9 h-9 rounded-full bg-surface-container-high border-0 flex items-center justify-center text-secondary shadow-[0_0_16px_rgba(76,215,246,0.5)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+<div class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-tertiary border-2 border-surface-container-lowest"></div>
+</div>
+<div class="mt-1.5 text-center pointer-events-none">
+<span class="block font-label-md text-label-md text-on-surface font-semibold whitespace-nowrap">Rahul</span>
+<span class="block font-label-mono text-label-mono text-secondary">Lead • Slack</span>
+</div>
+</div>
+<!-- Node 2: Action: Bring Prototype -->
+<div class="node-item absolute top-[68px] left-[290px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer z-10 group" data-node="action-proto">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-10 h-10 rounded-full bg-primary-container/30 blur-sm"></div>
+<div class="relative w-9 h-9 rounded-full bg-primary-container flex items-center justify-center text-on-primary shadow-[0_0_16px_rgba(128,131,255,0.6)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+</div>
+</div>
+<div class="mt-1 text-center pointer-events-none">
+<span class="block font-label-md text-label-md text-on-surface font-medium whitespace-nowrap">Bring Prototype</span>
+<span class="block font-label-mono text-label-mono text-primary">Required Action</span>
+</div>
+</div>
+<!-- Satellite Node 2b: prototype-v3.zip (SELECTED DEFAULT) -->
+<div class="node-item selected absolute top-[125px] left-[305px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer z-30 group" data-node="file-proto">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-10 h-10 rounded-full bg-secondary-container/40 animate-ping opacity-60"></div>
+<div class="relative w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-[0_0_20px_rgba(76,215,246,0.8)] ring-2 ring-primary scale-110 group-hover:scale-125 transition-all">
+<span class="material-symbols-outlined text-[16px]">folder_zip</span>
+</div>
+</div>
+<div class="mt-1 text-center pointer-events-none">
+<span class="block font-label-mono text-label-mono text-secondary-fixed bg-surface-container-highest/90 px-1.5 py-0.5 rounded shadow whitespace-nowrap">prototype-v3.zip</span>
+</div>
+</div>
+<!-- Node 3: Action: Update Architecture Slides -->
+<div class="node-item absolute top-[290px] left-[275px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer z-10 group" data-node="action-slides">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-10 h-10 rounded-full bg-secondary-container/25 blur-sm"></div>
+<div class="relative w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-secondary shadow-[0_0_16px_rgba(76,215,246,0.4)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">co_present</span>
+</div>
+</div>
+<div class="mt-1 text-center pointer-events-none">
+<span class="block font-label-md text-label-md text-on-surface font-medium whitespace-nowrap">Arch Slides</span>
+<span class="block font-label-mono text-label-mono text-on-surface-variant">Pending sync</span>
+</div>
+</div>
+<!-- Satellite Node 3b: architecture.pptx -->
+<div class="node-item absolute top-[230px] left-[295px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer z-10 group" data-node="file-arch">
+<div class="relative flex items-center justify-center">
+<div class="relative w-7 h-7 rounded-full bg-surface-container-highest text-primary flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[14px]">description</span>
+</div>
+</div>
+<div class="mt-0.5 text-center pointer-events-none">
+<span class="block font-label-mono text-label-mono text-on-surface-variant whitespace-nowrap">arch.pptx</span>
+</div>
+</div>
+<!-- Node 4: Calendar Conf Room C -->
+<div class="node-item absolute top-[295px] left-[75px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer z-10 group" data-node="calendar-room">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-10 h-10 rounded-full bg-tertiary/20 blur-sm"></div>
+<div class="relative w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-tertiary shadow-[0_0_16px_rgba(78,222,163,0.35)] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[18px]">meeting_room</span>
+</div>
+</div>
+<div class="mt-1 text-center pointer-events-none">
+<span class="block font-label-md text-label-md text-on-surface font-medium whitespace-nowrap">Conf Room C</span>
+<span class="block font-label-mono text-label-mono text-tertiary">Calendar Verified</span>
+</div>
+</div>
+<!-- Floating Canvas Navigation Controls -->
+<div class="absolute top-3 right-3 flex flex-col gap-1.5 z-30">
+<button class="w-8 h-8 rounded-full bg-surface-container/90 backdrop-blur-md text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors shadow-lg active:scale-95" id="btnRecenter" title="Reset View">
+<span class="material-symbols-outlined text-[16px]">filter_center_focus</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container/90 backdrop-blur-md text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors shadow-lg active:scale-95" id="btnRelayout" title="Neural Re-layout">
+<span class="material-symbols-outlined text-[16px]">device_hub</span>
+</button>
+</div>
+<!-- Live Context Strength Legend -->
+<div class="absolute bottom-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container/85 backdrop-blur-md z-30">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">5 Nodes linked • 2 Implicit</span>
+</div>
+</div>
+<!-- Inspector Drawer (Peek Sheet for Selected Entity) -->
+<div class="w-full rounded-2xl bg-surface-container/90 backdrop-blur-2xl p-space-md shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300" id="inspectorDrawer">
+<!-- Sheet Drag Indicator -->
+<div class="w-full flex justify-center -mt-1 mb-2.5">
+<span class="w-10 h-1 rounded-full bg-outline-variant/60"></span>
+</div>
+<!-- Header of Inspector -->
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_16px_rgba(76,215,246,0.25)]">
+<span class="material-symbols-outlined text-[22px]">folder_zip</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate" id="inspectorTitle">prototype-v3.zip</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary font-label-mono text-label-mono" id="inspectorBadge">
+                SHA-256 VERIFIED
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" id="inspectorMeta">
+              14.2 MB • Attached in #design-sprint by <span class="text-secondary font-medium">Rahul</span>
+</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+<!-- Evidence / Grounding Stream Card -->
+<div class="mt-space-md p-space-sm rounded-xl bg-surface-container-lowest/80 flex flex-col space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-outline uppercase tracking-wider">Semantic Provenance</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">Today at 3:14 PM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface italic">
+          “Uploaded the final interactive frames here (<span class="text-primary underline">prototype-v3.zip</span>). Let's walk the VP through this tomorrow at 5:00 PM.”
+        </p>
+<div class="flex items-center justify-between pt-1 font-label-mono text-label-mono">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span>
+<span>Local Cache Ready</span>
+</div>
+<span class="text-primary">Confidence: 99.1%</span>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="grid grid-cols-2 gap-space-xs mt-space-md">
+<button class="flex items-center justify-center gap-1.5 py-2.5 px-space-sm rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-[0_0_20px_rgba(192,193,255,0.4)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">cloud_download</span>
+<span>Download (14.2 MB)</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 py-2.5 px-space-sm rounded-xl bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-bright active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span>Open Slack Origin</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initContextGraphInteractive() {
+    const nodeData = {
+      'file-proto': {
+        title: 'prototype-v3.zip',
+        meta: '14.2 MB • Attached in #design-sprint by Rahul',
+        badge: 'SHA-256 VERIFIED',
+        icon: 'folder_zip',
+        quote: '“Uploaded the final interactive frames here (prototype-v3.zip). Let\'s walk the VP through this tomorrow at 5:00 PM.”',
+        timestamp: 'Today at 3:14 PM',
+        confidence: '99.1%',
+        action1: 'Download (14.2 MB)',
+        icon1: 'cloud_download',
+        action2: 'Open Slack Origin',
+        icon2: 'chat'
+      },
+      'rahul': {
+        title: 'Rahul Sharma',
+        meta: 'Design Lead • Active 12m ago',
+        badge: 'KEY PARTICIPANT',
+        icon: 'person',
+        quote: '“I\'ll present the primary wireflows and hand over the updated components before our 5 PM session.”',
+        timestamp: 'Today at 3:10 PM',
+        confidence: '96.8%',
+        action1: 'Message Rahul',
+        icon1: 'send',
+        action2: 'View Profile',
+        icon2: 'account_box'
+      },
+      'action-proto': {
+        title: 'Bring Latest Prototype',
+        meta: 'Assigned by Review Agenda • Due Tomorrow 5:00 PM',
+        badge: 'HIGH PRIORITY',
+        icon: 'rocket_launch',
+        quote: '“Requirement surfaced from sync meeting note: Ensure offline-ready build is configured on test device.”',
+        timestamp: 'Synced 1h ago',
+        confidence: '98.5%',
+        action1: 'Mark as Ready',
+        icon1: 'done_all',
+        action2: 'View Checklist',
+        icon2: 'checklist'
+      },
+      'calendar-room': {
+        title: 'Conf Room C (Executive Wing)',
+        meta: 'Calendar Event: Tomorrow 5:00 PM – 5:45 PM',
+        badge: 'RESERVED',
+        icon: 'meeting_room',
+        quote: '“Calendar invite confirmed with 6 attendees. Video link and display screen pre-routed for demo.”',
+        timestamp: 'Confirmed 2h ago',
+        confidence: '100%',
+        action1: 'Open Calendar',
+        icon1: 'event',
+        action2: 'Room Directions',
+        icon2: 'near_me'
+      },
+      'action-slides': {
+        title: 'Update Architecture Slides',
+        meta: 'Referenced in Slack by Architecture Guild',
+        badge: 'IN PROGRESS',
+        icon: 'co_present',
+        quote: '“Need 2 updated diagram slides clarifying database write queues for the system review.”',
+        timestamp: 'Today at 1:20 PM',
+        confidence: '94.2%',
+        action1: 'Open Keynote',
+        icon1: 'slideshow',
+        action2: 'Request Update',
+        icon2: 'notification_add'
+      },
+      'file-arch': {
+        title: 'architecture.pptx',
+        meta: '4.8 MB • Google Drive Sync',
+        badge: 'VERSION 2.4',
+        icon: 'description',
+        quote: '“Last modified by Sarah at 11:45 AM. Contains current neural ingress diagram.”',
+        timestamp: 'Modified today',
+        confidence: '95.0%',
+        action1: 'View in Drive',
+        icon1: 'visibility',
+        action2: 'Version History',
+        icon2: 'history'
+      },
+      'master': {
+        title: 'Project Review',
+        meta: 'Epic Node • Tomorrow 5:00 PM • 6 Participants',
+        badge: 'CORE EVENT',
+        icon: 'verified',
+        quote: '“Synthesized milestone: Design readiness, performance bench test results, and rollout clearance.”',
+        timestamp: 'Unified Context',
+        confidence: '99.9%',
+        action1: 'Review Dossier',
+        icon1: 'folder_managed',
+        action2: 'Share Briefing',
+        icon2: 'share'
+      }
+    };
+
+    const nodes = document.querySelectorAll('.node-item');
+    const titleEl = document.getElementById('inspectorTitle');
+    const metaEl = document.getElementById('inspectorMeta');
+    const badgeEl = document.getElementById('inspectorBadge');
+    const drawer = document.getElementById('inspectorDrawer');
+
+    nodes.forEach(node => {
+      node.addEventListener('click', () => {
+        nodes.forEach(n => {
+          n.classList.remove('ring-2', 'ring-primary', 'scale-110');
+          const innerRing = n.querySelector('.ring-2');
+          if (innerRing) innerRing.classList.remove('ring-2', 'ring-primary');
+        });
+
+        node.classList.add('scale-110');
+        const key = node.getAttribute('data-node');
+        const data = nodeData[key];
+
+        if (data && titleEl && metaEl && badgeEl) {
+          titleEl.textContent = data.title;
+          metaEl.innerHTML = data.meta;
+          badgeEl.textContent = data.badge;
+
+          // Tactile peek highlight
+          drawer.classList.add('ring-1', 'ring-primary/40');
+          setTimeout(() => drawer.classList.remove('ring-1', 'ring-primary/40'), 500);
+        }
+      });
+    });
+
+    // Filter Chips Interactive Toggle
+    const filterButtons = document.querySelectorAll('.filter-chip');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary', 'shadow-[0_0_16px_rgba(192,193,255,0.35)]');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        btn.classList.add('bg-primary', 'text-on-primary', 'shadow-[0_0_16px_rgba(192,193,255,0.35)]');
+      });
+    });
+
+    // Control buttons subtle pulse animation
+    const btnRelayout = document.getElementById('btnRelayout');
+    if (btnRelayout) {
+      btnRelayout.addEventListener('click', () => {
+        btnRelayout.classList.add('rotate-180');
+        setTimeout(() => btnRelayout.classList.remove('rotate-180'), 400);
+      });
+    }
+  })();
+</script></main><div class="fixed bottom-0 w-full z-50 pointer-events-none pb-safe"><div class="px-margin pb-space-md pt-space-xs flex justify-center w-full"><nav class="pointer-events-auto flex items-center justify-between w-full max-w-md px-space-sm py-space-xs bg-surface-container/85 backdrop-blur-2xl rounded-full shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]" data-active-classes="text-primary font-semibold drop-shadow-[0_0_8px_rgba(192,193,255,0.45)]"><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="guardian-home" href="#"><span class="material-symbols-outlined text-[22px]">auto_awesome</span><span class="font-label-mono text-label-mono mt-0.5">Home</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] transition-colors text-primary font-semibold drop-shadow-[0_0_8px_rgba(192,193,255,0.45)]" data-path="context-graph" href="#"><span class="material-symbols-outlined text-[22px]">hub</span><span class="font-label-mono text-label-mono mt-0.5">Graph</span></a><div class="flex items-center justify-center -my-3"><a class="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-on-primary shadow-[0_0_24px_-2px_rgba(192,193,255,0.65)] hover:scale-105 active:scale-95 transition-all" data-path="neural-capture" href="#"><span class="material-symbols-outlined text-[24px]">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="dossiers-archive" href="#"><span class="material-symbols-outlined text-[22px]">folder_managed</span><span class="font-label-mono text-label-mono mt-0.5">Dossiers</span></a><a class="flex flex-col items-center justify-center min-w-[48px] min-h-[48px] text-on-surface-variant transition-colors" data-path="stream-comparison" href="#"><span class="material-symbols-outlined text-[22px]">compare_arrows</span><span class="font-label-mono text-label-mono mt-0.5">Compare</span></a></nav></div></div></body></html>

@@ -1,56 +1,58 @@
 import { Node, Edge, MarkerType } from '@xyflow/react';
 import { ContextObject } from '../types/context';
 
+/**
+ * Maps a single ContextObject into React Flow graph nodes and edges
+ * utilizing the Obsidian Lumina visual design system.
+ */
 export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edges: Edge[] } {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
 
-  // Layout coordinates (mobile-friendly vertical/hierarchical flow)
-  // X centers around 200
-  const centerX = 220;
+  const centerX = 200;
 
-  // 1. Actor Node (Level 0)
-  const actorId = 'node-actor';
+  // 1. Center Master Node: Purpose (e.g. Project Review)
+  const purposeId = 'node-purpose';
   nodes.push({
-    id: actorId,
+    id: purposeId,
     type: 'default',
-    position: { x: centerX - 80, y: 30 },
+    position: { x: centerX - 80, y: 160 },
     data: {
-      label: `👤 ${context.actor}\n(Initiator)`
+      label: `🎯 ${context.purpose}\n(${context.temporal.eventTiming || 'Milestone'})`
     },
     style: {
-      background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
-      color: '#ffffff',
-      border: '1px solid #60a5fa',
-      borderRadius: '12px',
-      padding: '10px 16px',
-      fontWeight: 600,
-      fontSize: '13px',
-      boxShadow: '0 8px 20px rgba(59, 130, 246, 0.3)',
+      background: 'linear-gradient(135deg, #262a33 0%, #1c2028 100%)',
+      color: '#c0c1ff',
+      border: '1.5px solid #8083ff',
+      borderRadius: '16px',
+      padding: '12px 16px',
+      fontWeight: 700,
+      fontSize: '12px',
+      boxShadow: '0 0 28px rgba(128, 131, 255, 0.45)',
       width: 160,
       textAlign: 'center'
     }
   });
 
-  // 2. Purpose Node (Level 1, Left)
-  const purposeId = 'node-purpose';
+  // 2. Originator / Actor Node (Level 0, Top-Left)
+  const actorId = 'node-actor';
   nodes.push({
-    id: purposeId,
+    id: actorId,
     type: 'default',
-    position: { x: 30, y: 150 },
+    position: { x: 30, y: 30 },
     data: {
-      label: `🎯 Purpose:\n${context.purpose}`
+      label: `👤 ${context.actor}\n(Originator)`
     },
     style: {
-      background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)',
-      color: '#ffffff',
-      border: '1px solid #a78bfa',
-      borderRadius: '12px',
+      background: 'linear-gradient(135deg, #181c24 0%, #0f131c 100%)',
+      color: '#4cd7f6',
+      border: '1.5px solid #03b5d3',
+      borderRadius: '14px',
       padding: '10px 14px',
       fontWeight: 600,
-      fontSize: '12px',
-      boxShadow: '0 6px 16px rgba(139, 92, 246, 0.25)',
-      width: 150,
+      fontSize: '11.5px',
+      boxShadow: '0 0 20px rgba(76, 215, 246, 0.3)',
+      width: 140,
       textAlign: 'center'
     }
   });
@@ -62,30 +64,31 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
     label: 'initiates for',
     type: 'smoothstep',
     animated: true,
-    style: { stroke: '#8b5cf6', strokeWidth: 2 },
-    labelStyle: { fill: '#cbd5e1', fontSize: 10, fontWeight: 500 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#8b5cf6' }
+    style: { stroke: '#4cd7f6', strokeWidth: 2 },
+    labelStyle: { fill: '#4cd7f6', fontSize: 10, fontWeight: 600 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#4cd7f6' }
   });
 
-  // 3. Event Timing Node (Level 2, Left of Purpose)
+  // 3. Event Timing Node (Bottom-Left of Purpose)
   if (context.temporal.eventTiming) {
     const eventId = 'node-event';
     nodes.push({
       id: eventId,
       type: 'default',
-      position: { x: 20, y: 270 },
+      position: { x: 20, y: 290 },
       data: {
-        label: `📅 Event Timing:\n${context.temporal.eventTiming}`
+        label: `📅 ${context.temporal.eventTiming}\n(Event Horizon)`
       },
       style: {
-        background: '#0f172a',
-        color: '#38bdf8',
-        border: '1px dashed #38bdf8',
-        borderRadius: '10px',
+        background: '#0a0e16',
+        color: '#4edea3',
+        border: '1px dashed #4edea3',
+        borderRadius: '12px',
         padding: '8px 12px',
         fontSize: '11px',
         fontWeight: 500,
-        width: 160,
+        boxShadow: '0 0 16px rgba(78, 222, 163, 0.25)',
+        width: 150,
         textAlign: 'center'
       }
     });
@@ -94,18 +97,18 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
       id: `edge-${purposeId}-${eventId}`,
       source: purposeId,
       target: eventId,
-      label: 'scheduled as',
+      label: 'scheduled at',
       type: 'smoothstep',
-      style: { stroke: '#38bdf8', strokeWidth: 1.5 },
-      labelStyle: { fill: '#94a3b8', fontSize: 9 },
-      markerEnd: { type: MarkerType.ArrowClosed, color: '#38bdf8' }
+      style: { stroke: '#4edea3', strokeWidth: 1.5, strokeDasharray: '3,3' },
+      labelStyle: { fill: '#4edea3', fontSize: 9 },
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#4edea3' }
     });
   }
 
-  // 4. Action Nodes (Level 1 & 2, Center/Right)
-  const actionStartY = 140;
-  const actionGapY = 120;
-  const actionX = 240;
+  // 4. Action Nodes & Artifacts (Right Side)
+  const actionStartY = 40;
+  const actionGapY = 130;
+  const actionX = 260;
 
   context.actions.forEach((action, idx) => {
     const actionId = `node-action-${idx}`;
@@ -120,53 +123,54 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
       },
       style: {
         background: isDone
-          ? 'linear-gradient(135deg, #059669 0%, #047857 100%)'
-          : 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-        color: isDone ? '#ffffff' : '#f1f5f9',
-        border: isDone ? '1px solid #10b981' : '1px solid #475569',
-        borderRadius: '12px',
+          ? 'linear-gradient(135deg, #00885d 0%, #0f131c 100%)'
+          : 'linear-gradient(135deg, #262a33 0%, #181c24 100%)',
+        color: isDone ? '#4edea3' : '#dfe2ee',
+        border: isDone ? '1px solid #4edea3' : '1px solid #908fa0',
+        borderRadius: '14px',
         padding: '10px 14px',
-        fontWeight: 500,
-        fontSize: '12px',
+        fontWeight: 600,
+        fontSize: '11.5px',
         boxShadow: isDone
-          ? '0 6px 16px rgba(16, 185, 129, 0.2)'
-          : '0 6px 16px rgba(15, 23, 42, 0.4)',
+          ? '0 0 20px rgba(78, 222, 163, 0.35)'
+          : '0 4px 16px rgba(0, 0, 0, 0.4)',
         width: 170,
         textAlign: 'center'
       }
     });
 
     edges.push({
-      id: `edge-${actorId}-${actionId}`,
-      source: actorId,
+      id: `edge-${purposeId}-${actionId}`,
+      source: purposeId,
       target: actionId,
-      label: 'requests',
+      label: 'requires action',
       type: 'smoothstep',
-      style: { stroke: '#3b82f6', strokeWidth: 2 },
-      labelStyle: { fill: '#94a3b8', fontSize: 10 },
-      markerEnd: { type: MarkerType.ArrowClosed, color: '#3b82f6' }
+      style: { stroke: '#c0c1ff', strokeWidth: 1.75 },
+      labelStyle: { fill: '#c0c1ff', fontSize: 9.5 },
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#c0c1ff' }
     });
 
-    // Link matching artifact concept to action if applicable
+    // Associated Artifact Concept
     const artifactConcept = context.artifacts[idx] || context.artifacts[0];
     if (artifactConcept) {
       const artifactId = `node-art-${idx}`;
       nodes.push({
         id: artifactId,
         type: 'default',
-        position: { x: 440, y: actionStartY + idx * actionGapY - 10 },
+        position: { x: actionX + 190, y: actionStartY + idx * actionGapY },
         data: {
           label: `📦 Artifact:\n${artifactConcept}`
         },
         style: {
-          background: '#042f2e',
-          color: '#2dd4bf',
-          border: '1px solid #14b8a6',
-          borderRadius: '10px',
+          background: '#0a0e16',
+          color: '#4cd7f6',
+          border: '1px solid #4cd7f6',
+          borderRadius: '12px',
           padding: '8px 12px',
           fontWeight: 600,
           fontSize: '11px',
-          width: 140,
+          boxShadow: '0 0 16px rgba(76, 215, 246, 0.25)',
+          width: 130,
           textAlign: 'center'
         }
       });
@@ -175,40 +179,39 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
         id: `edge-${actionId}-${artifactId}`,
         source: actionId,
         target: artifactId,
-        label: 'requires',
+        label: 'specifies',
         type: 'smoothstep',
-        style: { stroke: '#14b8a6', strokeWidth: 1.5 },
-        labelStyle: { fill: '#99f6e4', fontSize: 9 },
-        markerEnd: { type: MarkerType.ArrowClosed, color: '#14b8a6' }
+        style: { stroke: '#4cd7f6', strokeWidth: 1.5, strokeDasharray: '3,3' },
+        labelStyle: { fill: '#4cd7f6', fontSize: 9 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: '#4cd7f6' }
       });
     }
   });
 
-  // 5. Task Deadline Node (if present)
+  // 5. Task Deadline Node (Bottom Right)
   if (context.temporal.taskDeadline) {
     const deadlineId = 'node-deadline';
     nodes.push({
       id: deadlineId,
       type: 'default',
-      position: { x: actionX + 20, y: actionStartY + context.actions.length * actionGapY },
+      position: { x: actionX + 40, y: actionStartY + context.actions.length * actionGapY + 10 },
       data: {
-        label: `⏰ Task Deadline:\n${context.temporal.taskDeadline}`
+        label: `⏰ Deadline:\n${context.temporal.taskDeadline}`
       },
       style: {
-        background: 'linear-gradient(135deg, #e11d48 0%, #9f1239 100%)',
-        color: '#ffffff',
-        border: '1px solid #fb7185',
-        borderRadius: '10px',
+        background: 'linear-gradient(135deg, #93000a 0%, #1c2028 100%)',
+        color: '#ffb4ab',
+        border: '1.5px solid #ffb4ab',
+        borderRadius: '12px',
         padding: '8px 14px',
-        fontWeight: 600,
+        fontWeight: 700,
         fontSize: '11px',
-        boxShadow: '0 4px 14px rgba(225, 29, 72, 0.3)',
-        width: 150,
+        boxShadow: '0 0 20px rgba(255, 180, 171, 0.35)',
+        width: 140,
         textAlign: 'center'
       }
     });
 
-    // Link last action to deadline
     const lastActionId = `node-action-${Math.max(0, context.actions.length - 1)}`;
     edges.push({
       id: `edge-${lastActionId}-${deadlineId}`,
@@ -216,9 +219,9 @@ export function mapContextToGraph(context: ContextObject): { nodes: Node[]; edge
       target: deadlineId,
       label: 'due by',
       type: 'smoothstep',
-      style: { stroke: '#f43f5e', strokeWidth: 2, strokeDasharray: '4 4' },
-      labelStyle: { fill: '#fecdd3', fontSize: 9 },
-      markerEnd: { type: MarkerType.ArrowClosed, color: '#f43f5e' }
+      style: { stroke: '#ffb4ab', strokeWidth: 1.75, strokeDasharray: '4,4' },
+      labelStyle: { fill: '#ffb4ab', fontSize: 9 },
+      markerEnd: { type: MarkerType.ArrowClosed, color: '#ffb4ab' }
     });
   }
 
