@@ -116,13 +116,24 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </span>
           <span className="vigilance-text">Silent Context Vigilance: Active</span>
         </div>
-        <button 
-          className="instant-scan-btn" 
-          onClick={() => onNavigate('input')}
-        >
-          <span className="material-symbols-outlined bolt-icon">bolt</span>
-          <span>New Ingestion</span>
-        </button>
+        <div className="vigilance-actions-row">
+          <button 
+            className="instant-scan-btn secondary" 
+            onClick={() => onNavigate('input')}
+            title="Type or paste conversation text"
+          >
+            <span className="material-symbols-outlined text-[14px]">chat</span>
+            <span>Text</span>
+          </button>
+          <button 
+            className="instant-scan-btn primary" 
+            onClick={() => onNavigate('capture')}
+            title="Upload or scan chat screenshot"
+          >
+            <span className="material-symbols-outlined text-[14px]">document_scanner</span>
+            <span>OCR</span>
+          </button>
+        </div>
       </div>
 
       {/* Live Hero Card / Spotlight Protocol */}

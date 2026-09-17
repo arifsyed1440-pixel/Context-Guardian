@@ -47,6 +47,24 @@ export const ConversationInputScreen: React.FC<ConversationInputScreenProps> = (
 
   return (
     <div className="screen-inner-container input-stitch-screen">
+      {/* Submode Ingestion Switcher Tabs */}
+      <div className="ingest-switch-tabs">
+        <button 
+          className="ingest-tab-btn active" 
+          disabled
+        >
+          <span className="material-symbols-outlined text-[15px]">chat_bubble</span>
+          <span>Text Snippet (Active)</span>
+        </button>
+        <button 
+          className="ingest-tab-btn" 
+          onClick={() => onNavigate('capture')}
+        >
+          <span className="material-symbols-outlined text-[15px]">document_scanner</span>
+          <span>Screenshot OCR</span>
+        </button>
+      </div>
+
       {/* Header Info Banner */}
       <div className="ingest-header-card">
         <div className="ingest-tag-row">

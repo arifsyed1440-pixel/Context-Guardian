@@ -1,48 +1,13 @@
-import React, { useState } from 'react';
-import { 
-  Upload, 
-  Image as ImageIcon, 
-  FileText, 
-  Sparkles, 
-  AlertCircle, 
-  ArrowRight,
-  CheckCircle2,
-  RotateCcw,
-  Layers,
-  Cpu
-} from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ContextObject, ScreenType } from '../../types/context';
 import { extractContext } from '../../services/localExtractionEngine';
 import { recognizeScreenshotText, OcrProgress } from '../../services/ocrService';
+import { DEMO_PRESETS, SampleChatPreset, generateScreenshotDataUrl } from '../../utils/sampleImageGenerator';
 
 interface CaptureScreenProps {
   onContextExtracted: (context: ContextObject) => void;
   onNavigate: (screen: ScreenType) => void;
 }
-
-const SAMPLE_SCREENSHOTS = [
-  {
-    id: 'sample-rahul',
-    title: 'Slack Chat - Rahul (Review Request)',
-    badge: 'Canonical Demo',
-    mockText: "Rahul: Hey, for tomorrow's project review, please bring the latest prototype. Also update the architecture slides before 5 PM.",
-    accent: '#3b82f6'
-  },
-  {
-    id: 'sample-priya',
-    title: 'Teams Sync - Priya (Figma Handover)',
-    badge: 'Design Sync',
-    mockText: "Priya: For the mobile design handover, please verify the onboarding Figma components and export the SVG icon kit by Friday.",
-    accent: '#8b5cf6'
-  },
-  {
-    id: 'sample-alex',
-    title: 'Incident Room - Alex (Critical Fix)',
-    badge: 'Urgent',
-    mockText: "Alex: We need to fix the memory leak in production sync before tonight's 8 PM release. Review the crash logs on Sentry.",
-    accent: '#f43f5e'
-  }
-];
 
 export const CaptureScreen: React.FC<CaptureScreenProps> = ({
   onContextExtracted,
@@ -53,208 +18,336 @@ export const CaptureScreen: React.FC<CaptureScreenProps> = ({
   const [isOcrRunning, setIsOcrRunning] = useState<boolean>(false);
   const [ocrProgress, setOcrProgress] = useState<OcrProgress>({ progress: 0, statusText: '' });
   const [ocrError, setOcrError] = useState<string | null>(null);
-  const [selectedSampleId, setSelectedSampleId] = useState<string | null>(null);
+  const [selectedPresetId, setSelectedPresetId] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileUpload = async (file: File) => {
+  // Clipboard Paste Support (Ctrl+V / Cmd+V)
+  useEffect(() => {
+    const handlePaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const file = items[i].getAsFile();
+          if (file) {
+            handleProcessImageFile(file);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('paste', handlePaste);
+    return () => window.removeEventListener('paste', handlePaste);
+  }, []);
+
+  // Process an uploaded or pasted image file with OCR
+  const handleProcessImageFile = async (file: File) => {
     setOcrError(null);
-    setSelectedSampleId(null);
+    setSelectedPresetId(null);
 
-    // Generate local preview URL
     const previewUrl = URL.createObjectURL(file);
     setImagePreview(previewUrl);
+    await executeOcr(file);
+  };
 
+  // Run OCR on either a File or data URL
+  const executeOcr = async (target: File | string, fallbackText?: string) => {
     setIsOcrRunning(true);
-    setOcrProgress({ progress: 10, statusText: 'Starting on-device OCR engine...' });
+    setOcrError(null);
+    setOcrProgress({ progress: 5, statusText: 'Initializing client-side OCR engine...' });
 
     try {
-      const text = await recognizeScreenshotText(file, (info) => {
-        setOcrProgress(info);
+      const recognized = await recognizeScreenshotText(target, (p) => {
+        setOcrProgress(p);
       });
-      setExtractedRawText(text);
+
+      setExtractedRawText(recognized);
       setIsOcrRunning(false);
     } catch (err: unknown) {
       setIsOcrRunning(false);
-      setOcrError('OCR had difficulty parsing text from this image. You can type or adjust the text below.');
-      // Resilient fallback: Provide the canonical example text so user can continue seamlessly
+      const errMsg = err instanceof Error ? err.message : 'OCR encountered difficulty parsing text.';
+      setOcrError(`${errMsg} You can review or edit the conversation text below to proceed.`);
+
+      // Resilient fallback: ensure user is never blocked
       if (!extractedRawText) {
-        setExtractedRawText("Rahul: Hey, for tomorrow's project review, please bring the latest prototype. Also update the architecture slides before 5 PM.");
+        setExtractedRawText(
+          fallbackText ||
+          "Rahul: Hey, for tomorrow's project review, please bring the latest prototype. Also update the architecture slides before 5 PM."
+        );
       }
     }
   };
 
+  // Drag and Drop handlers
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFileUpload(e.dataTransfer.files[0]);
+      handleProcessImageFile(e.dataTransfer.files[0]);
     }
   };
 
-  const handleSelectSample = (sample: typeof SAMPLE_SCREENSHOTS[0]) => {
-    setSelectedSampleId(sample.id);
-    setImagePreview(null);
+  // Handle selecting a sample demo screenshot preset
+  const handleSelectPreset = (preset: SampleChatPreset) => {
+    setSelectedPresetId(preset.id);
     setOcrError(null);
-    setExtractedRawText(sample.mockText);
+
+    // Generate real visual canvas screenshot
+    const dataUrl = generateScreenshotDataUrl(preset);
+    setImagePreview(dataUrl);
+
+    // Pre-populate raw text immediately for resilient demonstration
+    setExtractedRawText(preset.text);
+
+    // Execute OCR on the generated canvas image for live verification
+    executeOcr(dataUrl, preset.text);
   };
 
+  // Clear / Reset
+  const handleReset = () => {
+    setImagePreview(null);
+    setExtractedRawText('');
+    setOcrError(null);
+    setSelectedPresetId(null);
+    setOcrProgress({ progress: 0, statusText: '' });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  // Execute extraction through EXISTING Local Context Extraction Engine
   const handleRunExtraction = () => {
     if (!extractedRawText.trim()) return;
 
+    // Single source of truth: extract with sourceType 'screenshot'
     const extracted = extractContext(extractedRawText, 'screenshot');
     onContextExtracted(extracted);
     onNavigate('analysis');
   };
 
-  const handleReset = () => {
-    setImagePreview(null);
-    setExtractedRawText('');
-    setOcrError(null);
-    setSelectedSampleId(null);
-    setOcrProgress({ progress: 0, statusText: '' });
-  };
-
   return (
-    <div className="screen-container capture-screen">
-      {/* Top Banner */}
+    <div className="screen-inner-container capture-stitch-screen">
+      {/* Ambient Radial Highlights */}
+      <div className="ambient-glows-wrap">
+        <div className="ambient-glow top-left"></div>
+        <div className="ambient-glow top-right"></div>
+      </div>
+
+      {/* Submode Ingestion Switcher Tabs */}
+      <div className="ingest-switch-tabs">
+        <button 
+          className="ingest-tab-btn" 
+          onClick={() => onNavigate('input')}
+        >
+          <span className="material-symbols-outlined text-[15px]">chat_bubble</span>
+          <span>Text Snippet</span>
+        </button>
+        <button 
+          className="ingest-tab-btn active" 
+          disabled
+        >
+          <span className="material-symbols-outlined text-[15px]">document_scanner</span>
+          <span>Screenshot OCR (Active)</span>
+        </button>
+      </div>
+
+      {/* Screen Title & Atmosphere Block (Stitch Screen 03) */}
       <div className="capture-header-card">
-        <div className="capture-badge">
-          <ImageIcon size={14} />
-          <span>Screenshot Capture</span>
+        <div className="capture-tag-row">
+          <div className="capture-node-pill">
+            <span className="material-symbols-outlined text-[13px] text-tertiary">document_scanner</span>
+            <span className="node-label">Neural Vision Node</span>
+          </div>
+          <span className="epoch-tag">CLIENT-SIDE TESSERACT</span>
         </div>
-        <h2 className="capture-title">Recover Context from Images</h2>
+        <h2 className="capture-title">Recover Context from Screenshots</h2>
         <p className="capture-desc">
-          Drop a chat screenshot, photo, or cropped snippet to perform client-side OCR and recover key context.
+          Drop or upload a chat screenshot, photo, or snippet. Antigravity's on-device OCR extracts the conversation text and grounds it in the semantic engine.
         </p>
       </div>
 
-      {/* Upload Dropzone */}
-      <div 
-        className="upload-dropzone-card"
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={handleDrop}
-      >
-        <input 
-          type="file" 
-          id="screenshot-upload" 
-          accept="image/*" 
-          onChange={(e) => e.target.files?.[0] && handleFileUpload(e.target.files[0])} 
-          className="file-input-hidden" 
-        />
-        <label htmlFor="screenshot-upload" className="dropzone-label">
-          <div className="dropzone-icon-circle">
-            <Upload size={24} />
-          </div>
-          <span className="dropzone-main-text">Upload Chat Screenshot</span>
-          <span className="dropzone-sub-text">PNG, JPG, WebP (Drag & Drop or Click to Select)</span>
-        </label>
-      </div>
-
-      {/* Image Preview / OCR Scanning Progress Bar */}
-      {isOcrRunning && (
-        <div className="ocr-progress-card">
-          <div className="ocr-progress-header">
-            <div className="ocr-status-wrap">
-              <Cpu size={15} className="pulse-icon" />
-              <span className="ocr-status-text">{ocrProgress.statusText}</span>
-            </div>
-            <span className="ocr-percent">{ocrProgress.progress}%</span>
-          </div>
-          <div className="ocr-progress-track">
-            <div 
-              className="ocr-progress-fill" 
-              style={{ width: `${ocrProgress.progress}%` }}
-            />
-          </div>
+      {/* Hackathon Demo Presets */}
+      <div className="demo-presets-card">
+        <div className="demo-presets-header">
+          <span className="material-symbols-outlined text-[15px] text-secondary">burst_mode</span>
+          <span className="demo-presets-label">Hackathon Sample Screenshots:</span>
         </div>
-      )}
-
-      {/* Uploaded Image Thumbnail Preview */}
-      {imagePreview && (
-        <div className="uploaded-image-preview-card">
-          <div className="thumbnail-header">
-            <span className="thumbnail-title">Uploaded Screenshot Source</span>
-            <button className="reset-thumb-btn" onClick={handleReset} title="Remove image">
-              <RotateCcw size={12} />
-              <span>Change Image</span>
-            </button>
-          </div>
-          <div className="image-preview-frame">
-            <img src={imagePreview} alt="Uploaded screenshot preview" className="screenshot-img" />
-          </div>
-        </div>
-      )}
-
-      {/* Sample Screenshots Fast Pick */}
-      <div className="sample-screenshots-section">
-        <div className="section-label-row">
-          <Layers size={13} />
-          <span className="section-label">Or Pick a Sample Conversation Screen:</span>
-        </div>
-        <div className="sample-screens-grid">
-          {SAMPLE_SCREENSHOTS.map((sample) => (
-            <div 
-              key={sample.id}
-              className={`sample-screen-card ${selectedSampleId === sample.id ? 'selected' : ''}`}
-              onClick={() => handleSelectSample(sample)}
+        <div className="presets-grid">
+          {DEMO_PRESETS.map((preset) => (
+            <button
+              key={preset.id}
+              className={`preset-card ${selectedPresetId === preset.id ? 'selected' : ''}`}
+              onClick={() => handleSelectPreset(preset)}
+              type="button"
             >
-              <div className="screen-card-header">
-                <ImageIcon size={14} style={{ color: sample.accent }} />
-                <span className="sample-screen-title">{sample.title}</span>
-                <span className="sample-screen-badge">{sample.badge}</span>
+              <div className="preset-header">
+                <span className="material-symbols-outlined text-[14px] text-primary">image</span>
+                <span className="preset-title">{preset.sender} ({preset.tag})</span>
               </div>
-              <p className="sample-screen-snippet">"{sample.mockText}"</p>
-            </div>
+              <p className="preset-snippet">"{preset.text}"</p>
+            </button>
           ))}
         </div>
       </div>
 
-      {/* Resilient Error / Fallback Banner */}
-      {ocrError && (
-        <div className="resilience-notice warning">
-          <AlertCircle size={15} className="notice-icon" />
-          <span>{ocrError}</span>
+      {/* Interactive Dropzone / Upload Area */}
+      <div 
+        className={`upload-dropzone-box ${isDragging ? 'drag-active' : ''}`}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={() => fileInputRef.current?.click()}
+      >
+        <input 
+          ref={fileInputRef}
+          type="file" 
+          id="screenshot-upload" 
+          accept="image/*" 
+          onChange={(e) => e.target.files?.[0] && handleProcessImageFile(e.target.files[0])} 
+          className="file-input-hidden" 
+        />
+        <div className="dropzone-inner-content">
+          <div className="dropzone-icon-orb">
+            <span className="material-symbols-outlined dropzone-icon">cloud_upload</span>
+          </div>
+          <span className="dropzone-primary-text">Upload Chat Screenshot</span>
+          <span className="dropzone-secondary-text">
+            Drag & drop, browse files, or press <kbd className="shortcut-kbd">Ctrl+V</kbd> to paste
+          </span>
+          <span className="dropzone-meta-pill">PNG, JPG, WebP • 100% Client-Side</span>
+        </div>
+      </div>
+
+      {/* Image Preview & Scanner Status */}
+      {imagePreview && (
+        <div className="preview-media-card">
+          <div className="preview-media-header">
+            <div className="preview-media-label-group">
+              <span className="material-symbols-outlined text-[15px] text-secondary">image</span>
+              <span className="preview-media-title">Screenshot Source</span>
+            </div>
+            <button 
+              className="change-image-btn" 
+              onClick={handleReset} 
+              title="Remove or change image"
+              type="button"
+            >
+              <span className="material-symbols-outlined text-[13px]">restart_alt</span>
+              <span>Reset</span>
+            </button>
+          </div>
+
+          <div className="preview-image-container">
+            <img 
+              src={imagePreview} 
+              alt="Screenshot source preview" 
+              className="preview-image-element" 
+            />
+          </div>
+
+          {/* OCR Scanning Progress Bar */}
+          {isOcrRunning && (
+            <div className="ocr-progress-container">
+              <div className="ocr-progress-top">
+                <div className="ocr-status-group">
+                  <div className="spin-indicator small"></div>
+                  <span className="ocr-status-text">{ocrProgress.statusText}</span>
+                </div>
+                <span className="ocr-percent-badge">{ocrProgress.progress}%</span>
+              </div>
+              <div className="ocr-progress-track">
+                <div 
+                  className="ocr-progress-fill" 
+                  style={{ width: `${ocrProgress.progress}%` }}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
 
-      {/* Recognized / Editable Raw Text Area */}
+      {/* Resilient Error / Fallback Notice */}
+      {ocrError && (
+        <div className="ocr-error-banner">
+          <span className="material-symbols-outlined error-icon">info</span>
+          <div className="error-text-col">
+            <span className="error-heading">Notice</span>
+            <span className="error-body">{ocrError}</span>
+          </div>
+        </div>
+      )}
+
+      {/* Extracted / Editable Conversation Text Box */}
       {extractedRawText && (
-        <div className="ocr-preview-card">
-          <div className="preview-header">
+        <div className="convo-input-card">
+          <div className="convo-input-header">
             <div className="preview-title-row">
-              <FileText size={15} />
-              <span>Recognized Conversation Text</span>
+              <span className="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+              <span className="convo-label">Recognized Conversation Text</span>
             </div>
-            <span className="fallback-note">Editable on-device</span>
+            <span className="mode-status">
+              <span className="sparkle-symbol">✦</span>
+              <span>Editable before extraction</span>
+            </span>
           </div>
 
           <textarea
-            className="ocr-textarea"
+            className="convo-textarea-field"
             rows={4}
             value={extractedRawText}
             onChange={(e) => setExtractedRawText(e.target.value)}
             placeholder="Review or edit recognized text before context recovery..."
           />
 
-          <div className="preview-actions-bar">
+          <div className="convo-meta-footer">
+            <span>{extractedRawText.length} characters • UTF-8</span>
             <button
-              className="cta-primary-btn"
-              onClick={handleRunExtraction}
-              disabled={isOcrRunning || !extractedRawText.trim()}
+              className="clear-text-btn"
+              onClick={() => setExtractedRawText('')}
+              type="button"
             >
-              <Sparkles size={16} />
-              <span>Proceed to Context Analysis</span>
-              <ArrowRight size={14} />
+              <span className="material-symbols-outlined text-[13px]">backspace</span>
+              <span>Clear</span>
             </button>
           </div>
+
+          {/* Action Button to run existing Local Context Extraction Engine */}
+          <button
+            className="extract-execute-btn"
+            onClick={handleRunExtraction}
+            disabled={isOcrRunning || !extractedRawText.trim()}
+          >
+            <span className="material-symbols-outlined text-[18px]">psychology</span>
+            <span>Proceed to Context Analysis</span>
+            <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </button>
         </div>
       )}
 
-      {/* Resilient Safeguard Notice */}
-      <div className="resilience-notice">
-        <CheckCircle2 size={15} className="notice-icon" />
-        <span>
-          <strong>On-Device Guarantee:</strong> The Local Context Extraction Engine operates purely client-side. Your uploaded screenshots never leave this browser tab.
-        </span>
+      {/* Resilient Privacy & Architecture Guarantee Banner */}
+      <div className="privacy-guarantee-card">
+        <div className="privacy-card-inner">
+          <span className="material-symbols-outlined text-[18px] text-tertiary">verified_user</span>
+          <p className="privacy-card-text">
+            <strong>Client-Side Guarantee:</strong> OCR runs locally via Tesseract WebAssembly. Images and text never leave this browser tab.
+          </p>
+        </div>
       </div>
     </div>
   );
 };
+
+export default CaptureScreen;

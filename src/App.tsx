@@ -10,6 +10,7 @@ import { ContextObject, ScreenType } from './types/context';
 import { Header } from './components/Header';
 import { Navigation } from './components/Navigation';
 import { HomeScreen } from './components/screens/HomeScreen';
+import { CaptureScreen } from './components/screens/CaptureScreen';
 import { ConversationInputScreen } from './components/screens/ConversationInputScreen';
 import { ContextAnalysisScreen } from './components/screens/ContextAnalysisScreen';
 import { ContextGraphScreen } from './components/screens/ContextGraphScreen';
@@ -107,6 +108,13 @@ export const App: React.FC = () => {
                   onSelectContext={handleSelectContext}
                   onNavigate={setCurrentScreen}
                   onDeleteContext={handleDeleteContext}
+                />
+              )}
+
+              {currentScreen === 'capture' && (
+                <CaptureScreen
+                  onContextExtracted={handleContextExtracted}
+                  onNavigate={setCurrentScreen}
                 />
               )}
 

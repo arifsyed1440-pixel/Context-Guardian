@@ -14,7 +14,8 @@ export const Navigation: React.FC<NavigationProps> = ({
 }) => {
   const navItems = [
     { id: 'home' as ScreenType, label: 'Home', icon: 'home', enabled: true },
-    { id: 'input' as ScreenType, label: 'Ingest', icon: 'chat_bubble', enabled: true },
+    { id: 'capture' as ScreenType, label: 'Capture', icon: 'document_scanner', enabled: true },
+    { id: 'input' as ScreenType, label: 'Text', icon: 'chat_bubble', enabled: true },
     { id: 'analysis' as ScreenType, label: 'Analysis', icon: 'psychology', enabled: hasActiveContext },
     { id: 'graph' as ScreenType, label: 'Graph', icon: 'hub', enabled: hasActiveContext },
     { id: 'dossier' as ScreenType, label: 'Dossier', icon: 'verified', enabled: hasActiveContext },
